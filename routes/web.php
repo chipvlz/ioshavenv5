@@ -22,3 +22,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post("/locale", 'MainController@locale');
+
+
+Route::get('/app/create', 'AppController@create')->middleware('auth');
+Route::get('/app/{uid}/edit', 'AppController@showEditPage')->middleware('auth');
+Route::post('/app/edit', 'AppController@edit')->middleware('auth');
+
+Route::post('/upload/apk', 'UploadController@apk')->middleware('auth');

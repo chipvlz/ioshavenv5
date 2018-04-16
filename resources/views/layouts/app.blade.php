@@ -11,6 +11,7 @@
     <title>{{env("APP_TYPE")}} Haven</title>
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
@@ -22,6 +23,8 @@
         </main>
     </div>
 
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script src="/js/app.js" charset="utf-8"></script>
     <script src="/fa/svg-with-js/js/fontawesome-all.min.js" charset="utf-8"></script>
 </body>

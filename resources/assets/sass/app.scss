@@ -59,11 +59,11 @@ html {
 .nav2 {
   background: #fff;
   height: 100px;
-  padding: 0rem 1rem;
+  padding: 0rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   border-bottom: 1px solid #ccc;
   font-family: 'Nunito', sans-serif;
   margin-top: 25px;
@@ -111,7 +111,7 @@ html {
     background: white;
     border: 1px solid #ccc;
     border-top: none;
-    top: 76px;
+    top: 72px;
     right: 0;
     border-radius: 0 0 0.5rem 0.5rem;
     opacity: 0;
@@ -236,6 +236,14 @@ html {
 .totop {
     opacity: 0;
     transition: all .5s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
     &.show {
       opacity: 1;
     }
@@ -243,4 +251,13 @@ html {
 
 .avatar {
   border: 1px solid white;
+}
+
+.socials a {
+    color: #ccc;
+    padding: 0.2rem;
+    &:hover {
+      cursor: pointer;
+      color: #aaa;
+    }
 }

@@ -15,7 +15,7 @@ class Log extends Model
     ];
 
     public static function emergency($scope, $message) {
-      $this->create([
+      static::create([
         "level" => 0,
         "scope" => $scope,
         "message" => $message
@@ -23,7 +23,7 @@ class Log extends Model
     }
 
     public static function alert($scope, $message) {
-      $this->create([
+      static::create([
         "level" => 1,
         "scope" => $scope,
         "message" => $message
@@ -31,7 +31,7 @@ class Log extends Model
     }
 
     public static function critical($scope, $message) {
-      $this->create([
+      static::create([
         "level" => 2,
         "scope" => $scope,
         "message" => $message
@@ -39,7 +39,7 @@ class Log extends Model
     }
 
     public static function error($scope, $message) {
-      $this->create([
+      static::create([
         "level" => 3,
         "scope" => $scope,
         "message" => $message
@@ -47,7 +47,7 @@ class Log extends Model
     }
 
     public static function warning($scope, $message) {
-      $this->create([
+      static::create([
         "level" => 4,
         "scope" => $scope,
         "message" => $message
@@ -55,7 +55,7 @@ class Log extends Model
     }
 
     public static function notice($scope, $message) {
-      $this->create([
+      static::create([
         "level" => 5,
         "scope" => $scope,
         "message" => $message
@@ -63,7 +63,7 @@ class Log extends Model
     }
 
     public static function info($scope, $message) {
-      $this->create([
+      static::create([
         "level" => 6,
         "scope" => $scope,
         "message" => $message
@@ -71,7 +71,7 @@ class Log extends Model
     }
 
     public static function debug($scope, $message) {
-      $this->create([
+      static::create([
         "level" => 7,
         "scope" => $scope,
         "message" => $message
