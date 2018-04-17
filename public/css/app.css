@@ -9561,10 +9561,14 @@ html {
 }
 
 .banner {
-  height: 280px;
   background-image: url(/img/transparent-banner.png);
   background-size: cover;
   background-color: #03a9f4;
+  overflow: hidden;
+}
+
+.banner.home {
+  height: 280px;
 }
 
 .logo-wrapper {
@@ -9708,4 +9712,40 @@ html {
 .socials a:hover {
   cursor: pointer;
   color: #aaa;
+}
+
+.app-banner.mb-3.jumbotron-fluid {
+  margin-top: -1.5rem;
+}
+
+.stat {
+  background: white;
+  -webkit-box-shadow: 0px 5px 16px -6px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 5px 16px -6px rgba(0, 0, 0, 0.15);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.stat * {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .stats {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
 }

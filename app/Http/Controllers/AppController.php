@@ -4,24 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\App;
+use App\Preview;
 use App\Log;
 use Auth;
 
 class AppController extends Controller
 {
     public function showEditPage($uid) {
+      $app = Preview::byuid($uid)->first();
       return view('apps.edit', [
-        "uid" => $uid
+        "uid" => $uid,
+        "preview" => $app
       ]);
     }
 
     public function create() {
-      $app = new App;
-      $app->uid = str_random(7);
-      $app->user_id = Auth::id();
-      $app->description = "No description";
-      $app->save();
-      Log::info("App:create", Auth::user()->username . ": Created application");
+      $uid = str_random(7);
+      $app = Preview::create([
+        "user_id" => Auth::id(),
+        "uid" => $uid
+      ]);
+      Log::info("App:create", Auth::user()->username . ": Created application $uid");
       return redirect("/app/$app->uid/edit");
     }
 

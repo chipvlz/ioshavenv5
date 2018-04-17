@@ -62,9 +62,10 @@
             }
             this.started = true;
             axios.post(this.action, data, config).then(res => {
-              this.success = 'File uploaded'
-              this.error = ''
-              console.log(res.data);
+              this.success = 'File uploaded';
+              this.error = '';
+              this.$emit('success', res.data);
+              setTimeout(this.reset, 1000);
             }).catch(err => {
               console.error(err);
               this.error = 'Invalid file extension or file is too big'

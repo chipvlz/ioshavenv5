@@ -18,6 +18,15 @@ window.Vue = require('vue');
 Vue.component('editor', require('./components/Editor.vue'));
 Vue.component('file-upload', require('./components/FileUpload.vue'));
 
+function formatBytes(bytes,decimals) {
+   if(bytes == 0) return '0 Bytes';
+   var k = 1000,
+       dm = decimals || 2,
+       sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+       i = Math.floor(Math.log(bytes) / Math.log(k));
+   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
 const app = new Vue({
     el: '#app',
     data: {
@@ -25,15 +34,28 @@ const app = new Vue({
       scrollpos: 0,
       hasScrolledOnePage: false
     },
+    methods: {
+      iconSuccess (data) {
+        $('#icon-image').attr('src',  data.icon);
+      },
+      bannerSuccess (data) {
+        $('#banner-image').attr('src', data.banner);
+      },
+      apkSuccess (data) {
+        $('#size').html(formatBytes(data.size));
+      }
+    },
     mounted () {
       this.scrollpos = window.pageYOffset || document.documentElement.scrollTop;
-      this.hasScrolledOnePage = this.scrollpos > window.innerHeight;
+      this.hasScrolledOnePage = this.scrollpos > 32;
       window.addEventListener('scroll', (e) => {
         this.scrollpos = window.pageYOffset || document.documentElement.scrollTop;
-        this.hasScrolledOnePage = this.scrollpos > window.innerHeight;
+        this.hasScrolledOnePage = this.scrollpos > 32;
       });
     }
 });
+
+
 
 $(".totop").on('click', function (e) {
   e.preventDefault();

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="toolbar-container">
+    <div id="toolbar-container" class="bg-light">
 
       <span class="ql-formats">
         <select class="ql-size"></select>
@@ -38,7 +38,7 @@
         <button class="ql-clean"></button>
       </span>
     </div>
-    <div id="app-description">
+    <div id="app-description" class="bg-white">
 
       <slot>
         <p>Insert an app description</p>

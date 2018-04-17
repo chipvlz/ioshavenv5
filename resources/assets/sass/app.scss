@@ -137,10 +137,13 @@ html {
 }
 
 .banner {
-  height: 280px;
+  &.home {
+    height: 280px;
+  }
   background-image: url(/img/transparent-banner.png);
   background-size: cover;
   background-color: #03a9f4;
+  overflow: hidden;
 }
 
 .logo-wrapper {
@@ -260,4 +263,28 @@ html {
       cursor: pointer;
       color: #aaa;
     }
+}
+
+.app-banner.mb-3.jumbotron-fluid {
+    margin-top: -1.5rem;
+}
+
+.stat {
+  background: white;
+  box-shadow: 0px 5px 16px -6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  * {
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 992px) {
+  .stats {
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
 }
