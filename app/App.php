@@ -10,4 +10,8 @@ class app extends Model
     public static function byuid($uid) {
       return static::where('uid', $uid);
     }
+
+    public function user() {
+      return $this->belongsTo('App\User');
+    }
 }

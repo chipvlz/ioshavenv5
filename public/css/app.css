@@ -9441,6 +9441,12 @@ html {
   width: 100%;
 }
 
+.flex-grow {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
 .nav1 {
   background: #23282d;
   height: 32px;
@@ -9472,6 +9478,10 @@ html {
 
 .nav1 .android {
   color: #A4C639;
+}
+
+.has-nav {
+  margin-top: 32px;
 }
 
 .nav2 {
@@ -9571,6 +9581,14 @@ html {
   height: 280px;
 }
 
+.banner.query {
+  background-image: url(/img/funky-lines.png);
+  background-size: 50%;
+  margin-top: -1.5rem;
+  margin-bottom: -7.5rem;
+  font-size: 1.2rem;
+}
+
 .logo-wrapper {
   font-family: 'Nunito', sans-serif;
   font-size: 3rem;
@@ -9612,8 +9630,8 @@ html {
   padding: 0 1rem;
   border-radius: 0.5rem;
   margin-bottom: 2rem;
-  -webkit-box-shadow: 0 3px 18px 0px rgba(0, 0, 0, 0.17);
-          box-shadow: 0 3px 18px 0px rgba(0, 0, 0, 0.17);
+  -webkit-box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.17);
+          box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.17);
 }
 
 .header {
@@ -9718,10 +9736,164 @@ html {
   margin-top: -1.5rem;
 }
 
-.stat {
+.locale-down {
+  vertical-align: top;
+}
+
+.dashboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  margin-top: -32px;
+  padding-top: 32px;
+  height: 100vh;
+}
+
+.dashboard main {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  min-width: 270px;
+  padding-top: 0;
+  overflow: auto;
+}
+
+.dashboard .user {
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dashboard .user .info {
+  font-size: 0.7rem;
+  padding-left: 0.65rem;
+}
+
+.dashboard .user .info .username {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.dashboard .sidebar {
+  height: 100vh;
+  background: #24282e;
+  color: white;
+  width: 50px;
+}
+
+.dashboard .sidebar .label {
+  display: none;
+}
+
+.dashboard .sidebar a {
+  color: white;
+  text-decoration: none;
+}
+
+.dashboard .sidebar.show {
+  width: 250px;
+}
+
+.dashboard .sidebar.show .user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dashboard .sidebar.show .user-icon {
+  display: none;
+}
+
+.dashboard .sidebar.show .label {
+  display: inline-block;
+}
+
+.dashboard .sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.dashboard .sidebar li {
+  font-size: 1rem;
+  padding: 0.25rem 0.6rem;
+}
+
+.dashboard .sidebar li:hover {
+  background: #444a58;
+  cursor: pointer;
+}
+
+.dashboard .sidebar .icon {
+  width: 30px;
+  display: inline-block;
+  text-align: center;
+}
+
+.app {
+  padding: 0.25rem;
   background: white;
-  -webkit-box-shadow: 0px 5px 16px -6px rgba(0, 0, 0, 0.15);
-          box-shadow: 0px 5px 16px -6px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0px 8px 10px -8px rgba(0, 0, 0, 0.17);
+          box-shadow: 0px 8px 10px -8px rgba(0, 0, 0, 0.17);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 0.25rem;
+  position: relative;
+  color: black !important;
+  text-decoration: none !important;
+}
+
+.app img {
+  border-radius: 0.5rem;
+}
+
+.app .title {
+  font-weight: bold;
+  font-size: 1rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.app .short {
+  height: 2.2rem;
+  font-size: 0.8rem;
+  color: #969696;
+  line-height: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app .info {
+  overflow: hidden;
+}
+
+.app .action {
+  position: absolute;
+  background: white;
+  height: 100%;
+  width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  right: 0;
+  top: 0;
+  padding-right: 0.25rem;
+  border-radius: 0.25rem;
+  -webkit-box-shadow: -18px 0px 13px -2px white;
+          box-shadow: -18px 0px 13px -2px white;
+}
+
+.stat, .stat-wrapper {
+  width: 100%;
+  padding: 0 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -9735,17 +9907,28 @@ html {
           justify-content: center;
 }
 
-.stat * {
+.stat *, .stat-wrapper * {
   width: 100%;
 }
 
-@media (min-width: 992px) {
-  .stats {
-    -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
-    -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
-  }
+.stat {
+  padding: 1rem;
+  background: white;
+  text-align: center;
+  -webkit-box-shadow: 0px 8px 10px -8px rgba(0, 0, 0, 0.17);
+          box-shadow: 0px 8px 10px -8px rgba(0, 0, 0, 0.17);
+}
+
+.stats[min-width~="576px"] .stat-wrapper {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.stats[min-width~="768px"] .stat-wrapper {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 25%;
+          flex: 0 0 25%;
+  max-width: 25%;
 }

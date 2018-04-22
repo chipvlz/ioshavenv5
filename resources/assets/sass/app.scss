@@ -31,6 +31,10 @@ html {
   width: 100%;
 }
 
+.flex-grow {
+  flex-grow: 1
+}
+
 .nav1 {
   background: #23282d;
   height: 32px;
@@ -54,6 +58,10 @@ html {
   .android {
     color: #A4C639;
   }
+}
+
+.has-nav {
+  margin-top: 32px;
 }
 
 .nav2 {
@@ -140,6 +148,13 @@ html {
   &.home {
     height: 280px;
   }
+  &.query {
+    background-image: url(/img/funky-lines.png);
+    background-size: 50%;
+    margin-top: -1.5rem;
+    margin-bottom: -7.5rem;
+    font-size: 1.2rem;
+  }
   background-image: url(/img/transparent-banner.png);
   background-size: cover;
   background-color: #03a9f4;
@@ -180,7 +195,7 @@ html {
     padding: 0 1rem;
     border-radius: 0.5rem;
     margin-bottom: 2rem;
-    box-shadow: 0 3px 18px 0px rgba(0,0,0,0.17);
+    @include shadow-big();
 }
 
 .header {
@@ -269,22 +284,153 @@ html {
     margin-top: -1.5rem;
 }
 
-.stat {
+
+
+.locale-down {
+  vertical-align: top;
+}
+
+.dashboard {
+  display: flex;
+  overflow: hidden;
+  margin-top: -32px;
+  padding-top: 32px;
+  height: 100vh;
+  main {
+    flex-grow: 1;
+    min-width: 270px;
+    padding-top: 0;
+    overflow: auto;
+  }
+  .user {
+    display: none;
+    align-items: center;
+    .info {
+      font-size: 0.7rem;
+      padding-left: 0.65rem;
+      .username {
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: white;
+      }
+    }
+  }
+  .sidebar {
+    height: 100vh;
+    background: #24282e;
+    color: white;
+    width: 50px;
+    .label { display: none}
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    &.show {
+      width: 250px;
+      .user {display: flex}
+      .user-icon {display: none}
+      .label {display: inline-block}
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      font-size: 1rem;
+      padding: 0.25rem 0.6rem;
+      &:hover {
+        background: #444a58;
+        cursor: pointer;
+      }
+    }
+    .icon {
+      width: 30px;
+      display: inline-block;
+      text-align: center;
+    }
+  }
+}
+
+.app {
+  padding: 0.25rem;
   background: white;
-  box-shadow: 0px 5px 16px -6px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ccc;
+  @include shadow-small();
+  display: flex;
+  border-radius: 0.25rem;
+  position: relative;
+  color: black !important;
+  text-decoration: none !important;
+  img {
+    border-radius: 0.5rem;
+  }
+  .title {
+    font-weight: bold;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .short {
+    height: 2.2rem;
+    font-size: 0.8rem;
+    color: #969696;
+    line-height: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .info {
+    overflow: hidden;
+  }
+  .action {
+    position: absolute;
+    background: white;
+    height: 100%;
+    width: auto;
+    display: flex;
+    align-items: center;
+    right: 0;
+    top: 0;
+    padding-right: 0.25rem;
+    border-radius: 0.25rem;
+    box-shadow: -18px 0px 13px -2px white;
+  }
+}
+
+
+.stat, .stat-wrapper {
+  width: 100%;
+  padding: 0 $grid-gutter-width / 2;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  // &:first-child {
+  //   padding-left: 0;
+  // }
+  // &:last-child {
+  //   padding-right: 0;
+  // }
   * {
     width: 100%;
   }
 }
 
+.stat {
+  padding: 1rem;
+  background: white;
+  text-align: center;
+  @include shadow-small();
+}
 
-@media (min-width: 992px) {
-  .stats {
-    flex-grow: 1;
-    justify-content: flex-end;
+.stats[min-width~="576px"] {
+  .stat-wrapper {
+    @include make-col(6);
+  }
+}
+
+.stats[min-width~="768px"] {
+  .stat-wrapper {
+    @include make-col(3);
   }
 }

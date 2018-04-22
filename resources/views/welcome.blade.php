@@ -14,8 +14,9 @@
     <body>
 
       <div id="app">
-        @include('layouts.navigation')
-        <div class="banner">
+        @include('layouts.navigation-small')
+        @include('layouts.navigation-big')
+        <div class="banner home">
           <div class="logo-wrapper">
             <span class="logo {{ env('APP_TYPE')}}"></span>
             {{env("APP_TYPE")}} Haven

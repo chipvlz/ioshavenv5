@@ -1,6 +1,7 @@
 
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
+window.ElementQueries = require('css-element-queries/src/ElementQueries')
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -19,6 +20,8 @@ try {
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
+
+window.ElementQueries.listen();
 
 window.axios = require('axios');
 

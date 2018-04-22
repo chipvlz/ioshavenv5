@@ -19,10 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@dashboard');
 
 Route::post("/locale", 'MainController@locale');
 
+Route::get('/apps', "AppController@get");
 
 Route::get('/app/create', 'AppController@create')->middleware('auth');
 Route::get('/app/{uid}/edit', 'AppController@showEditPage')->middleware('auth');
@@ -34,3 +35,5 @@ Route::post('/upload/banner', 'UploadController@banner')->middleware('auth');
 
 Route::get('/download/preview-apk/{uid}', 'DownloadController@previewApk')->middleware('auth');
 Route::get('/preview/image/{folder}/{file}', 'DownloadController@previewImage')->middleware('auth');
+
+Route::get('/dashboard/apps', 'DashboardController@apps');

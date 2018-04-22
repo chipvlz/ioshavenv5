@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 Vue.component('editor', require('./components/Editor.vue'));
 Vue.component('file-upload', require('./components/FileUpload.vue'));
+Vue.component('load-more', require('./components/LoadMore.vue'));
 
 function formatBytes(bytes,decimals) {
    if(bytes == 0) return '0 Bytes';
@@ -30,9 +31,12 @@ function formatBytes(bytes,decimals) {
 const app = new Vue({
     el: '#app',
     data: {
+      showdashboard: false,
       showmoreclick: false,
       scrollpos: 0,
-      hasScrolledOnePage: false
+      hasScrolledOnePage: false,
+      apps: [],
+      readyForDynamicContent: false
     },
     methods: {
       iconSuccess (data) {
@@ -43,7 +47,15 @@ const app = new Vue({
       },
       apkSuccess (data) {
         $('#size').html(formatBytes(data.size));
+      },
+      addApps(data) {
+        this.apps.push.apply(this.apps, data);
+      },
+      toggleDashboard(val) {
+        this.showdashboard = val;
+        // window.ElementQueries.init();
       }
+
     },
     mounted () {
       this.scrollpos = window.pageYOffset || document.documentElement.scrollTop;
@@ -72,4 +84,9 @@ $('.locale').on('click', function (e) {
   $('#locale-value').val($(this).data('value'));
   // console.log($('#locale').serialize());
   $('#locale').submit();
+})
+
+$('#loadmore').on('submit', function (e) {
+  e.preventDefault();
+  console.log(e.target.action);
 })

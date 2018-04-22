@@ -8,7 +8,7 @@
   </div>
 
   <div class="image" style="background-image">
-    <img src="https://placeimg.com/640/480/any" class="img" alt="news thumbnail">
+    <img src="http://placeimg.com/640/480/any" class="img" alt="news thumbnail">
   </div>
 
   <div class="footer">

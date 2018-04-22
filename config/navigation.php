@@ -8,7 +8,7 @@ return [
       "color" => "red",
     ],
     "Apps" => [
-      "url" => "/",
+      "url" => "/apps",
       "icon" => "fas fa-th",
       "color" => "blue",
     ],
