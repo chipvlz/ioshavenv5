@@ -1,0 +1,21 @@
+{
+  "Upload": "上传",
+  "Upload Avatar": "上传头像",
+  "Change Username":"更改用户名",
+  "Download":"下载",
+  "Download App": "下载App",
+  "News": "新闻",
+  "Apps": "应用",
+  "Games": "游戏",
+  "More": "更多",
+  "Login": "登录",
+  "Register": "寄存器",
+  "E-Mail address": "电子邮件地址",
+  "Password": "密码",
+  "Username": "用户名",
+  "Confirm password": "确认密码",
+  "Forgot password?": "忘记密码？",
+  "Remember me": "记住我",
+  "Reset password": "重设密码",
+  "Send reset link": "发送重置链接"
+}
