@@ -25,6 +25,7 @@ class CreateAppsTable extends Migration
               $table->string('banner')->nullable();
               $table->string('unsigned')->nullable();
               $table->string('signed')->nullable();
+              $table->string('duplicate')->nullable();
               $table->string('apk')->nullable();
               $table->string('version')->nullable();
               $table->string('short')->default("A short snippet");
@@ -33,6 +34,7 @@ class CreateAppsTable extends Migration
               $table->bigInteger('views')->default(0);
               $table->bigInteger('downloads')->default(0);
               $table->bigInteger('size')->default(0);
+              $table->boolean('review')->default(0);
               $table->softDeletes();
               $table->timestamps();
           });

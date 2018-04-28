@@ -8,12 +8,16 @@
       <!-- <input type="hidden" :name="name" :value="path"> -->
     </label>
     <div class="progress w-100" v-show="started && !success">
-      <div :id="'progress-' + id" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+      <div :id="'progress-' + id" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%">
+        <span v-if="percent >= 100 && !error">Processing...</span>
+        <span v-else-if="!error" class="pl-3 text-left">{{percent}}%</span>
+        <span v-else="">Error</span>
+      </div>
     </div>
     <div class="text-danger status" v-show="error">
       <strong class="mr-2">Error:</strong>
       {{error}}
-      <strong @click="reset" class="text-primary">Try again</strong>
+      <button @click.prevent="reset" class="font-weight-bold btn btn-link">Try again</button>
     </div>
     <div class="text-primary status success" v-show="success">
       <strong class="mr-2">Success:</strong> {{success}}
@@ -29,7 +33,8 @@
             error: '',
             success: '',
             started: false,
-            path: null
+            path: null,
+            percent:0
           }
         },
         mounted() {
@@ -39,6 +44,7 @@
           onUploadProgress (event) {
             var percent = Math.round( (event.loaded * 100) / event.total );
             $('#progress-' + this.id).width(percent + '%');
+            this.percent = percent;
           },
           reset () {
             this.started = false,

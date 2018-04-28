@@ -14,12 +14,18 @@
     @else
     <form action="/logout" id="logout" method="post">@csrf</form>
     <div class="dropdown">
-      <img src="http://placeimg.com/250/250/people" data-toggle='dropdown' id="profile-dropdown" role="button" class="rounded-circle avatar mr-3" height="24" width="24" alt="profile image" aria-haspopup="true" aria-expanded="false">
+      <img src="{{!!Auth::user()->avatar ? Storage::url(Auth::user()->avatar) : 'https://api.adorable.io/avatars/200/'.Auth::user()->username}}" data-toggle='dropdown' id="profile-dropdown" role="button" class="rounded-circle avatar mr-3" height="24" width="24" alt="profile image" aria-haspopup="true" aria-expanded="false">
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profile-dropdown">
-        <a class="dropdown-item" href="/dashboard">Dashboard</a>
-        <a class="dropdown-item" href="#">My Profile</a>
+        <a class="dropdown-item" href="/dashboard">
+          <i class="fas fa-cogs mr-2"></i>
+          Dashboard</a>
+        <a class="dropdown-item" href="/dashboard/profile">
+          <i class="fas fa-user mr-2"></i>
+          My Profile</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item text-danger logout" href="#">Logout</a>
+        <a class="dropdown-item text-danger logout" href="#">
+          <i class="fal fa-sign-out-alt mr-2"></i>
+          Logout</a>
       </div>
     </div>
 

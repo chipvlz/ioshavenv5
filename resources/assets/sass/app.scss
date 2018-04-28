@@ -291,11 +291,25 @@ html {
 }
 
 .dashboard {
+  .bottom-nav {
+    background: white;
+    border-top: 1px solid #ccc;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  &.has-bottom-nav {
+    padding-bottom: 40px;
+  }
   display: flex;
   overflow: hidden;
   margin-top: -32px;
   padding-top: 32px;
   height: 100vh;
+  .info {
+    padding: 0 15px;
+  }
   main {
     flex-grow: 1;
     min-width: 270px;
@@ -307,7 +321,7 @@ html {
     align-items: center;
     .info {
       font-size: 0.7rem;
-      padding-left: 0.65rem;
+      padding: 0.65rem;
       .username {
         font-weight: bold;
         font-size: 0.9rem;
@@ -320,6 +334,10 @@ html {
     background: #24282e;
     color: white;
     width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 32px;
     .label { display: none}
     a {
       color: white;
@@ -414,6 +432,34 @@ html {
   * {
     width: 100%;
   }
+}
+
+.checkbox-label {
+  margin: 0;
+  padding: 0;
+}
+
+.checkbox-label input {
+  display: none;
+}
+
+.checkbox-label input ~ .check:hover {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.checkbox-label input ~ .check {
+    background: transparent;
+    padding: 0.4rem 0.5rem;
+    color: #444;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+.checkbox-label input:checked ~ .check {
+    background: #007bff;
+    color: white;
+    border: none;
 }
 
 .stat {

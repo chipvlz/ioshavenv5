@@ -26,7 +26,8 @@ class AppController extends Controller
       $app = Preview::byuid($uid)->first();
       return view('apps.edit', [
         "uid" => $uid,
-        "preview" => $app
+        "preview" => $app,
+        "hasBottomNav" => true
       ]);
     }
 
@@ -42,8 +43,29 @@ class AppController extends Controller
 
     public function edit(Request $r) {
       $r->validate([
-        'description' => 'required',
+        'uid' => 'required',
+        'name' => 'required',
+        'description' => 'required'
       ]);
-      dd($r->all());
+      $p = Preview::byuid($r->uid)->first();
+      if ($r->delete) {
+        $p->delete();
+        return redirect('/dashboard');
+      }
+      $p->status = "saved";
+      $p->name = $r->name;
+      $p->unsigned = $r->unsigned;
+      $p->signed = $r->signed;
+      $p->duplicate = $r->duplicate;
+      $p->version = $r->version;
+      $p->short = $r->short;
+      $p->description = $r->description;
+      $p->tags = $r->tags;
+      if ($r->review) {
+        $p->review = 1;
+        $p->status = 'pending';
+      }
+      $p->save();
+      return back();
     }
 }

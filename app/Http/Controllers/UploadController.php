@@ -9,6 +9,7 @@ use Image;
 use Storage;
 use App\App;
 use App\Preview;
+use App\User;
 
 class UploadController extends Controller
 {
@@ -69,8 +70,9 @@ class UploadController extends Controller
         ], 501);
       }
       $app = Preview::byuid($request->uid)->first();
-      $app->icon = str_replace_first("public", "/storage", $path);
+      $app->icon = $path;
       $app->save();
+      $app->icon = Storage::url($app->icon);
       return response()->json($app);
     }
 
@@ -84,8 +86,25 @@ class UploadController extends Controller
         ], 501);
       }
       $app = Preview::byuid($request->uid)->first();
-      $app->banner = str_replace_first("public", "/storage", $path);;
+      $app->banner = $path;
       $app->save();
+      $app->banner = Storage::url($app->banner);
       return response()->json($app);
+    }
+
+    public function avatar(Request $request) {
+      $fileTypes = ['png', 'jpg', 'jpeg', 'gif'];
+      $path = $this->image($request, 'avatar-0', 'avatars', $fileTypes, 200, 200);
+      if (!$path) {
+        return Response::json([
+          "error" => "wrong extention",
+          "accepted" => $fileTypes
+        ], 501);
+      }
+      $user = User::find($request->id);
+      $user->avatar = $path;
+      $user->save();
+      $user->avatar = Storage::url($user->avatar);
+      return response()->json($user);
     }
 }

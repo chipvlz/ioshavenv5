@@ -28,6 +28,8 @@ function formatBytes(bytes,decimals) {
    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
+
+
 const app = new Vue({
     el: '#app',
     data: {
@@ -36,11 +38,13 @@ const app = new Vue({
       scrollpos: 0,
       hasScrolledOnePage: false,
       apps: [],
+      users: [],
       readyForDynamicContent: false
     },
     methods: {
       iconSuccess (data) {
-        $('#icon-image').attr('src',  data.icon);
+        console.log(data);
+        $('#icon-image').attr('src', data.icon);
       },
       bannerSuccess (data) {
         $('#banner-image').attr('src', data.banner);
@@ -48,8 +52,14 @@ const app = new Vue({
       apkSuccess (data) {
         $('#size').html(formatBytes(data.size));
       },
+      avatarSuccess (data) {
+        $('#avatar-image').attr('src', data.avatar);
+      },
       addApps(data) {
         this.apps.push.apply(this.apps, data);
+      },
+      addUsers(data) {
+        this.users.push.apply(this.users, data);
       },
       toggleDashboard(val) {
         this.showdashboard = val;
@@ -90,3 +100,5 @@ $('#loadmore').on('submit', function (e) {
   e.preventDefault();
   console.log(e.target.action);
 })
+
+$("[data-toggle=popover]").popover();
