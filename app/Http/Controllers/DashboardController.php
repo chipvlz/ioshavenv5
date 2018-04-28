@@ -9,6 +9,7 @@ use App\Role;
 use Storage;
 use Gate;
 use App\User;
+use App\Story;
 
 class DashboardController extends Controller
 {
@@ -67,7 +68,6 @@ class DashboardController extends Controller
           $user->avatar = !!$user->avatar ? Storage::url($user->avatar) : 'https://api.adorable.io/avatars/200/'.$user->username;
           $user->role = $user->role()->first();
         }
-
       }
 
       $data = [
@@ -76,6 +76,26 @@ class DashboardController extends Controller
       ];
 
       return !$r->json ? view('dashboard.users', $data) : response()->json($data);
+    }
+
+    public function showStories (Request $r) {
+      if (Gate::denies('create stories')) abort(404);
+      $stories = !$r->q ? Story::paginate(10)
+        : Story::where('title', 'like', "%$r->q%")->paginate(10);
+
+      if ($r->json) {
+        foreach ($stories as $story) {
+          $story->image = !!$story->image ? Storage::url($story->image) : '/img/banner.png';
+          $story->role = $user->role()->first();
+        }
+      }
+
+      $data = [
+        "stories" => $stories,
+        "query" => $r->q
+      ];
+
+      return !$r->json ? view('dashboard.stories', $data) : response()->json($data);
     }
 
     public function showProfile () {

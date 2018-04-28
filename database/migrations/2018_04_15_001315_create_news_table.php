@@ -13,17 +13,28 @@ class CreateNewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('stories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('uid');
             $table->integer("user_id");
-            $table->string("type");
-            $table->string("title");
-            $table->string("mini");
-            $table->longText("content");
-            $table->string("image");
-            $table->string("tags");
+            $table->string("published_version")->nullable();
+            $table->string("saved_version");
             $table->timestamps();
+        });
+
+        Schema::create('story_versions', function (Blueprint $table) {
+          $table->increments('id');
+          $table->string('uid');
+          $table->integer('user_id');
+          $table->integer('story_id');
+          $table->string("commit")->nullable();
+          $table->string("type")->nullable();
+          $table->string("title")->nullable();
+          $table->string("mini")->nullable();
+          $table->longText("content")->nullable();
+          $table->string("image")->nullable();
+          $table->string("tags")->nullable();
+          $table->timestamps();
         });
     }
 
@@ -34,6 +45,7 @@ class CreateNewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('stories');
+        Schema::dropIfExists('story_versions');
     }
 }

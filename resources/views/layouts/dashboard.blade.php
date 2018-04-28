@@ -31,6 +31,14 @@
                   </div>
                 </a>
               </li>
+              @can('upload apps')
+              <li>
+                <a href="/dashboard/apps">
+                  <span class="icon"><i class="fal fa-th-large"></i></span>
+                  <span class="label pl-2">Apps</span>
+                </a>
+              </li>
+              @endcan
               @can('view logs')
               <li>
                 <a href="/dashboard/logs">
@@ -39,19 +47,11 @@
                 </a>
               </li>
               @endcan
-              @can('manage users')
+              @can('create stories')
               <li>
-                <a href="/dashboard/users">
-                  <span class="icon"><i class="fal fa-users"></i></span>
-                  <span class="label pl-2">Users</span>
-                </a>
-              </li>
-              @endcan
-              @can('upload apps')
-              <li>
-                <a href="/dashboard/apps">
-                  <span class="icon"><i class="fal fa-th-large"></i></span>
-                  <span class="label pl-2">Apps</span>
+                <a href="/dashboard/stories">
+                  <span class="icon"><i class="fal fa-newspaper"></i></span>
+                  <span class="label pl-2">News</span>
                 </a>
               </li>
               @endcan
@@ -63,6 +63,16 @@
                 </a>
               </li>
               @endcan
+              @can('manage users')
+              <li>
+                <a href="/dashboard/users">
+                  <span class="icon"><i class="fal fa-users"></i></span>
+                  <span class="label pl-2">Users</span>
+                </a>
+              </li>
+              @endcan
+
+
             </ul>
 
             <ul>

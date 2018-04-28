@@ -14348,6 +14348,9 @@ var app = new Vue({
     avatarSuccess: function avatarSuccess(data) {
       $('#avatar-image').attr('src', data.avatar);
     },
+    storySuccess: function storySuccess(data) {
+      $('#story-image').attr('src', data.image);
+    },
     addApps: function addApps(data) {
       this.apps.push.apply(this.apps, data);
     },
@@ -14394,6 +14397,7 @@ $('#loadmore').on('submit', function (e) {
 });
 
 $("[data-toggle=popover]").popover();
+$('[data-toggle="tooltip"]').tooltip();
 
 /***/ }),
 /* 16 */

@@ -55,6 +55,9 @@ const app = new Vue({
       avatarSuccess (data) {
         $('#avatar-image').attr('src', data.avatar);
       },
+      storySuccess (data) {
+        $('#story-image').attr('src', data.image);
+      },
       addApps(data) {
         this.apps.push.apply(this.apps, data);
       },
@@ -102,3 +105,4 @@ $('#loadmore').on('submit', function (e) {
 })
 
 $("[data-toggle=popover]").popover();
+$('[data-toggle="tooltip"]').tooltip();

@@ -33,20 +33,28 @@ Route::post('/upload/apk', 'UploadController@apk')->middleware('auth');
 Route::post('/upload/icon', 'UploadController@icon')->middleware('auth');
 Route::post('/upload/banner', 'UploadController@banner')->middleware('auth');
 Route::post('/upload/avatar', 'UploadController@avatar')->middleware('auth');
+Route::post('/upload/story', 'UploadController@story')->middleware('auth');
 
 Route::get('/download/preview-apk/{uid}', 'DownloadController@previewApk')->middleware('auth');
-Route::get('/preview/image/{folder}/{file}', 'DownloadController@previewImage')->middleware('auth');
 
 Route::get('/dashboard/apps', 'DashboardController@showApps')->middleware('auth');
 Route::get('/dashboard/users', 'DashboardController@showUsers')->middleware('auth');
 Route::get('/dashboard/roles', 'DashboardController@showRoles')->middleware('auth');
 Route::get('/dashboard/profile', 'DashboardController@showProfile')->middleware('auth');
-Route::get('/user/edit/{username}', 'UserController@showUser')->middleware('auth');
-Route::post('/user/edit', 'UserController@edit')->middleware('auth');
+Route::get('/dashboard/stories', 'DashboardController@showStories')->middleware('auth');
+
 
 Route::get('/role/edit/{id}', 'RoleController@showEditPage')->middleware('auth');
 Route::get('/role/delete/{id}', 'RoleController@delete')->middleware('auth');
 Route::post('/role/edit', 'RoleController@edit')->middleware('auth');
 Route::post('/role/create', 'RoleController@create')->middleware('auth');
+
+Route::get('/story/edit/{uid}/{vid?}', 'StoryController@showEditPage')->middleware('auth');
+Route::post('/story/edit', 'StoryController@edit')->middleware('auth');
+Route::post('/story/create', 'StoryController@create')->middleware('auth');
+
+
+Route::get('/user/edit/{username}', 'UserController@showUser')->middleware('auth');
+Route::post('/user/edit', 'UserController@edit')->middleware('auth');
 
 Route::get('/test', 'TestController@test');
