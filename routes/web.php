@@ -11,11 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    // App::setLocale("es");
-    // config(['app.locale' => 'en']);
-    return view('welcome');
-});
+Route::get('/', 'MainController@news');
 
 Auth::routes();
 

@@ -18,6 +18,7 @@ class CreateNewsTable extends Migration
             $table->string('uid');
             $table->integer("user_id");
             $table->string("published_version")->nullable();
+            $table->string("queued_version")->nullable();
             $table->string("saved_version");
             $table->timestamps();
         });
@@ -34,6 +35,7 @@ class CreateNewsTable extends Migration
           $table->longText("content")->nullable();
           $table->string("image")->nullable();
           $table->string("tags")->nullable();
+          $table->dateTime("released_at")->nullable();
           $table->timestamps();
         });
     }

@@ -112,15 +112,15 @@ class UploadController extends Controller
 
     public function story(Request $request) {
       $fileTypes = ['png', 'jpg', 'jpeg', 'gif'];
-      $path = $this->image($request, 'story-0', 'stories', $fileTypes, 640, 480);
+      $path = $this->image($request, 'image-0', 'stories', $fileTypes, 640, 480);
       if (!$path) {
         return Response::json([
           "error" => "wrong extention",
           "accepted" => $fileTypes
         ], 501);
       }
-      $story = Story::find($request->uid);
-      $version = $story->current();
+      $story = Story::byuid($request->uid)->first();
+      $version = $story->version($request->vid);
       $version->image = $path;
       $version->save();
       $version->image = Storage::url($version->image);

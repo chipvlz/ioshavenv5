@@ -23,9 +23,11 @@
           </div>
         </div>
         <div class="posts container">
-          @component('components.newspost')@endcomponent
-          @component('components.newspost')@endcomponent
-          @component('components.newspost')@endcomponent
+          @foreach($stories as $story)
+            @component('components.newspost', [
+              "story" => $story
+            ])@endcomponent
+          @endforeach
         </div>
       </div>
 

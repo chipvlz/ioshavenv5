@@ -43,10 +43,10 @@
       <thead class="bg-dark text-white">
         <tr>
           <th>#</th>
-          <th scope="col">Image</th>
           <th scope="col">Type</th>
           <th scope="col">Title</th>
-          <th scope="col">Tags</th>
+          <th scope="col">Views</th>
+          <th scope="col">Comments</th>
           <th scope="col" class="text-right">Actions</th>
         </tr>
       </thead>
@@ -54,15 +54,12 @@
         @foreach($stories as $story)
         <tr>
           <th scope="row" class="align-middle">{{$loop->iteration}}</th>
-          <td class="align-middle">
-            <img src="{{!!$story->avatar ? Storage::url($story->avatar) : '/img/banner.png' }}" width="75" alt="banner">
-          </td>
-          <td class="align-middle">{{$story->type}}</td>
-          <td class="align-middle">{{$story->title}}</td>
-          <td class="align-middle">{{$story->role->name}}</td>
+          <td class="align-middle">{{$story->current()->type}}</td>
+          <td class="align-middle">{{$story->current()->title}}</td>
+          <td></td>
+          <td></td>
           <td class="text-right align-middle">
             <a href="/story/edit/{{$story->uid}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-pencil"></i></a>
-            <a href="/story/delete/{{$story->uid}}" class="btn btn-danger btn-sm my-1"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
         @endforeach

@@ -7,6 +7,7 @@ use App\Story;
 use App\StoryVersion;
 use Gate;
 use Auth;
+use Carbon\Carbon;
 
 class StoryController extends Controller
 {
@@ -74,8 +75,15 @@ class StoryController extends Controller
           $story->save();
         }
       }
-      if ($r->publish) {
+      elseif ($r->publish) {
         $story->published_version = $r->vid;
+        $story->save();
+        $version = $story->published();
+        $version->released_at = !!$version->released_at ? $version->released_at : Carbon::now();
+        $version->save();
+      }
+      elseif ($r->queue) {
+        $story->queued_version = $r->vid;
         $story->save();
       }
       return redirect("/story/edit/$story->uid");

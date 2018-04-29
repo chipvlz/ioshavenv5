@@ -8,6 +8,10 @@ class StoryVersion extends Model
 {
     protected $table = "story_versions";
 
+    protected $dates = [
+      "released_at",
+    ];
+
     protected $fillable = [
       "story_id", "uid", 'type', 'title', 'mini', 'content', 'image', 'tags', 'user_id', 'commit'
     ];

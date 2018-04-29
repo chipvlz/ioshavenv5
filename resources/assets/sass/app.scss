@@ -299,9 +299,6 @@ html {
     align-items: center;
     justify-content: flex-end;
   }
-  &.has-bottom-nav {
-    padding-bottom: 40px;
-  }
   display: flex;
   overflow: hidden;
   margin-top: -32px;
@@ -337,7 +334,7 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-bottom: 32px;
+    padding-bottom: 16px;
     .label { display: none}
     a {
       color: white;
@@ -365,6 +362,12 @@ html {
       width: 30px;
       display: inline-block;
       text-align: center;
+    }
+  }
+  &.has-bottom-nav {
+    padding-bottom: 40px;
+    .sidebar {
+      padding-bottom: 56px;
     }
   }
 }

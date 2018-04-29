@@ -25,6 +25,10 @@ class Story extends Model
       return StoryVersion::where('uid', $this->saved_version)->first();
     }
 
+    public function queued() {
+      return StoryVersion::where('uid', $this->queued_version)->first();
+    }
+
     public function version($vid) {
       return StoryVersion::where('uid', $vid)->first();
     }

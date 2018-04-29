@@ -9765,10 +9765,6 @@ html {
           justify-content: flex-end;
 }
 
-.dashboard.has-bottom-nav {
-  padding-bottom: 40px;
-}
-
 .dashboard .info {
   padding: 0 15px;
 }
@@ -9815,7 +9811,7 @@ html {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding-bottom: 32px;
+  padding-bottom: 16px;
 }
 
 .dashboard .sidebar .label {
@@ -9864,6 +9860,14 @@ html {
   width: 30px;
   display: inline-block;
   text-align: center;
+}
+
+.dashboard.has-bottom-nav {
+  padding-bottom: 40px;
+}
+
+.dashboard.has-bottom-nav .sidebar {
+  padding-bottom: 56px;
 }
 
 .app {

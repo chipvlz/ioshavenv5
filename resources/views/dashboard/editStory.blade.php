@@ -1,11 +1,14 @@
 @extends('layouts.dashboard')
 @section('content')
 
-<div class="app-banner mb-3 jumbotron-fluid">
+<!-- <div class="app-banner mb-3 jumbotron-fluid">
   <img id="story-image" src="{{ !!$version->image ? Storage::url($version->image) : '/img/banner.png' }}" class="w-100" alt="banner">
-</div>
+</div> -->
 
 <div class="container mb-4">
+  <div class="mb-3">
+    <img id="story-image" src="{{ !!$version->image ? Storage::url($version->image) : '/img/banner.png' }}" height="120" alt="banner">
+  </div>
   <h1 class="py-2 border-bottom d-flex align-items-end justify-content-between">{{ $version->title ?? 'New story' }}</h1>
 </div>
 
@@ -47,6 +50,9 @@
     <file-upload id="image" name="image" @success="storySuccess" class="mb-3" action="/upload/story" :data="[{
       name: 'uid',
       value: '{{ $story->uid }}'
+      },{
+      name: 'vid',
+      value: '{{ $version->uid }}'
       }]">
       <i class="fas fa-image mr-2"></i>Upload image
     </file-upload>
@@ -69,7 +75,11 @@
   <div class="fixed-bottom p-3 bottom-nav">
     <small><span class="text-muted mr-2">{{$version->uid}} </span></small>
     <button type="submit" class="btn btn-primary d-flex align-items-center mr-2 btn-sm" name="save" value="1"><i class="fas fa-save mr-2"></i>Save</button>
+    @can('approve apps')
     <button type="submit" class="btn btn-success d-flex align-items-center mr-2 btn-sm" name="publish" value="1"><i class="fas fa-check mr-2"></i>Publish</button>
+    @else
+    <button type="submit" class="btn btn-success d-flex align-items-center mr-2 btn-sm" name="queue" value="1"><i class="fas fa-check mr-2"></i>Submit</button>
+    @endcan
   </div>
 </form>
 
@@ -77,17 +87,34 @@
 <div class="container mt-4">
   <h1 class="py-2 border-bottom mb-2">Version History</h1>
   <div class="list-group list-group-flush">
-    @foreach($versions as $version)
-    <div class="list-group-item p-2 d-flex align-items-center justify-content-between {{ ($story->current()->uid != $version->uid) ? 'list-group-item-muted' : '' }}">
+    @foreach($versions as $v)
+    <div class="list-group-item p-2 d-flex align-items-center justify-content-between {{ ($version->uid != $v->uid) ? 'list-group-item-muted' : '' }}">
       <span class="font-weight-bold">
-        <span class="mr-2" data-toggle="tooltip" data-placement="right" title="{{ $version->user->username }}">
-          <img class="rounded-circle" id="avatar-image" src="{{!!$version->user->avatar ? Storage::url($version->user->avatar) : 'https://api.adorable.io/avatars/200/'.$version->user->username }}" width="20" height="20" alt="avatar">
+        <span class="mr-2" data-toggle="tooltip" data-placement="bottom" title="{{ $v->user->username }}">
+          <img class="rounded-circle" id="avatar-image" src="{{!!$v->user->avatar ? Storage::url($v->user->avatar) : 'https://api.adorable.io/avatars/200/'.$v->user->username }}" width="20" height="20" alt="avatar">
         </span>
         <span>
-          {{ $version->commit ?? "Unnamed commit: $version->uid" }}
+          @if (!!$story->published() && $v->uid == $story->published()->uid)
+          <span data-toggle="tooltip" data-placement="right" title="published">
+            <i class="fas fa-check mr-1 text-success"></i>
+          </span>
+          @elseif (!!$story->queued() && $v->uid == $story->queued()->uid)
+          <span data-toggle="tooltip" data-placement="right" title="awaiting approval">
+            <i class="fas fa-spinner fa-pulse"></i>
+          </span>
+          @endif
+
+          @if ($v->uid == $story->current()->uid)
+          <span data-toggle="tooltip" data-placement="right" title="saved">
+            <i class="fas fa-save mr-1 text-primary"></i>
+          </span>
+          @endif
+          {{ $v->commit ?? "Unnamed commit: $v->uid" }}
         </span>
       </span>
-      <a href="/story/edit/{{$story->uid .'/'. $version->uid}}" class="float-right btn btn-link p-0 mr-2"><small>{{ $version->uid }}</small></a>
+      <a href="/story/edit/{{$story->uid .'/'. $v->uid}}" class="float-right btn btn-link p-0">
+        <small>{{ $v->uid }}</small>
+      </a>
     </div>
     @endforeach
   </div>

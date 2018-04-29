@@ -1,19 +1,19 @@
 <div class="news-post col-lg-8">
   <div class="header">
     <div class="type-image"></div>
-    <div class="type">Announcement</div>
-    <div class="username">Gushyz</div>
+    <div class="type">{{ $story->published()->type }}</div>
+    <div class="username">{{ $story->user->username }}</div>
     <i class="fas fa-circle circle"></i>
-    <div class="time">March, 22 2018</div>
+    <div class="time">{{ $story->published()->released_at->diffForHumans() }}</div>
   </div>
 
   <div class="image" style="background-image">
-    <img src="http://placeimg.com/640/480/any" class="img" alt="news thumbnail">
+    <img src="{{!!$story->published()->image ? Storage::url($story->published()->image) : '/img/banner.png'}}" class="img" alt="news thumbnail">
   </div>
 
   <div class="footer">
-    <div class="title">Crazy Title to Grab Attention</div>
-    <div class="mini">Little tag line to engage readers just a little more. Shouldn't be too long.</div>
+    <div class="title">{{ $story->published()->title }}</div>
+    <div class="mini">{{ $story->published()->mini }}</div>
     <div class="readmore">Read More <i class="fal fa-chevron-right"></i></div>
   </div>
 </div>
