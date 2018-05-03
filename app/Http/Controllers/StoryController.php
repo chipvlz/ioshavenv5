@@ -27,7 +27,6 @@ class StoryController extends Controller
 
     public function view ($uid) {
       $story = Story::byuid($uid)->whereNotNull('published_version')->firstOrFail();
-
       return view('story', [
         "story" => $story,
         "published" => $story->published(),

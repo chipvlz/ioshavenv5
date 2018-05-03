@@ -1,9 +1,17 @@
 @extends('layouts.app')
 @section('open-graph')
-<meta property="og:title" content="{{ env('APP_TYPE') }} Haven - {{ $published->title }}">
-<meta property="og:description" content="{{ $published->mini }}">
-<meta property="og:site_name" content="{{ env('APP_TYPE') }} Haven">
-<meta property="og:image" content="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
+<meta property="og:title"               content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $published->title }}">
+<meta name="title"                      content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $published->title }}">
+<meta name="description"                content="{{ $published->mini }}">
+<meta property="og:description"         content="{{ $published->mini }}">
+<meta name="twitter:description"        content="{{ $published->mini }}">
+<meta property="og:site_name"           content="{{ env('APP_TYPE') }} Haven">
+<meta property="og:image"               content="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
+<meta name="twitter:image:src"          content="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
+<meta property="og:type"                content="article">
+<meta property="article:author"         content="$story->user->username">
+<meta property="article:published_time" content="$published->released_at">
+<meta property="twitter:site"           content="@ioshavenco">
 @endsection
 
 @extends('layouts.app')
