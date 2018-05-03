@@ -1,17 +1,27 @@
 @extends('layouts.app')
 @section('open-graph')
+<meta name="twitter:description"        content="{{ $published->mini }}">
+<meta name="twitter:image"              content="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
+<meta name="twitter:title"              content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $published->title }}">
+<meta name="twitter:card"               content="summary_large_image">
+<meta name="twitter:site"               content="@ioshavenco">
+
+<meta property="og:description"         content="{{ $published->mini }}">
+<meta property="og:image:width"         content="1500">
+<meta property="og:image:height"        content="500">
+<meta property="og:site_name"           content="{{ strtoupper(env('APP_TYPE')) }} Haven">
+<meta property="og:image"               content="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
 <meta property="og:title"               content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $published->title }}">
+<meta property="og:type"                content="article">
+
+<meta property="article:published_time" content="{{ $published->released_at }}">
+<meta property="article:modified_time"  content="{{ $published->updated_at }}">
+<meta property="article:section"        content="{{ $published->type }}">
+<meta property="article:author"         content="$story->user->username">
+
 <meta name="title"                      content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $published->title }}">
 <meta name="description"                content="{{ $published->mini }}">
-<meta property="og:description"         content="{{ $published->mini }}">
-<meta name="twitter:description"        content="{{ $published->mini }}">
-<meta property="og:site_name"           content="{{ env('APP_TYPE') }} Haven">
-<meta property="og:image"               content="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
-<meta name="twitter:image:src"          content="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
-<meta property="og:type"                content="article">
-<meta property="article:author"         content="$story->user->username">
-<meta property="article:published_time" content="$published->released_at">
-<meta property="twitter:site"           content="@ioshavenco">
+
 @endsection
 
 @extends('layouts.app')
