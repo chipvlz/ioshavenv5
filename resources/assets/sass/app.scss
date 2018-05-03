@@ -35,6 +35,61 @@ html {
   flex-grow: 1
 }
 
+blockquote {
+    border-left: 10px solid #ccc;
+    padding: 2rem 1rem !important;
+    margin: 1rem 0 !important;
+    background: #f5f5f5;
+    font-size: 1.00rem;
+    text-align: center;
+    font-style: italic;
+    position: relative;
+    border-radius: 0.3rem;
+}
+
+.embeded iframe {
+    background: white;
+}
+
+blockquote::before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 4rem;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+blockquote::after {
+    color: #ccc;
+    content: close-quote;
+    font-size: 4em;
+    line-height: 0.1rem;
+    margin-right: 1rem;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.embeded {
+    display: flex;
+    align-items: center;
+}
+
+.embeded *:first-child {
+    display: inline-block !important;
+    margin: auto !important;
+}
+
+.no-link {
+  color: #444 !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
 .nav1 {
   background: #23282d;
   height: 32px;
@@ -66,7 +121,7 @@ html {
 
 .nav2 {
   background: #fff;
-  height: 100px;
+  height: 60px;
   padding: 0rem;
   display: flex;
   justify-content: space-between;
@@ -74,7 +129,7 @@ html {
   font-size: 1.2rem;
   border-bottom: 1px solid #ccc;
   font-family: 'Nunito', sans-serif;
-  margin-top: 25px;
+  margin-top: 32px;
 }
 
 .nav-link {
@@ -155,6 +210,15 @@ html {
     margin-bottom: -7.5rem;
     font-size: 1.2rem;
   }
+  &.query2 {
+    background-image: url(/img/query2.png);
+    background-size: 50%;
+    margin-bottom: -7.5rem;
+    font-size: 1.5rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+  }
   background-image: url(/img/transparent-banner.png);
   background-size: cover;
   background-color: #03a9f4;
@@ -177,8 +241,13 @@ html {
     background-position: left;
     background-size: 3rem;
     padding: 2rem;
+    background-size: 60px;
+    margin-right: 0.8rem;
     &.ios {
-      background-image: url(/img/ios-logo.png);
+      background-image: url(/img/ios-white@3x.png);
+    }
+    &.apk {
+      background-image: url(/img/apk-white@3x.png);
     }
 }
 
@@ -188,13 +257,14 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
+    &.query {
+      margin-top: -190px;
+    }
 }
 
 .news-post {
     background: white;
-    padding: 0 1rem;
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
+    border-radius: 0.3rem;
     @include shadow-big();
 }
 
@@ -228,8 +298,13 @@ html {
     color: #aaa;
 }
 
+.tiny {
+  color: #aaa;
+  font-size: 0.4rem;
+}
+
 .image {
-    height: 300px;
+    max-height: 300px;
     overflow: hidden;
     margin: 0 -1rem;
 }
@@ -241,9 +316,9 @@ html {
     font-size: 1.6rem;
   }
   .mini {
-    font-size: 1rem;
-    opacity: 0.5;
-    margin-bottom: 1rem;
+    color: #444;
+    text-decoration: none !important;
+    outline: none !important;
   }
   .readmore {
     color: #2196F3;
@@ -467,6 +542,66 @@ html {
 
 .list-group-item-muted {
   opacity: 0.5;
+}
+
+.responsive-video {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    position: relative;
+}
+.embed-content {
+  width: 100%;
+  max-width: 560px;
+}
+
+iframe.video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.story {
+  h1,h2,h3,h4,h5,h6 { text-align: center }
+  p, .embeded {
+    margin-bottom: 3rem;
+  }
+  p{
+    margin-top: 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    word-break: break-all;
+    hyphens: auto;
+  }
+  .ql-size-small {
+    font-size: 0.75em;
+  }
+  .ql-size-large {
+    font-size: 1.2em;
+  }
+  .ql-size-huge {
+    font-size: 1.7em;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .logo-wrapper {
+    font-size: 2rem;
+    padding-top: 0.5rem;
+  }
+  .logo {
+    background-size: 40px;
+    margin-right: -0.5rem;
+  }
+  .posts {
+    margin-top: -212px;
+    padding: 0;
+  }
+  .container.phone {
+    padding: 0;
+  }
 }
 
 .stat {

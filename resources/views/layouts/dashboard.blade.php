@@ -90,7 +90,7 @@
               </li>
             </ul>
           </div>
-          <main class="py-4">
+          <main class="py-4" id="dashboard-content">
               @include('layouts.alerts')
               @yield('content')
           </main>

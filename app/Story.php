@@ -3,41 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\StoryVersion;
+use App\Traits\Versionable;
 
 class Story extends Model
 {
+    use Versionable;
+
     protected $table = "stories";
 
     protected $fillable = [
-      "uid", "user_id", "saved_version", "published_version"
+      "uid", "user_id", "saved_version", "published_version", "queued_version"
     ];
 
     public function user() {
       return $this->belongsTo('App\User');
     }
 
-    public function published() {
-      return StoryVersion::where('uid', $this->published_version)->first();
-    }
 
-    public function current() {
-      return StoryVersion::where('uid', $this->saved_version)->first();
-    }
-
-    public function queued() {
-      return StoryVersion::where('uid', $this->queued_version)->first();
-    }
-
-    public function version($vid) {
-      return StoryVersion::where('uid', $vid)->first();
-    }
-
-    public function versions() {
-      return $this->hasMany('App\StoryVersion');
-    }
-
-    public static function byuid($uid) {
-      return static::where('uid', $uid);
-    }
 }

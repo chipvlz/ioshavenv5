@@ -22,7 +22,7 @@ Route::post("/locale", 'MainController@locale');
 Route::get('/apps', "AppController@get");
 
 Route::post('/app/create', 'AppController@create')->middleware('auth');
-Route::get('/app/{uid}/edit', 'AppController@showEditPage')->middleware('auth');
+Route::get('/app/edit/{uid}/{vid?}', 'AppController@showEditPage')->middleware('auth');
 Route::post('/app/edit', 'AppController@edit')->middleware('auth');
 
 Route::post('/upload/apk', 'UploadController@apk')->middleware('auth');
@@ -46,6 +46,7 @@ Route::post('/role/edit', 'RoleController@edit')->middleware('auth');
 Route::post('/role/create', 'RoleController@create')->middleware('auth');
 
 Route::get('/story/edit/{uid}/{vid?}', 'StoryController@showEditPage')->middleware('auth');
+Route::get('/story/{uid}', 'StoryController@view');
 Route::post('/story/edit', 'StoryController@edit')->middleware('auth');
 Route::post('/story/create', 'StoryController@create')->middleware('auth');
 

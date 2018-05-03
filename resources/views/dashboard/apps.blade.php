@@ -43,14 +43,14 @@
     @foreach($apps as $app)
 
         <div class="col-lg-4 col-md-6 col-12">
-          <a class="app mb-2 py-1 px-2" href="/app/{{ $app->uid }}/edit">
+          <a class="app mb-2 py-1 px-2" href="/app/edit/{{ $app->uid }}">
             <div class="icon">
-              <img src="{{!!$app->icon ? Storage::url($app->icon) : '/img/icon.png'}}" alt="app-icon" width="60" height="60">
+              <img src="{{!!$app->current()->icon ? Storage::url($app->current()->icon) : '/img/icon.png'}}" alt="app-icon" width="60" height="60">
             </div>
             <!-- <div class="w-100"> -->
               <div class="info pl-2 pr-0 w-100">
-                <div class="title">{{ $app->name }}</div>
-                <div class="short">{{ $app->short }}</div>
+                <div class="title">{{ $app->current()->name }}</div>
+                <div class="short">{{ $app->current()->short }}</div>
               </div>
               <div class="action pr-2">
                 <button class="btn btn-outline-primary btn-sm">Edit</button>
@@ -83,6 +83,7 @@
   <load-more
    :current="{{ $apps->currentPage() }}"
    :last="{{ $apps->lastPage() }}"
+   array="apps"
    search="{{ $search }}"
    query="{{ $query }}"
    @update="addApps"

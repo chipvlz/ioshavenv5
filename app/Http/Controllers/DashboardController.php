@@ -30,16 +30,17 @@ class DashboardController extends Controller
 
     public function showApps(Request $r) {
       if (Gate::denies('upload apps')) abort(404);
-      $a = Auth::user()->previews();
+      $a = Auth::user()->apps();
+
       $apps = !$r->q ? $a
         : $a->where('name', 'like', "%$r->q%");
 
       $apps = $apps->paginate(10);
-
+      
       if ($r->json) {
         foreach ($apps as $app) {
-          $app->icon = isset($app->icon) ? Storage::url($app->icon) : '/img/icon.png';
-          $app->banner = isset($app->banner) ? Storage::url($app->banner) : '/img/banner.png';
+          $app->icon = isset($app->current()->icon) ? Storage::url($app->current()->icon) : '/img/icon.png';
+          $app->banner = isset($app->current()->banner) ? Storage::url($app->current()->banner) : '/img/banner.png';
         }
       }
 

@@ -101,8 +101,20 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'icon' => [
+            'required' => 'Please upload an icon image.',
+        ],
+        'banner' => [
+            'required' => 'Please upload an banner image.',
+        ],
+        'image' => [
+            'required' => 'Please upload an image.',
+        ],
+        'avatar' => [
+            'required' => 'Please upload an avatar image.',
+        ],
+        'apk' => [
+            'required' => "Please upload a '.apk' file.",
         ],
     ],
 
@@ -117,6 +129,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+      'short' => 'short description'
+    ],
 
 ];

@@ -25,11 +25,9 @@ class User extends Authenticatable
     ];
 
     public function apps() {
-      return $this->hasMany('App\App');
-    }
-
-    public function previews() {
-      return $this->hasMany('App\Preview');
+      return $this->hasMany('App\App')
+              ->join('app_versions', 'apps.saved_version', '=', 'app_versions.uid')
+              ->select('apps.*', 'app_versions.*', 'app_versions.uid as vid', 'apps.uid as uid');
     }
 
     public function role() {

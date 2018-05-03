@@ -27,7 +27,7 @@
         <div class="col-lg-4 col-md-6 col-12">
           <a class="app mb-2 py-1 px-2" href="/app/{{ $app->uid }}">
             <div class="icon">
-              <img src="http://placeimg.com/100/100/tech" alt="app-icon" width="60" height="60">
+              <img src="{{!!$app->current()->icon ? Storage::url($app->current()->icon) : '/img/icon.png'}}" alt="app-icon" width="60" height="60">
             </div>
             <!-- <div class="w-100"> -->
               <div class="info pl-2 pr-0 w-100">
@@ -46,7 +46,7 @@
     <div class="col-lg-4 col-md-6 col-12 dynamic-content d-none" v-for="app in apps">
       <a class="app mb-2 py-1 px-2" :href="'app/' + app.uid">
         <div class="icon">
-          <img src="http://placeimg.com/100/100/tech" alt="app-icon" width="60" height="60">
+          <img :src="app.icon" alt="app-icon" width="60" height="60">
         </div>
         <!-- <div class="w-100"> -->
           <div class="info pl-2 pr-0 w-100">
@@ -65,10 +65,12 @@
   <load-more
    :current="{{ $apps->currentPage() }}"
    :last="{{ $apps->lastPage() }}"
+   array="apps"
    search="{{ $search }}"
    query="{{ $query }}"
    @update="addApps"
   ></load-more>
+
 </div>
 
 

@@ -51,15 +51,14 @@ class UploadController extends Controller
       $path = $this->upload($request, 'apk-0', 'apk', $fileTypes);
       if (!$path) {
         return Response::json([
-          "error" => "wrong extention",
+          "error" => "wrong extension",
           "accepted" => $fileTypes
         ], 501);
       }
-      $app = Preview::byuid($request->uid)->first();
-      $app->apk = "app/$path";
-      $app->size = Storage::size($path);
-      $app->save();
-      return response()->json($app);
+      return response()->json([
+        "path" => $path,
+        "size" => Storage::size($path),
+      ]);
     }
 
     public function icon(Request $request) {
@@ -67,15 +66,14 @@ class UploadController extends Controller
       $path = $this->image($request, 'icon-0', 'icons', $fileTypes, 100, 100);
       if (!$path) {
         return Response::json([
-          "error" => "wrong extention",
+          "error" => "wrong extension",
           "accepted" => $fileTypes
         ], 501);
       }
-      $app = Preview::byuid($request->uid)->first();
-      $app->icon = $path;
-      $app->save();
-      $app->icon = Storage::url($app->icon);
-      return response()->json($app);
+      return response()->json([
+        "path" => $path,
+        "image" => Storage::url($path),
+      ]);
     }
 
     public function banner(Request $request) {
@@ -83,15 +81,14 @@ class UploadController extends Controller
       $path = $this->image($request, 'banner-0', 'banners', $fileTypes, 1500, 500);
       if (!$path) {
         return Response::json([
-          "error" => "wrong extention",
+          "error" => "wrong extension",
           "accepted" => $fileTypes
         ], 501);
       }
-      $app = Preview::byuid($request->uid)->first();
-      $app->banner = $path;
-      $app->save();
-      $app->banner = Storage::url($app->banner);
-      return response()->json($app);
+      return response()->json([
+        "path" => $path,
+        "image" => Storage::url($path),
+      ]);
     }
 
     public function avatar(Request $request) {
@@ -99,7 +96,7 @@ class UploadController extends Controller
       $path = $this->image($request, 'avatar-0', 'avatars', $fileTypes, 200, 200);
       if (!$path) {
         return Response::json([
-          "error" => "wrong extention",
+          "error" => "wrong extension",
           "accepted" => $fileTypes
         ], 501);
       }
@@ -112,18 +109,17 @@ class UploadController extends Controller
 
     public function story(Request $request) {
       $fileTypes = ['png', 'jpg', 'jpeg', 'gif'];
-      $path = $this->image($request, 'image-0', 'stories', $fileTypes, 640, 480);
+      $path = $this->image($request, 'image-0', 'stories', $fileTypes, 1500, 500);
       if (!$path) {
         return Response::json([
-          "error" => "wrong extention",
+          "error" => "wrong extension",
           "accepted" => $fileTypes
         ], 501);
       }
-      $story = Story::byuid($request->uid)->first();
-      $version = $story->version($request->vid);
-      $version->image = $path;
-      $version->save();
-      $version->image = Storage::url($version->image);
-      return response()->json($version);
+
+      return response()->json([
+        "path" => $path,
+        "image" => Storage::url($path),
+      ]);
     }
 }

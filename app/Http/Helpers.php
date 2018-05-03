@@ -23,3 +23,20 @@ function formatNum($num, $dm = 2) {
   $i = floor(log($num) / log($k));
   return round($num / pow($k, $i), $dm) . $sizes[$i];
 }
+
+function remove_scripts($html) {
+  try {
+    $doc = new DOMDocument();
+    $doc->loadHTML("<html>$html</html>");
+    $scripts = $doc->getElementsByTagName('script');
+    $length = $scripts->length;
+
+    for ($i = 0; $i < $length; $i ++) {
+      $scripts->item($i)->parentNode->removeChild($scripts->item($i));
+    }
+
+    return $doc->saveHTML();
+  } catch (\Exception $e) {
+    return "";
+  }
+}

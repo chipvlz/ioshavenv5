@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Database\Version;
 
 class CreateNewsTable extends Migration
 {
@@ -13,30 +14,17 @@ class CreateNewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('uid');
+        Version::main('stories', function (Blueprint $table) {
             $table->integer("user_id");
-            $table->string("published_version")->nullable();
-            $table->string("queued_version")->nullable();
-            $table->string("saved_version");
-            $table->timestamps();
         });
 
-        Schema::create('story_versions', function (Blueprint $table) {
-          $table->increments('id');
-          $table->string('uid');
-          $table->integer('user_id');
-          $table->integer('story_id');
-          $table->string("commit")->nullable();
+        Version::versions('story', function (Blueprint $table) {
           $table->string("type")->nullable();
           $table->string("title")->nullable();
           $table->string("mini")->nullable();
           $table->longText("content")->nullable();
           $table->string("image")->nullable();
           $table->string("tags")->nullable();
-          $table->dateTime("released_at")->nullable();
-          $table->timestamps();
         });
     }
 

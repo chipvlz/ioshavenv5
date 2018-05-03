@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\VersionableChild;
 
 class StoryVersion extends Model
 {
+    use VersionableChild;
+
     protected $table = "story_versions";
 
     protected $dates = [
@@ -20,7 +23,5 @@ class StoryVersion extends Model
       return $this->belongsTo('App\Story');
     }
 
-    public function user() {
-      return $this->belongsTo('App\User');
-    }
+
 }

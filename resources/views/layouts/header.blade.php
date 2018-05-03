@@ -10,3 +10,5 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/app.css">
+
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5aeb628d96e6fc00110b2f1a&product=inline-share-buttons"></script>
