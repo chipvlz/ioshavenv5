@@ -25,13 +25,6 @@
 <meta name="msapplication-config" content="/favicons/browserconfig.xml?v=bOLw3p3jEA">
 <meta name="theme-color" content="#ff3333">
 
-<meta property="og:image:height" content="474">
-<meta property="og:image:width" content="905">
-<meta property="og:description" content="Get all your iPhone app needs straight from the web.  Including IPAs, signed apps, Apple developer betas, and jailbreaks.">
-<meta property="og:title" content="{{ strtoupper(env('APP_TYPE')) }} Haven">
-<meta property="og:url" content="{{ url('/') }}">
-<meta property="og:image" content="{{ url('/img/banner.png') }}">
-
 <script defer type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5aeb628d96e6fc00110b2f1a&product=inline-share-buttons"></script>
 <script defer src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script defer src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>

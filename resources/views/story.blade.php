@@ -1,34 +1,23 @@
 @extends('layouts.app')
-@section('open-graph')
+@section('meta')
 <link rel="preload" as="image" href="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
+@component('components.meta', [
+  "description" => $published->mini,
+  "author" => $story->user->username,
+  "image" => !!$published->image ? Storage::url($published->image) : url('/img/banner.png'),
+  "title" => $published->title,
+  "type" => $published->type,
+  "url" => url("/story/$story->uid"),
+  "released_at" => $story->released_at,
+  "updated_at" => $published->updated_at,
+])@endcomponent
 
-<meta name="twitter:description"        content="{{ $published->mini }}">
-<meta name="twitter:image"              content="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
-<meta name="twitter:title"              content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $published->title }}">
-<meta name="twitter:card"               content="summary_large_image">
-<meta name="twitter:site"               content="@ioshavenco">
-
-<meta property="og:description"         content="{{ $published->mini }}">
-<meta property="og:image:width"         content="1500">
-<meta property="og:image:height"        content="500">
-<meta property="og:site_name"           content="{{ strtoupper(env('APP_TYPE')) }} Haven">
-<meta property="og:image"               content="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
-<meta property="og:title"               content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $published->title }}">
-<meta property="og:type"                content="article">
-
-<meta property="article:published_time" content="{{ $published->released_at }}">
-<meta property="article:modified_time"  content="{{ $published->updated_at }}">
-<meta property="article:section"        content="{{ $published->type }}">
-<meta property="article:author"         content="$story->user->username">
-
-<meta name="title"                      content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $published->title }}">
-<meta name="description"                content="{{ $published->mini }}">
 
 @endsection
 
 @section('content')
 
-<div class="app-banner mb-3 jumbotron-fluid">
+<div class="app-banner mb-3 jumbotron-fluid pt-4">
   <img id="banner-image" src="{{ !!$published->image ? Storage::url($published->image) : '/img/banner.png' }}" class="w-100" alt="banner">
 </div>
 
