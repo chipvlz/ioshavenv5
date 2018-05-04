@@ -63217,6 +63217,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     handleFile: function handleFile() {
       var _this = this;
 
+      console.log('handling file');
       var input = $('#' + this.id)[0];
       var data = new FormData();
       var config = {};

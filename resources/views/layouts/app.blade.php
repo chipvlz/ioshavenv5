@@ -6,10 +6,8 @@
     @else
       @component('components.meta', [
         "description" => "Get all your iPhone app needs straight from the web. Including IPAs, signed apps, Apple developer betas, and jailbreaks.",
-        "height" => "1920",
         "image" => url('/img/banner.png'),
         "title" => "Home",
-        "width" => "1080",
         "url" => url('/'),
       ])@endcomponent
     @endif
@@ -25,5 +23,6 @@
         </main>
     </div>
 
+    <script src="{{ url('/js/app.js') }}" charset="utf-8"></script>
 </body>
 </html>

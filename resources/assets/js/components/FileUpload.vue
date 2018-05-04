@@ -54,6 +54,7 @@
             $('#progress-' + this.id).width('0%');
           },
           handleFile () {
+            console.log('handling file');
             var input = $('#' + this.id)[0];
             var data = new FormData();
             var config = {};

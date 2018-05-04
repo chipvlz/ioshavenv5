@@ -25,10 +25,10 @@
 <meta name="msapplication-config" content="/favicons/browserconfig.xml?v=bOLw3p3jEA">
 <meta name="theme-color" content="#ff3333">
 
-<script defer type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5aeb628d96e6fc00110b2f1a&product=inline-share-buttons"></script>
-<script defer src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<script defer src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>
-<script defer src="{{ url('/js/app.js') }}" charset="utf-8"></script>
+<script async type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5aeb628d96e6fc00110b2f1a&product=inline-share-buttons"></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>
+
 
 
 <title>{{env("APP_TYPE")}} Haven</title>
