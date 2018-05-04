@@ -6,7 +6,7 @@
     @else
       @component('components.meta', [
         "description" => "Get all your iPhone app needs straight from the web. Including IPAs, signed apps, Apple developer betas, and jailbreaks.",
-        "image" => url('/img/banner.png'),
+        "image" => url('/img/' . env('APP_TYPE') . '-banner.png'),
         "title" => "Home",
         "url" => url('/'),
       ])@endcomponent

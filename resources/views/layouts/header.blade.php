@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.bubble.css">
 <link rel="prefetch" href="{{ url('/css/app.css') }}">
 <link href="{{ url('/fa/web-fonts-with-css/css/fontawesome-all.min.css') }}" rel="prefetch"></link>
 

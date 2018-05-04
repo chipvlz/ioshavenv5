@@ -14,7 +14,7 @@
 */?>
 
 <meta name="twitter:description"        content="{{ $description }}">
-<meta name="twitter:image"              content="{{ $image }}">
+<meta name="twitter:image"              content="{{ $image ?? url('/img/' . env('APP_TYPE') . '-banner.png') }}">
 <meta name="twitter:title"              content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $title }}">
 <meta name="twitter:card"               content="summary_large_image">
 <meta name="twitter:site"               content="@ioshavenco">
@@ -23,7 +23,7 @@
 <meta property="og:image:width"         content="{{ $width ?? '1500' }}">
 <meta property="og:image:height"        content="{{ $height ?? '500' }}">
 <meta property="og:site_name"           content="{{ strtoupper(env('APP_TYPE')) }} Haven">
-<meta property="og:image"               content="{{ $image }}">
+<meta property="og:image"               content="{{ $image ?? url('/img/' . env('APP_TYPE') . '-banner.png') }}">
 <meta property="og:title"               content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $title }}">
 <meta property="og:type"                content="article">
 <meta property="og:url"                 content="{{ $url ?? url('/') }}">

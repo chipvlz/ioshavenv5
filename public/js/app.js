@@ -62693,7 +62693,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "btn btn-light dropdown-toggle",
+                staticClass: "btn btn-light btn-sm dropdown-toggle",
                 attrs: {
                   type: "button",
                   "data-toggle": "dropdown",
@@ -62768,7 +62768,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-format btn btn-light py-2 px-3",
+                staticClass: "button-format btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   "data-format": "bold",
@@ -62784,7 +62784,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-format btn btn-light py-2 px-3",
+                staticClass: "button-format btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   "data-format": "italic",
@@ -62800,7 +62800,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-format btn btn-light py-2 px-3",
+                staticClass: "button-format btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   "data-format": "underline",
@@ -62816,10 +62816,10 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-format btn btn-light py-2 px-3",
+                staticClass: "button-format btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
-                  "data-format": "strikethrough",
+                  "data-format": "strike",
                   title: "strikethrough",
                   "data-toggle": "tooltip",
                   "data-placement": "bottom",
@@ -62841,7 +62841,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-heading btn btn-light py-2 px-3",
+                staticClass: "button-heading btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   "data-size": "1",
@@ -62857,7 +62857,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-heading btn btn-light py-2 px-3",
+                staticClass: "button-heading btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   "data-size": "2",
@@ -62873,7 +62873,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-format btn btn-light py-2 px-3",
+                staticClass: "button-format btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   "data-format": "blockquote",
@@ -62898,7 +62898,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-list btn btn-light py-2 px-3",
+                staticClass: "button-list btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   "data-format": "unordered",
@@ -62914,7 +62914,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-list btn btn-light py-2 px-3",
+                staticClass: "button-list btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   "data-format": "ordered",
@@ -62930,7 +62930,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-indent btn btn-light py-2 px-3",
+                staticClass: "button-indent btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   "data-format": "+1",
@@ -62946,7 +62946,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "button-indent btn btn-light py-2 px-3",
+                staticClass: "button-indent btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   "data-format": "-1",
@@ -62971,7 +62971,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "btn btn-light py-2 px-3",
+                staticClass: "btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   id: "embed-button",
@@ -62987,7 +62987,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "btn btn-light py-2 px-3",
+                staticClass: "btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   id: "image-button",
@@ -63003,7 +63003,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "btn btn-light py-2 px-3",
+                staticClass: "btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   id: "link-button",
@@ -63019,7 +63019,7 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "btn btn-light py-2 px-3",
+                staticClass: "btn btn-light btn-sm py-2 px-3",
                 attrs: {
                   type: "button",
                   id: "video-button",

@@ -8,7 +8,7 @@
     <div id="toolbar-container" class="bg-light btn-toolbar p-3" role="toolbar" aria-label="Toolbar with button groups">
 
       <div class="btn-group mr-3" role="group" aria-label="First group">
-          <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span title="font size" id="current-size" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
               Normal
             </span>
@@ -23,58 +23,58 @@
       </div>
 
         <div class="btn-group mr-3" role="group" aria-label="First group">
-          <button type="button" class="button-format btn btn-light py-2 px-3" data-format="bold" title="bold" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-format btn btn-light btn-sm py-2 px-3" data-format="bold" title="bold" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-bold"></i>
           </button>
-          <button type="button" class="button-format btn btn-light py-2 px-3" data-format="italic" title="italic" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-format btn btn-light btn-sm py-2 px-3" data-format="italic" title="italic" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-italic"></i>
           </button>
-          <button type="button" class="button-format btn btn-light py-2 px-3" data-format="underline" title="underline" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-format btn btn-light btn-sm py-2 px-3" data-format="underline" title="underline" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-underline"></i>
           </button>
-          <button type="button" class="button-format btn btn-light py-2 px-3" data-format="strikethrough" title="strikethrough" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-format btn btn-light btn-sm py-2 px-3" data-format="strike" title="strikethrough" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-strikethrough"></i>
           </button>
         </div>
 
         <div class="btn-group mr-3" role="group" aria-label="First group">
-          <button type="button" class="button-heading btn btn-light py-2 px-3" data-size="1" title="huge heading" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-heading btn btn-light btn-sm py-2 px-3" data-size="1" title="huge heading" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-h1"></i>
           </button>
-          <button type="button" class="button-heading btn btn-light py-2 px-3" data-size="2" title="large heading" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-heading btn btn-light btn-sm py-2 px-3" data-size="2" title="large heading" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-h2"></i>
           </button>
-          <button type="button" class="button-format btn btn-light py-2 px-3" data-format="blockquote" title="quote" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-format btn btn-light btn-sm py-2 px-3" data-format="blockquote" title="quote" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-quote-right"></i>
           </button>
         </div>
 
         <div class="btn-group mr-3" role="group" aria-label="First group">
-          <button type="button" class="button-list btn btn-light py-2 px-3" data-format="unordered" title="bulleted list" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-list btn btn-light btn-sm py-2 px-3" data-format="unordered" title="bulleted list" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-list-ul"></i>
           </button>
-          <button type="button" class="button-list btn btn-light py-2 px-3" data-format="ordered" title="numbered list" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-list btn btn-light btn-sm py-2 px-3" data-format="ordered" title="numbered list" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-list-ol"></i>
           </button>
-          <button type="button" class="button-indent btn btn-light py-2 px-3" data-format="+1" title="indent" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-indent btn btn-light btn-sm py-2 px-3" data-format="+1" title="indent" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-indent"></i>
           </button>
-          <button type="button" class="button-indent btn btn-light py-2 px-3" data-format="-1" title="indent" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="button-indent btn btn-light btn-sm py-2 px-3" data-format="-1" title="indent" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-outdent"></i>
           </button>
         </div>
 
         <div class="btn-group mr-3" role="group" aria-label="First group">
-          <button type="button" class="btn btn-light py-2 px-3" id="embed-button" title="embed code" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="btn btn-light btn-sm py-2 px-3" id="embed-button" title="embed code" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-code"></i>
           </button>
-          <button type="button" class="btn btn-light py-2 px-3" id="image-button" title="insert image" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="btn btn-light btn-sm py-2 px-3" id="image-button" title="insert image" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-image"></i>
           </button>
-          <button type="button" class="btn btn-light py-2 px-3" id="link-button" title="insert link" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="btn btn-light btn-sm py-2 px-3" id="link-button" title="insert link" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-link"></i>
           </button>
-          <button type="button" class="btn btn-light py-2 px-3" id="video-button" title="insert video" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+          <button type="button" class="btn btn-light btn-sm py-2 px-3" id="video-button" title="insert video" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-video"></i>
           </button>
         </div>
@@ -261,7 +261,7 @@
             this.quill = new Quill('#app-description', {
               modules: {
                 toolbar: '#toolbar-container'
-              }
+              },
             });
 
             this.quill.root.innerHTML = $('#editor-preload').html()

@@ -584,6 +584,49 @@ iframe.video {
   .ql-size-huge {
     font-size: 1.7em;
   }
+  @function list($x) {
+    $result: ();
+      @for $j from $x through 8 {
+        $result: append($result, list-#{$j + 1});
+      }
+    @return $result;
+  }
+
+  li {
+      counter-reset: list(0);
+      counter-increment: list-0;
+      list-style-type: none;
+  }
+  ol li {
+    &:before {
+      content: counter(list-0, decimal) '. '
+    }
+  }
+  ul li {
+    &:before {
+      content: counter(list-0, disc) '. '
+    }
+  }
+
+  $ols: decimal lower-alpha lower-roman;
+  $uls: disc circle square;
+  @for $i from 1 through 8 {
+      .ql-indent-#{$i} {
+        margin-left: 3em * $i;
+        counter-reset: list($i);
+        counter-increment: list-#{$i};
+      }
+      ol .ql-indent-#{$i} {
+        &:before {
+          content: counter(list-#{$i}, nth($ols, ($i % 3) + 1)) '. '
+        }
+      }
+      ul .ql-indent-#{$i} {
+        &:before {
+          content: counter(list-#{$i}, nth($uls, ($i % 3) + 1)) '. '
+        }
+      }
+  }
 }
 
 @include media-breakpoint-down(xs) {
