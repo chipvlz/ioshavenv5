@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('open-graph')
+<link rel="preload" as="image" href="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
+
 <meta name="twitter:description"        content="{{ $published->mini }}">
 <meta name="twitter:image"              content="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}">
 <meta name="twitter:title"              content="{{ strtoupper(env('APP_TYPE')) }} Haven - {{ $published->title }}">
@@ -24,7 +26,6 @@
 
 @endsection
 
-@extends('layouts.app')
 @section('content')
 
 <div class="app-banner mb-3 jumbotron-fluid">
