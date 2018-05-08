@@ -1,57 +1,56 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', 'MainController@news');
-
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@dashboard')->middleware('auth');
-
+Route::get('/', 'MainController@news');
 Route::post("/locale", 'MainController@locale');
-
-Route::get('/apps', "AppController@get");
-
-Route::post('/app/create', 'AppController@create')->middleware('auth');
-Route::get('/app/edit/{uid}/{vid?}', 'AppController@showEditPage')->middleware('auth');
-Route::post('/app/edit', 'AppController@edit')->middleware('auth');
-
-Route::post('/upload/apk', 'UploadController@apk')->middleware('auth');
-Route::post('/upload/icon', 'UploadController@icon')->middleware('auth');
-Route::post('/upload/banner', 'UploadController@banner')->middleware('auth');
-Route::post('/upload/avatar', 'UploadController@avatar')->middleware('auth');
-Route::post('/upload/story', 'UploadController@story')->middleware('auth');
-
-Route::get('/download/preview-apk/{uid}', 'DownloadController@previewApk')->middleware('auth');
-
-Route::get('/dashboard/apps', 'DashboardController@showApps')->middleware('auth');
-Route::get('/dashboard/users', 'DashboardController@showUsers')->middleware('auth');
-Route::get('/dashboard/roles', 'DashboardController@showRoles')->middleware('auth');
-Route::get('/dashboard/profile', 'DashboardController@showProfile')->middleware('auth');
-Route::get('/dashboard/stories', 'DashboardController@showStories')->middleware('auth');
-
-
-Route::get('/role/edit/{id}', 'RoleController@showEditPage')->middleware('auth');
-Route::get('/role/delete/{id}', 'RoleController@delete')->middleware('auth');
-Route::post('/role/edit', 'RoleController@edit')->middleware('auth');
-Route::post('/role/create', 'RoleController@create')->middleware('auth');
-
-Route::get('/story/edit/{uid}/{vid?}', 'StoryController@showEditPage')->middleware('auth');
-Route::get('/story/{uid}', 'StoryController@view');
-Route::post('/story/edit', 'StoryController@edit')->middleware('auth');
-Route::post('/story/create', 'StoryController@create')->middleware('auth');
-
-
-Route::get('/user/edit/{username}', 'UserController@showUser')->middleware('auth');
-Route::post('/user/edit', 'UserController@edit')->middleware('auth');
-
+Route::get('/apps', "MainController@apps");
 Route::get('/test', 'TestController@test');
+
+Route::prefix('dashboard')->group(function () {
+  Route::get('/', 'DashboardController@dashboard');
+  Route::get('/apps', 'DashboardController@showApps');
+  Route::get('/logs', 'DashboardController@showLogs');
+  Route::get('/users', 'DashboardController@showUsers');
+  Route::get('/roles', 'DashboardController@showRoles');
+  Route::get('/profile', 'DashboardController@showProfile');
+  Route::get('/stories', 'DashboardController@showStories');
+
+});
+
+Route::prefix('app')->group(function () {
+  Route::get('/edit/{uid}/{vid?}', 'AppController@showEditPage');
+  Route::post('/edit', 'AppController@edit');
+  Route::post('/create', 'AppController@create');
+});
+
+Route::prefix('upload')->group(function () {
+  Route::post('/apk', 'UploadController@apk');
+  Route::post('/icon', 'UploadController@icon');
+  Route::post('/banner', 'UploadController@banner');
+  Route::post('/avatar', 'UploadController@avatar');
+  Route::post('/story', 'UploadController@story');
+});
+
+Route::prefix('role')->group(function () {
+  Route::get('/edit/{id}', 'RoleController@showEditPage');
+  Route::get('/delete/{id}', 'RoleController@delete');
+  Route::post('/edit', 'RoleController@edit');
+  Route::post('/create', 'RoleController@create');
+});
+
+Route::prefix('story')->group(function () {
+  Route::get('/edit/{uid}/{vid?}', 'StoryController@showEditPage');
+  Route::get('/{uid}', 'MainController@showStory');
+  Route::post('/edit', 'StoryController@edit');
+  Route::post('/create', 'StoryController@create');
+});
+
+Route::prefix('user')->group(function () {
+  Route::get('/edit/{username}', 'UserController@showUser');
+  Route::post('/edit', 'UserController@edit');
+});
+
+Route::prefix('action')->group(function () {
+  Route::post('like', 'MainController@like');
+});

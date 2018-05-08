@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Preview;
-use App\Log;
+use App\Report;
 
 use Faker\Factory as Faker;
 
@@ -29,7 +29,7 @@ class PreviewsTableSeeder extends Seeder
         $app->description = $faker->paragraphs(3, true);
         $app->save();
 
-        Log::info("Preview:create", "PreviewTableSeeder.php" . ": Created application $uid");
+        Report::info("Preview:create", "PreviewTableSeeder.php" . ": Created application $uid");
       }
 
     }

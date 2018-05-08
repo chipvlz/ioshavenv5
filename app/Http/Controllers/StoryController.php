@@ -3,19 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Story;
 use App\StoryVersion;
+use Carbon\Carbon;
+use App\Story;
+use Report;
 use Gate;
 use Auth;
-use Carbon\Carbon;
 
 class StoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:create stories');
+    }
+
     public function showEditPage($uid, $vid=null) {
-      if (Gate::denies('create stories')) abort(404);
       $story = Story::byuid($uid)->firstOrFail();
       $version = !!$vid ? $story->version($vid) : $story->current();
-      // dd($story->versions()->sortByDesc('updated_at'));
+
       return view('dashboard.editStory', [
         "story" => $story,
         "version" => $version,
@@ -25,26 +31,40 @@ class StoryController extends Controller
       ]);
     }
 
-    public function view ($uid) {
-      $story = Story::byuid($uid)->whereNotNull('published_version')->firstOrFail();
-      return view('story', [
-        "story" => $story,
-        "published" => $story->published(),
-      ]);
-    }
+
 
     public function create () {
-      $uid = str_random(7);
-      $vid = str_random(20);
+      try {
+        $uid = str_random(7);
+        $vid = str_random(20);
 
-      Story::make([
-        "uid" => $uid,
-        "saved_version" => $vid
-      ], [
-        "uid" => $vid,
-      ]);
+        Story::make([
+          "uid" => $uid,
+          "saved_version" => $vid
+        ], [
+          "uid" => $vid,
+        ]);
 
-      return redirect("/story/edit/$uid");
+        Report::success([
+          "message" => "created story",
+          "data" => [
+            "uid" => $uid,
+            "vid" => $vid,
+          ]
+        ]);
+
+        return redirect("/story/edit/$uid");
+
+      } catch (\Exception $e) {
+
+        Report::danger([
+          "message" => "failed to create story",
+          "data" => [
+            "error" => Report::e($e)
+          ]
+        ]);
+
+      }
     }
 
     public function edit(Request $r) {
@@ -56,28 +76,60 @@ class StoryController extends Controller
         "image" => "required",
       ]);
 
-      $story = Story::byuid($r->uid)->first();
+      try {
+        $story = Story::byuid($r->uid)->first();
 
-      $version = $story->summary($r->commit)->commit([
-        'type' => $r->type,
-        'title' => $r->title,
-        'mini' => $r->mini,
-        'content' => remove_scripts($r->content),
-        'image' => $r->image,
-        'tags' => $r->tags,
-      ]);
+        $version = $story->summary($r->commit)->commit([
+          'type' => $r->type,
+          'title' => $r->title,
+          'mini' => $r->mini,
+          'content' => remove_scripts($r->content),
+          'image' => $r->image,
+          'tags' => $r->tags,
+        ]);
 
-      if ($r->save) {
-        $version->setAsCurrent();
+        if ($r->save) {
+          $version->setAsCurrent();
+          Report::success([
+            "message" => "saved story",
+            "data" => [
+              "story" => $story,
+            ]
+          ]);
+        }
+        elseif ($r->publish) {
+          $version->setAsCurrent();
+          $version->publish();
+          $version->setAsCurrent();
+          Report::success([
+            "message" => "published story",
+            "data" => [
+              "story" => $story,
+            ]
+          ]);
+        }
+        elseif ($r->queue) {
+          $version->setAsCurrent();
+          $version->queue();
+          $version->setAsCurrent();
+          Report::success([
+            "message" => "queued story",
+            "data" => [
+              "story" => $story,
+            ]
+          ]);
+        }
+        return redirect("/story/edit/$story->uid");
+
+      } catch (\Exception $e) {
+        Report::danger([
+          "message" => "failed to edit story",
+          "data" => [
+            "error" => Report::e($e)
+          ]
+        ]);
       }
-      elseif ($r->publish) {
-        $version->setAsCurrent();
-        $version->publish();
-      }
-      elseif ($r->queue) {
-        $version->setAsCurrent();
-        $version->queue();
-      }
-      return redirect("/story/edit/$story->uid");
+
+
     }
 }

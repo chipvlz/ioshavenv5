@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Report;
 
 class RegisterController extends Controller
 {
@@ -48,11 +49,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validation = Validator::make($data, [
             'username' => 'required|string|alpha_num|min:3|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
+        if ($validation->fails()) {
+          Report::info([
+            "message" => "Failed sign up",
+            "data" => $validation->errors(),
+          ]);
+        }
+        return $validation;
     }
 
     /**
@@ -63,6 +71,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Report::success([
+          "message" => "User signed up",
+          "data" => [
+            "username" => $data['username'],
+            "email" => $data['email'],
+          ]
+        ]);
+
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],

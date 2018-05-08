@@ -5,11 +5,12 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Permission;
-use App\Log;
+use App\Report;
 use Illuminate\Support\Facades\Blade;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\Schema;
+// use App\Policies\PermissionPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -31,18 +32,30 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        if (Schema::hasTable('permissions')) {
-          foreach (Permission::with('roles')->get() as $perm) {
-            Gate::define($perm->name, function ($user) use ($perm) {
-              return $user->role->permissions->contains('name', 'administrator')
-                    || $perm->roles->contains('name', $user->role->name);
-            });
-          }
-        }
+        Gate::before(function ($user, $ability) {
+          if (!Schema::hasTable('permissions')) return false;
+          $permissions = Permission::get()->map(function ($carry, $item) {
+            return $carry->name;
+          });
 
-        Blade::if('can', function ($perm) {
-          return Auth::check() && Gate::forUser(Auth::user())->allows($perm);
+          return $user->role->permissions->contains(function($perm) use ($ability, $permissions) {
+            return $permissions->contains($ability) && ($perm->name === 'administrator' || $ability);
+          });
         });
+
+        // if (Schema::hasTable('permissions')) {
+        //   // dump('has table');
+        //   foreach (Permission::with('roles')->get() as $perm) {
+        //     Gate::define($perm->name, function ($user) use ($perm) {
+        //       return $user->role->permissions->contains('name', 'administrator')
+        //             || $perm->roles->contains('name', $user->role->name);
+        //     });
+        //   }
+        // }
+
+        // Blade::if('can', function ($perm) {
+        //   return Auth::check() && Gate::forUser(Auth::user())->allows($perm);
+        // });
 
     }
 }

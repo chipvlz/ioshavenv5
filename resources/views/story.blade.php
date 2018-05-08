@@ -38,8 +38,11 @@
       <div>{!! $published->content !!}</div>
     </div>
   </div>
-
 </div>
 
+@component('components.actions', [
+  "table" => "stories",
+  "thing" => $story
+])@endcomponent
 
 @endsection

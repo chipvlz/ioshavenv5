@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\User;
 
 class CreateUsersTable extends Migration
 {
@@ -25,6 +26,14 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        User::create([
+          "role_id" => -1,
+          "username" => "system",
+          "email" => "system",
+          "password" => bcrypt(str_random(50)),
+        ]);
+
     }
 
     /**

@@ -14,9 +14,12 @@ class CreateLogTable extends Migration
     public function up()
     {
         Schema::create('log', function (Blueprint $table) {
-            $table->integer('level');
-            $table->string("scope");
-            $table->string('message');
+            $table->integer('user_id')->default(1);
+            $table->string('level');
+            $table->string("method");
+            $table->string("tags");
+            $table->string("message");
+            $table->longText('data');
             $table->timestamps();
         });
     }

@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\App;
-use Auth;
-use App\Role;
-use Storage;
-use Gate;
-use App\User;
 use App\Story;
+use App\Role;
+use App\User;
+use App\App;
+use Storage;
+use Report;
+use Auth;
+use Gate;
+
+
+
 
 class DashboardController extends Controller
 {
@@ -29,14 +33,14 @@ class DashboardController extends Controller
     }
 
     public function showApps(Request $r) {
-      if (Gate::denies('upload apps')) abort(404);
+      $this->authorize('upload apps');
       $a = Auth::user()->apps();
 
       $apps = !$r->q ? $a
         : $a->where('name', 'like', "%$r->q%");
 
       $apps = $apps->paginate(10);
-      
+
       if ($r->json) {
         foreach ($apps as $app) {
           $app->icon = isset($app->current()->icon) ? Storage::url($app->current()->icon) : '/img/icon.png';
@@ -53,16 +57,17 @@ class DashboardController extends Controller
     }
 
     public function showRoles () {
-      if (Gate::denies('manage roles')) abort(404);
+      $this->authorize('manage roles');
       return view('dashboard.roles', [
         "roles" => Role::get(),
       ]);
     }
 
     public function showUsers (Request $r) {
-      if (Gate::denies('manage users')) abort(404);
-      $users = !$r->q ? User::withTrashed()->paginate(10)
-        : User::withTrashed()->where('username', 'like', "%$r->q%")->paginate(10);
+      $this->authorize('manage users');
+      $u =  User::withTrashed()->where('role_id', '>', 0);
+      $users = !$r->q ? $u->paginate(10)
+        : $u->where('username', 'like', "%$r->q%")->paginate(10);
 
       if ($r->json) {
         foreach ($users as $user) {
@@ -80,7 +85,7 @@ class DashboardController extends Controller
     }
 
     public function showStories (Request $r) {
-      if (Gate::denies('create stories')) abort(404);
+      $this->authorize('create stories');
       $stories = !$r->q ? Story::paginate(10)
         : Story::where('title', 'like', "%$r->q%")->paginate(10);
 
@@ -105,6 +110,31 @@ class DashboardController extends Controller
         "hasBottomNav" => true,
         "isAuth" => true
       ]);
+    }
+
+    public function showLogs(Request $r) {
+      $this->authorize('view logs');
+
+      $l = Report::orderBy('created_at', 'desc');
+
+      $logs = !$r->q ? $l->paginate(10)
+        : $l->where('message', 'like', "%$r->q%")->paginate(10);
+
+
+      if ($r->json) {
+        foreach ($logs as $log) {
+          $log->user = $log->user()->first();
+          $log->user->avatar = !!$log->user->avatar ? Storage::url($log->user->avatar) : 'https://api.adorable.io/avatars/200/'.$log->user->username;
+          $log->time = $log->created_at->diffForHumans();
+        }
+      }
+
+      $data = [
+        "logs" => $logs,
+        "query" => $r->q,
+        "search" => "/dashboard/logs"
+      ];
+      return !$r->json ? view('dashboard.logs', $data) : response()->json($data);
     }
 
 }

@@ -14324,6 +14324,15 @@ function formatBytes(bytes, decimals) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
+function formatNum(bytes, decimals) {
+  if (bytes == 0) return '0';
+  var k = 1000,
+      dm = decimals || 2,
+      sizes = ['', 'K', 'M', 'B', 'T', 'P', 'E', 'Z', 'Y'],
+      i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
+}
+
 window.paramsToJson = function (url) {
   var params = url.split('?').reverse()[0].split('&');
   var data = {};
@@ -14353,6 +14362,7 @@ var app = new Vue({
     hasScrolledOnePage: false,
     apps: [],
     users: [],
+    logs: [],
     readyForDynamicContent: false
   },
   methods: {
@@ -14382,9 +14392,15 @@ var app = new Vue({
     addUsers: function addUsers(data) {
       this.users.push.apply(this.users, data);
     },
+    addLogs: function addLogs(data) {
+      this.logs.push.apply(this.logs, data);
+    },
     toggleDashboard: function toggleDashboard(val) {
       this.showdashboard = val;
-      // window.ElementQueries.init();
+    },
+    getLogClass: function getLogClass(level) {
+      if (level === 'danger' || level === 'warning') return 'table-' + level;
+      return level === 'success' ? 'text-' + level : '';
     }
   },
   mounted: function mounted() {
@@ -14394,12 +14410,12 @@ var app = new Vue({
     this.scrollpos = window.pageYOffset || document.documentElement.scrollTop;
     this.hasScrolledOnePage = this.scrollpos > 32;
     window.addEventListener('scroll', function (e) {
-      console.log('scrolling');
+      // console.log('scrolling');
       _this.scrollpos = window.pageYOffset || document.documentElement.scrollTop;
       _this.hasScrolledOnePage = _this.scrollpos > 32;
     });
     $('#dashboard-content').on('scroll', function (e) {
-      console.log('scrolling');
+      // console.log('scrolling');
       _this.scrollpos = $('#dashboard-content').scrollTop();
       _this.hasScrolledOnePage = _this.scrollpos > 32;
     });
@@ -14438,8 +14454,35 @@ $('.story p').each(function (index) {
   }
 });
 
+$('#logModal').on('show.bs.modal', function (event) {
+  var btn = $(event.relatedTarget);
+  var level = btn.data('level');
+  var message = btn.data('message');
+  var data = btn.data('data');
+  var method = btn.data('method');
+  $(this).find('.level').html('"' + level + '"').addClass('text-' + level);
+  $(this).find('.message').html('"' + message + '"');
+  $(this).find('.data').html(JSON.stringify(data, null, 2));
+  $(this).find('.method').html('"' + method + '"');
+  console.log(level, message, data, method);
+});
+
 $("[data-toggle=popover]").popover();
 $('[data-toggle="tooltip"]').tooltip();
+
+$('[data-like]').on('click', function () {
+  var _this2 = this;
+
+  $(this).toggleClass('liked');
+  axios.post('/action/like', {
+    table: $(this).data('like'),
+    uid: $(this).data('uid')
+  }).then(function (res) {
+    // console.log($(this).find('.likes'));
+    console.log(res, res.data.likes, formatNum(res.data.likes));
+    $(_this2).find('.likes').text(formatNum(res.data.likes));
+  });
+});
 
 /***/ }),
 /* 16 */

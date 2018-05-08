@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Versionable;
+use App\Traits\Likeable;
 
 class Story extends Model
 {
     use Versionable;
+    use Likeable;
 
     protected $table = "stories";
 

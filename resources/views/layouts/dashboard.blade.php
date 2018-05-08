@@ -31,6 +31,7 @@
                   </div>
                 </a>
               </li>
+
               @can('upload apps')
               <li>
                 <a href="/dashboard/apps">
@@ -39,6 +40,7 @@
                 </a>
               </li>
               @endcan
+
               @can('view logs')
               <li>
                 <a href="/dashboard/logs">
@@ -47,6 +49,7 @@
                 </a>
               </li>
               @endcan
+
               @can('create stories')
               <li>
                 <a href="/dashboard/stories">
@@ -55,6 +58,7 @@
                 </a>
               </li>
               @endcan
+
               @can('manage roles')
               <li>
                 <a href="/dashboard/roles">
@@ -63,6 +67,7 @@
                 </a>
               </li>
               @endcan
+              
               @can('manage users')
               <li>
                 <a href="/dashboard/users">
@@ -71,6 +76,7 @@
                 </a>
               </li>
               @endcan
+
 
 
             </ul>

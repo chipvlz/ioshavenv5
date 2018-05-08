@@ -5,15 +5,17 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\CanLike;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use SoftDeletes;
+    use CanLike;
 
 
     protected $fillable = [
-        'username', 'email', 'password',
+        'username', 'email', 'password', "role_id"
     ];
 
     protected $hidden = [

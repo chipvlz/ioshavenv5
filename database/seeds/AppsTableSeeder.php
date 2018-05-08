@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\App;
-use App\Log;
+use App\Report;
 
 use Faker\Factory as Faker;
 
@@ -29,7 +29,7 @@ class AppsTableSeeder extends Seeder
         $app->description = $faker->paragraphs(3, true);
         $app->save();
 
-        Log::info("App:create", "AppsTableSeeder.php" . ": Created application $uid");
+        Report::info("App:create", "AppsTableSeeder.php" . ": Created application $uid");
       }
 
     }

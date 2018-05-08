@@ -11,4 +11,5 @@ return [
   "view logs" => "Can view log information.",
   "manage roles" => "Can create, edit, & delete roles.",
   "manage social media" => "Can post to social media accounts.",
+  "like" => "Can like things such as posts, comments, stories, etc.",
 ];

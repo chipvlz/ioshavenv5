@@ -4,22 +4,22 @@
     @foreach($versions as $v)
     <div class="list-group-item p-2 d-flex align-items-center justify-content-between {{ ($version->uid != $v->uid) ? 'list-group-item-muted' : '' }}">
       <span class="font-weight-bold">
-        <span class="mr-2" data-toggle="tooltip" data-placement="bottom" title="{{ $v->user->username }}">
+        <span class="mr-2" title="{{ $v->user->username }}" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
           <img class="rounded-circle" id="avatar-image" src="{{!!$v->user->avatar ? Storage::url($v->user->avatar) : 'https://api.adorable.io/avatars/200/'.$v->user->username }}" width="20" height="20" alt="avatar">
         </span>
         <span>
           @if (!!$thing->published() && $v->uid == $thing->published()->uid)
-          <span data-toggle="tooltip" data-placement="right" title="published">
+          <span title="published" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-check mr-1 text-success"></i>
           </span>
           @elseif (!!$thing->queued() && $v->uid == $thing->queued()->uid)
-          <span data-toggle="tooltip" data-placement="right" title="awaiting approval">
+          <span title="awaiting approval" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-spinner fa-pulse"></i>
           </span>
           @endif
 
           @if ($v->uid == $thing->current()->uid)
-          <span data-toggle="tooltip" data-placement="right" title="saved">
+          <span title="saved" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-save mr-1 text-primary"></i>
           </span>
           @endif

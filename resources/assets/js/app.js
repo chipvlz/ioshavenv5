@@ -28,6 +28,15 @@ function formatBytes(bytes,decimals) {
    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
+function formatNum(bytes,decimals) {
+   if(bytes == 0) return '0'
+   var k = 1000,
+       dm = decimals || 2,
+       sizes = ['', 'K', 'M', 'B', 'T', 'P', 'E', 'Z', 'Y'],
+       i = Math.floor(Math.log(bytes) / Math.log(k));
+   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
+}
+
 window.paramsToJson = function (url) {
   let params = url.split('?').reverse()[0].split('&');
   let data = {};
@@ -53,6 +62,7 @@ const app = new Vue({
       hasScrolledOnePage: false,
       apps: [],
       users: [],
+      logs: [],
       readyForDynamicContent: false
     },
     methods: {
@@ -82,9 +92,15 @@ const app = new Vue({
       addUsers(data) {
         this.users.push.apply(this.users, data);
       },
+      addLogs(data) {
+        this.logs.push.apply(this.logs, data);
+      },
       toggleDashboard(val) {
         this.showdashboard = val;
-        // window.ElementQueries.init();
+      },
+      getLogClass (level) {
+        if (level === 'danger' || level === 'warning') return 'table-' + level;
+        return level === 'success' ? 'text-' + level : ''
       }
 
     },
@@ -93,12 +109,12 @@ const app = new Vue({
       this.scrollpos = window.pageYOffset || document.documentElement.scrollTop;
       this.hasScrolledOnePage = this.scrollpos > 32;
       window.addEventListener('scroll', (e) => {
-        console.log('scrolling');
+        // console.log('scrolling');
         this.scrollpos = window.pageYOffset || document.documentElement.scrollTop;
         this.hasScrolledOnePage = this.scrollpos > 32;
       });
       $('#dashboard-content').on('scroll', (e) => {
-        console.log('scrolling');
+        // console.log('scrolling');
         this.scrollpos = $('#dashboard-content').scrollTop();
         this.hasScrolledOnePage = this.scrollpos > 32;
       });
@@ -139,5 +155,30 @@ $('.story p').each(function(index) {
   }
 })
 
+$('#logModal').on('show.bs.modal', function(event) {
+  let btn = $(event.relatedTarget);
+  let level = btn.data('level');
+  let message = btn.data('message');
+  let data = btn.data('data');
+  let method = btn.data('method');
+  $(this).find('.level').html('"' + level + '"').addClass('text-' + level);
+  $(this).find('.message').html('"' + message + '"');
+  $(this).find('.data').html(JSON.stringify(data, null, 2));
+  $(this).find('.method').html('"' + method + '"');
+  console.log(level, message, data, method);
+});
+
 $("[data-toggle=popover]").popover();
 $('[data-toggle="tooltip"]').tooltip();
+
+$('[data-like]').on('click', function () {
+  $(this).toggleClass('liked')
+  axios.post('/action/like', {
+    table: $(this).data('like'),
+    uid: $(this).data('uid')
+  }).then(res => {
+    // console.log($(this).find('.likes'));
+    console.log(res, res.data.likes, formatNum(res.data.likes));
+    $(this).find('.likes').text(formatNum(res.data.likes))
+  })
+})

@@ -19,7 +19,7 @@ function formatBytes($bytes, $dm = 2) {
 function formatNum($num, $dm = 2) {
   $k = 1000;
   if ($num < $k) return $num;
-  $sizes = [".", "K", "M", "B", "T", "P", "E", "Z", "Y"];
+  $sizes = ["", "K", "M", "B", "T", "P", "E", "Z", "Y"];
   $i = floor(log($num) / log($k));
   return round($num / pow($k, $i), $dm) . $sizes[$i];
 }

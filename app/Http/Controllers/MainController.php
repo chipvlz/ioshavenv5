@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Session;
 use App\Story;
+use App\App;
+use Session;
+use Report;
+
 
 class MainController extends Controller
 {
@@ -24,5 +27,56 @@ class MainController extends Controller
       "search" => "/"
     ];
     return !$r->json ? view('welcome', $data) : response()->json($data);
+  }
+
+  public function showStory ($uid) {
+    $story = Story::byuid($uid)->whereNotNull('published_version')->firstOrFail();
+    return view('story', [
+      "story" => $story,
+      "published" => $story->published(),
+    ]);
+  }
+
+  public function apps(Request $r) {
+    $a = App::mergeVersions()->whereNotNull("published_version");
+    $apps = !$r->q ? $a
+      : $a->where('name', 'like', "%$r->q%");
+
+    $apps = $apps->paginate(10);
+
+    if ($r->json) {
+      foreach ($apps as $app) {
+        $app->icon = isset($app->current()->icon) ? Storage::url($app->current()->icon) : '/img/icon.png';
+      }
+    }
+
+    $data = [
+      "apps" => $apps,
+      "query" => $r->q,
+      "search" => "/apps"
+    ];
+
+    return !$r->json ? view('apps', $data) : response()->json($data);
+  }
+
+  public function like(Request $r) {
+    switch ($r->table) {
+      case 'stories':
+        $thing = Story::byuid($r->uid)->first();
+        break;
+      case 'apps':
+        $thing = App::byuid($r->uid)->first();
+        break;
+    }
+
+    if ($thing->isLiked()) $thing->unlike();
+    else $thing->like();
+
+    $data = [
+      "likes" => $thing->likeCount(),
+      "isLiked" => $thing->isLiked(),
+    ];
+
+    return response()->json($data);
   }
 }

@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use Auth;
-use Hash;
-use Session;
-use Gate;
 use App\Role;
+use Session;
+use Report;
+use Auth;
+use Gate;
+use Hash;
 
 class UserController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('can:manage users');
+    }
+
     public function showUser($username) {
-      if (Gate::denies('manage users')) abort(404);
       $user = User::withTrashed()->where('username', $username)->first();
       return view('dashboard.profile', [
         "isAuth" => $user->username == Auth::user()->username,

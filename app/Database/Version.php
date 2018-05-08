@@ -10,7 +10,7 @@ class Version extends Schema
   public static function main($name, $callback) {
     static::create($name, function (Blueprint $table) use ($name, $callback) {
       $table->increments('id');
-      $table->string('uid');
+      $table->string('uid')->unique();
       $callback($table);
       $table->string("published_version")->nullable();
       $table->string("queued_version")->nullable();
@@ -22,7 +22,7 @@ class Version extends Schema
   public static function versions($name, $callback) {
     static::create($name . '_versions', function (Blueprint $table) use ($name, $callback) {
       $table->increments('id');
-      $table->string('uid');
+      $table->string('uid')->unique();
       $table->integer('user_id');
       $table->integer($name . '_id');
       $table->string("commit")->nullable();
