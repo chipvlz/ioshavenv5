@@ -20,20 +20,15 @@ return [
   ],
 
   "more" => [
-    "asdf" => [
-      "url" => "/",
-      "icon" => "fal fa-newspaper",
-      "color" => "red",
+    "Betas" => [
+      "url" => "/betas",
+      "icon" => "fal fa-flask",
+      "color" => "green",
     ],
-    "asdf1" => [
-      "url" => "/",
-      "icon" => "fal fa-newspaper",
-      "color" => "red",
-    ],
-    "asdf2" => [
-      "url" => "/",
-      "icon" => "fal fa-newspaper",
-      "color" => "red",
+    "How to sideload" => [
+      "url" => "/sideload",
+      "icon" => "fal fa-wrench",
+      "color" => "black",
     ],
   ]
 ];

@@ -171,6 +171,19 @@ blockquote::after {
   }
 }
 
+.nav-link.green {
+  i, svg, &:hover, &.selected {
+    color: #4caf50;
+  }
+}
+
+.nav-link.black {
+  i, svg, &:hover, &.selected {
+    color: #000;
+  }
+}
+
+
 .nav-link.dark {
   i, svg, &:hover, &.selected {
     color: #444;

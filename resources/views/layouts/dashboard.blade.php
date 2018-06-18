@@ -18,7 +18,7 @@
               </li>
 
               <li>
-                <a href="/dashboard/stats">
+                <a href="/dashboard">
                   <span class="icon"><i class="fal fa-chart-line"></i></span>
                   <span class="label pl-2">Stats</span>
                 </a>

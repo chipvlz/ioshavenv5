@@ -10691,6 +10691,20 @@ blockquote::after {
   color: #ff9800;
 }
 
+.nav-link.green i,
+.nav-link.green svg,
+.nav-link.green:hover,
+.nav-link.green.selected {
+  color: #4caf50;
+}
+
+.nav-link.black i,
+.nav-link.black svg,
+.nav-link.black:hover,
+.nav-link.black.selected {
+  color: #000;
+}
+
 .nav-link.dark i,
 .nav-link.dark svg,
 .nav-link.dark:hover,
