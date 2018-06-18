@@ -69,7 +69,7 @@ class UploadController extends Controller
       }
       return response()->json([
         "path" => $path,
-        "size" => $path,
+        "size" => Storage::size($path),
       ]);
     }
 
@@ -90,7 +90,7 @@ class UploadController extends Controller
       }
       return response()->json([
         "path" => $path,
-        "size" => $path,
+        "size" => Storage::size($path),
       ]);
     }
 
