@@ -66,7 +66,7 @@
   "table" => "apps",
   "thing" => $app,
   "info" => [
-    ["icon" => "download", "value" => formatNum($app->downloads)],
+    ["icon" => "download", "value" => formatNum($app->downloads()->get()->count())],
     ["icon" => "eye", "value" => formatNum($app->views)],
     ["icon" => "file-archive", "value" => formatBytes($published->size)],
     ["icon" => "code-branch", "value" => $published->version],

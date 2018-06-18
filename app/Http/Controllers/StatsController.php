@@ -23,6 +23,7 @@ class StatsController extends Controller
 
     public function getDownloads($format='Y-_m-_d', $limit=7) {
       $format = str_replace('_', "%", $format);
+      // dd(Auth::user()->apps()->get());
       $app_ids = Auth::user()->apps()->pluck('main_id')->toArray();
       $raw = Download::whereIn('app_id', $app_ids)
            ->select(DB::raw("DATE_FORMAT(created_at, '%$format') as date"), DB::raw('count(*) as count'))

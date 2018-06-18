@@ -9,6 +9,7 @@ use Image;
 use Storage;
 use Carbon\Carbon;
 use Session;
+use App\Download;
 
 class DownloadController extends Controller
 {
@@ -29,7 +30,8 @@ class DownloadController extends Controller
       }
 
       $time = Session::get($s);
-      $app = App::byuid($r->uid)->firstOrFail()->version($r->vid);
+      $app_raw = App::byuid($r->uid)->firstOrFail();
+      $app = $app_raw->version($r->vid);
       $data = [
         "uid" => $r->uid,
         "vid" => $r->vid,
@@ -40,6 +42,7 @@ class DownloadController extends Controller
       ];
 
       if ($data['ready']) {
+        Download::make($app_raw);
         if (Session::has($s)) {
           Session::forget($s);
         }
