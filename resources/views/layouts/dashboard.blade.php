@@ -18,13 +18,6 @@
               </li>
 
               <li>
-                <a href="/dashboard">
-                  <span class="icon"><i class="fal fa-chart-line"></i></span>
-                  <span class="label pl-2">Stats</span>
-                </a>
-              </li>
-
-              <li>
                 <a href="/dashboard/profile">
                   <div class="user-icon">
                     <span class="icon"><i class="fal fa-user"></i></span>
@@ -37,6 +30,13 @@
                       <div>{{ Auth::user()->email }}</div>
                     </div>
                   </div>
+                </a>
+              </li>
+
+              <li>
+                <a href="/dashboard">
+                  <span class="icon"><i class="fal fa-chart-line"></i></span>
+                  <span class="label pl-2">Stats</span>
                 </a>
               </li>
 

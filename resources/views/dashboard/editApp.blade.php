@@ -107,6 +107,11 @@
       <editor class="mb-3" v-pre>{!!old('description') ?? $version->description!!}</editor>
     </div>
 
+    <div class="form-group">
+      <label for="tags" class="h6">Tags</label>
+      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('tags') ?? $version->tags}}" type="text" class="form-control py-3 px-3" id="tags" name="tags" placeholder="Ex. (game, free, side-scroller)" v-pre>
+    </div>
+
     @component('components.commit', [
       "uid" => $app->uid,
     ])@endcomponent
