@@ -4,8 +4,8 @@
 
 @if(!!$query)
 <div class="banner home query">
-    <div class="p-4 text-center w-100">
-      {{ $apps->total() }} Search results for <strong>{{ $query }}</strong>
+    <div class="p-4 text-center w-100" v-pre>
+      {{ $apps->total() }} Search results for <strong v-pre>{{ $query }}</strong>
     </div>
     <div class="container mb-4">
       <h1 class="py-2 border-bottom">My apps
@@ -43,14 +43,14 @@
     @foreach($apps as $app)
 
         <div class="col-lg-4 col-md-6 col-12">
-          <a class="app mb-2 py-1 px-2" href="/app/edit/{{ $app->uid }}">
+          <a class="app mb-2 py-1 px-2" href="/app/edit/{{ $app->uid }}" v-pre>
             <div class="icon">
-              <img src="{{!!$app->current()->icon ? Storage::url($app->current()->icon) : '/img/icon.png'}}" alt="app-icon" width="60" height="60">
+              <img src="{{ $app->current()->icon }}" alt="app-icon" width="60" height="60" v-pre>
             </div>
             <!-- <div class="w-100"> -->
               <div class="info pl-2 pr-0 w-100">
-                <div class="title">{{ $app->current()->name }}</div>
-                <div class="short">{{ $app->current()->short }}</div>
+                <div class="title" v-pre>{{ $app->current()->name }}</div>
+                <div class="short" v-pre>{{ $app->current()->short }}</div>
               </div>
               <div class="action pr-2">
                 <button class="btn btn-outline-primary btn-sm">Edit</button>
@@ -87,7 +87,7 @@
    search="{{ $search }}"
    query="{{ $query }}"
    @update="addApps"
-  ></load-more>
+   ></load-more>
 </div>
 
 @endsection

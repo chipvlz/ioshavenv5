@@ -8,13 +8,16 @@
   </div>
   <div class="d-flex align-items-center">
     @if(Auth::guest())
-      <a href="/login" class="nav-link">{{ __('Login') }}</a>
-      |
-      <a href="/register" class="nav-link mr-3">{{ __('Register') }}</a>
+      <a href="/login" class="nav-link d-none d-md-inline-block" v-pre>{{ __('Login') }}</a>
+      <span class="tiny mx-1 d-none d-md-inline-block">•</span>
+      <a href="/register" class="nav-link mr-3 d-none d-md-inline-block" v-pre>{{ __('Register') }}</a>
+      <a href="/login" class="nav-link mr-2 d-inline-block d-md-none">
+        <i class="far fa-sign-in"></i>
+      </a>
     @else
     <form action="/logout" id="logout" method="post">@csrf</form>
     <div class="dropdown">
-      <img src="{{!!Auth::user()->avatar ? Storage::url(Auth::user()->avatar) : 'https://api.adorable.io/avatars/200/'.Auth::user()->username}}" data-toggle='dropdown' id="profile-dropdown" role="button" class="rounded-circle avatar mr-3" height="24" width="24" alt="profile image" aria-haspopup="true" aria-expanded="false">
+      <img src="{{ Auth::user()->avatar }}" data-toggle='dropdown' id="profile-dropdown" role="button" class="rounded-circle avatar mr-3" height="24" width="24" alt="profile image" aria-haspopup="true" aria-expanded="false" v-pre>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profile-dropdown">
         <a class="dropdown-item" href="/dashboard">
           <i class="fas fa-cogs mr-2"></i>
@@ -36,13 +39,13 @@
         @csrf
         <input type="hidden" name="locale" id="locale-value">
       </form>
-      <a href="#" class="nav-link" data-toggle='dropdown' id="lang-dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      <a href="#" class="nav-link" data-toggle='dropdown' id="lang-dropdown" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
         {{ config('languages')[Session::get('locale')] }}
         <i class="fas fa-sort-down locale-down"></i>
       </a>
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profile-dropdown">
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profile-dropdown" v-pre>
         @foreach(config('languages') as $locale => $language)
-          <a class="dropdown-item locale" href="#" data-value="{{ $locale }}">{{ $language }}</a>
+          <a class="dropdown-item locale" href="#" data-value="{{ $locale }}" v-pre>{{ $language }}</a>
         @endforeach
       </div>
     </div>

@@ -64,11 +64,36 @@ class AppController extends Controller
     }
 
     public function edit(Request $r) {
+        $app = App::byuid($r->uid)->first();
+        if ($r->delete) {
+          foreach($app->versions() as $v) {
+            $app->removeVersion($v->uid);
+          }
+          $app->delete();
+          Report::success([
+            "message" => "deleted app",
+            "data" => [
+              "app" => $app
+            ]
+          ]);
+          return redirect('/dashboard/apps');
+        }
+        if ($r->unpublish) {
+          $app->unpublish();
+          Report::success([
+            "message" => "unpublished app",
+            "data" => [
+              "app" => $app,
+            ]
+          ]);
+          return back();
+        }
         if (env('APP_TYPE') === 'ios') {
           $rules = [
             'unsigned' => 'required_without_all:apk,signed,duplicate',
             'signed' => 'required_without_all:unsigned,apk,duplicate',
             'duplicate' => 'required_without_all:unsigned,signed,apk',
+            'size' => 'required',
           ];
         } else {
           $rules = [
@@ -85,7 +110,6 @@ class AppController extends Controller
           'banner' => 'required',
         ] + $rules);
       try {
-        $app = App::byuid($r->uid)->first();
         $version = $app->summary($r->commit)->commit([
           "name" => $r->name,
           "unsigned" => $r->unsigned,
@@ -96,6 +120,7 @@ class AppController extends Controller
           "icon" => $r->icon,
           "apk" => $r->apk,
           "short" => $r->short,
+          "size" => $r->size ?? $app->size,
           "description" => remove_scripts($r->description),
           "tags" => $r->tags,
         ]);

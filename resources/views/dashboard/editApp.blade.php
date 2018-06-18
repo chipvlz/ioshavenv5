@@ -3,47 +3,61 @@
 @section('content')
 
 @component('components.appbanner', [
-  "app" => $version
+  "app" => $app,
+  "version" => $version
 ])@endcomponent
 
 <div class="container">
   <form action="/app/edit" class="dropzone" method="post" id="app=dropzone">
     @csrf
-    <input type="hidden" name="uid" value="{{$app->uid}}">
+    <input type="hidden" name="uid" value="{{$app->uid}}" v-pre>
     <input type="hidden" name="description" id="app-description-value">
-    <input type="hidden" name="icon" id="icon-image-input" value="{{ old('icon') ?? $version->icon }}">
-    <input type="hidden" name="banner" id="banner-image-input" value="{{ old('banner') ?? $version->banner }}">
-    <input type="hidden" name="apk" id="apk-input" value="{{ old('apk') ?? $version->apk }}">
+    <input type="hidden" name="icon" id="icon-image-input" value="{{ old('icon') ?? $version->icon }}" v-pre>
+    <input type="hidden" name="banner" id="banner-image-input" value="{{ old('banner') ?? $version->banner }}" v-pre>
+    <input type="hidden" name="apk" id="apk-input" value="{{ old('apk') ?? $version->apk }}" v-pre>
+    <input type="hidden" name="unsigned" id="unsigned-input" value="{{ old('unsigned') ?? $version->unsigned }}" v-pre>
 
 
 
     <div class="form-group">
       <label for="name" class="h6">Name</label>
-      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('name') ?? $version->name}}" type="text" class="form-control py-3 px-3" id="name" name="name" placeholder="App name...">
+      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('name') ?? $version->name}}" type="text" class="form-control py-3 px-3" id="name" name="name" placeholder="App name..." v-pre>
     </div>
 
     <div class="form-group">
       <label for="version" class="h6">Version</label>
-      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('version') ?? $version->version}}" type="text" class="form-control py-3 px-3" id="version" name="version" placeholder="App version...">
+      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('version') ?? $version->version}}" type="text" class="form-control py-3 px-3" id="version" name="version" placeholder="App version..." v-pre>
     </div>
 
     <div class="form-group">
       <label for="short" class="h6">Short description</label>
-      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('short') ?? $version->short}}" type="text" class="form-control py-3 px-3" id="short" name="short" placeholder="Short description...">
+      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('short') ?? $version->short}}" type="text" class="form-control py-3 px-3" id="short" name="short" placeholder="Short description..." v-pre>
     </div>
 
     @if(env("APP_TYPE") === 'ios')
     <div class="form-group">
-      <label for="short" class="h6">Signed link</label>
-      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('signed') ?? $version->signed}}" type="text" class="form-control py-3 px-3" id="signed" name="signed" placeholder="signed link...">
+      <label for="size" class="h6">File size (in bytes)</label>
+      <input autocomplete="dashboard-app-{{$app->uid}}" id="unsigned-size" value="{{old('size') ?? $version->size}}" type="text" class="form-control py-3 px-3" id="size" name="size" placeholder="File size..." v-pre>
     </div>
     <div class="form-group">
-      <label for="short" class="h6">Unsigned link</label>
-      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('unsigned') ?? $version->unsigned}}" type="text" class="form-control py-3 px-3" id="unsigned" name="unsigned" placeholder="Unsigned link...">
+      <label for="unsigned" class="h6">IPA file</label>
+      <file-upload id="unsigned" name="unsigned" @success="unsignedSuccess" class="mb-3" action="/upload/ipa" :data="[{
+        name: 'uid',
+        value: '{{ $app->uid }}'
+        },{
+        name: 'vid',
+        value: '{{ $version->uid }}'
+        }]">
+        <i class="fas fa-file-archive mr-2"></i>Upload .ipa
+      </file-upload>
+    </div>
+    <div class="form-group">
+      <label for="short" class="h6">Signed link</label>
+      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('signed') ?? $version->signed}}" type="text" class="form-control py-3 px-3" id="signed" name="signed" placeholder="signed link..." v-pre>
     </div>
     <div class="form-group">
       <label for="short" class="h6">Install as duplicate link</label>
-      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('duplicate') ?? $version->duplicate}}" type="text" class="form-control py-3 px-3" id="duplicate" name="duplicate" placeholder="Install as duplicate link...">
+      <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('duplicate') ?? $version->duplicate}}" type="text" class="form-control py-3 px-3" id="duplicate" name="duplicate" placeholder="Install as duplicate link..." v-pre>
     </div>
     @endif
 
@@ -90,7 +104,7 @@
 
     <div class="form-group">
       <label class="h6">Description</label>
-      <editor class="mb-3">{!!old('description') ?? $version->description!!}</editor>
+      <editor class="mb-3" v-pre>{!!old('description') ?? $version->description!!}</editor>
     </div>
 
     @component('components.commit', [
@@ -98,11 +112,14 @@
     ])@endcomponent
 
 
-
     <div class="card text-white bg-danger mb-3 w-100">
       <div class="card-header"><i class="fas fa-exclamation-triangle mr-2"></i>DANGER<i class="fas fa-exclamation-triangle ml-2"></i></div>
       <div class="card-body bg-light text-danger">
-        <h5 class="card-title">Would you like to delete this application?</h5>
+        <h5 class="card-title text-dark">Would you like to unpublish this application?</h5>
+        <button type="submit" name="unpublish" value="1" class="btn btn-white border">
+          <i class="fal fa-ban mr-2"></i>Unpublish
+        </button>
+        <h5 class="card-title mt-3">Would you like to delete this application?</h5>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
           <i class="fal fa-trash-alt mr-2"></i>Delete
         </button>
@@ -112,7 +129,7 @@
 
 
     <div class="fixed-bottom p-3 bottom-nav">
-      <small><span class="text-muted mr-2">
+      <small><span class="text-muted mr-2" v-pre>
         Committed {{$version->updated_at->diffForHumans()}}</span></small>
         <button type="submit" class="btn btn-primary d-flex align-items-center mr-2 btn-sm" name="save" value="1"><i class="fas fa-save mr-2"></i>Save</button>
         @can('approve apps')
@@ -132,7 +149,7 @@
             </button>
           </div>
           <div class="modal-body">
-            Are you sure you would like to delete this application: <strong>{{$version->name}}</strong>? Once this action is performed, it cannot be undone!
+            Are you sure you would like to delete this application: <strong v-pre>{{$version->name}}</strong>? You will lose all versions of this application. Once this action is performed, it cannot be undone!
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
@@ -162,4 +179,8 @@
 
 </div>
 
+@endsection
+
+@section('footer')
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 @endsection

@@ -3,8 +3,8 @@
 
 @if(!!$query)
 <div class="banner home query">
-    <div class="p-4 text-center w-100">
-      {{ $users->total() }} Search results for <strong>{{ $query }}</strong>
+    <div class="p-4 text-center w-100" v-pre>
+      {{ $users->total() }} Search results for <strong v-pre>{{ $query }}</strong>
     </div>
     <div class="container mb-4">
       <h1 class="py-2 border-bottom">Users</h1>
@@ -37,21 +37,21 @@
       </thead>
       <tbody class="">
         @foreach($users as $user)
-        <tr class="{{ $user->trashed() ? 'table-danger text-danger' : '' }}">
-          <th scope="row" class="align-middle">{{$loop->iteration}}</th>
+        <tr class="{{ $user->trashed() ? 'table-danger text-danger' : '' }}" v-pre>
+          <th scope="row" class="align-middle" v-pre>{{$loop->iteration}}</th>
           <td class="align-middle">
-            <img class="rounded-circle" id="avatar-image" src="{{!!$user->avatar ? Storage::url($user->avatar) : 'https://api.adorable.io/avatars/200/'.$user->username }}" width="50" height="50" alt="avatar">
+            <img class="rounded-circle" id="avatar-image" src="{{ $user->avatar }}" width="50" height="50" alt="avatar" v-pre>
           </td>
-          <td class="align-middle">{{$user->username}}</td>
-          <td class="align-middle">{{$user->email}}</td>
-          <td class="align-middle">{{$user->role->name}}</td>
+          <td class="align-middle" v-pre>{{$user->username}}</td>
+          <td class="align-middle" v-pre>{{$user->email}}</td>
+          <td class="align-middle" v-pre>{{$user->role->name}}</td>
           <td class="text-right align-middle">
             @if($user->trashed())
             <button type="button" class="btn btn-dark btn-sm my-1" data-toggle="popover" title="Ban reason" data-content="{{ $user->ban_reason ?? 'N/A'}}">
               <i class="fas fa-question"></i>
             </button>
             @endif
-            <a href="/user/edit/{{$user->username}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-pencil"></i></a>
+            <a href="/user/edit/{{$user->username}}" class="btn btn-primary btn-sm my-1" v-pre><i class="fas fa-pencil"></i></a>
           </td>
         </tr>
         @endforeach

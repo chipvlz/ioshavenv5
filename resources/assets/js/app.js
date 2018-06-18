@@ -18,14 +18,15 @@ window.Vue = require('vue');
 Vue.component('editor', require('./components/Editor.vue'));
 Vue.component('file-upload', require('./components/FileUpload.vue'));
 Vue.component('load-more', require('./components/LoadMore.vue'));
+Vue.component('chart', require('./components/Chart.vue'));
 
 function formatBytes(bytes,decimals) {
-   if(bytes == 0) return '0 Bytes';
+   if(bytes == 0) return '0B';
    var k = 1000,
        dm = decimals || 2,
-       sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+       sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
        i = Math.floor(Math.log(bytes) / Math.log(k));
-   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
 }
 
 function formatNum(bytes,decimals) {
@@ -79,6 +80,11 @@ const app = new Vue({
         $('#size').html(formatBytes(data.size));
         $('#apk-input').val(data.path);
       },
+      unsignedSuccess (data) {
+        $('#size').html(formatBytes(data.size));
+        $('#unsigned-size').val(data.size);
+        $('#unsigned-input').val(data.path);
+      },
       avatarSuccess (data) {
         $('#avatar-image').attr('src', data.avatar);
       },
@@ -114,7 +120,6 @@ const app = new Vue({
         this.hasScrolledOnePage = this.scrollpos > 32;
       });
       $('#dashboard-content').on('scroll', (e) => {
-        // console.log('scrolling');
         this.scrollpos = $('#dashboard-content').scrollTop();
         this.hasScrolledOnePage = this.scrollpos > 32;
       });
@@ -182,3 +187,54 @@ $('[data-like]').on('click', function () {
     $(this).find('.likes').text(formatNum(res.data.likes))
   })
 })
+
+function countDown(i) {
+    return new Promise((resolve, reject) => {
+      var int = setInterval(function() {
+          $('#time-remaining').html(i + ' seconds');
+          i-- || (clearInterval(int), resolve());
+      }, 1000);
+    });
+}
+
+// console.log();
+if ($('#download-page').length > 0) {
+  $('#download-page').ready(function() {
+      let el = $('#download-page');
+      axios.post('/download/app', {
+        uid: el.data('uid'),
+        vid: el.data('vid'),
+        type: el.data('type'),
+        force: true
+      }).then(res => {
+        $('#download-status').html("Your download will start in...")
+        $('#time-remaining').html('5 seconds');
+        console.log(res.data);
+        return countDown(5)
+      }).then(() => {
+        $('#time-remaining').html('loading...');
+        return axios.post('/download/app', {
+          uid: el.data('uid'),
+          vid: el.data('vid'),
+          type: el.data('type'),
+          force: false
+        });
+      }).then(res=> {
+        if(res.data.link) {
+          if (res.data.isSigned) {
+            $('#time-remaining').html('installing app...');
+          } else {
+            $('#time-remaining').html('installing duplicate...');
+          }
+          window.location.href = res.data.link
+        } else if(res.data.download) {
+          $('#time-remaining').html('downloading...');
+          window.location.href = res.data.download
+        }
+        else {
+          $('#time-remaining').html('error');
+        }
+      })
+
+  })
+}

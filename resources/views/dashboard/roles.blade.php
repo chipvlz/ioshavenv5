@@ -26,15 +26,15 @@
       <tbody class="">
         @foreach($roles as $role)
         <tr>
-          <th scope="row" class="align-middle">{{ $role->id }}</th>
-          <td class="align-middle">{{$role->name}}</td>
+          <th scope="row" class="align-middle" v-pre>{{ $role->id }}</th>
+          <td class="align-middle" v-pre>{{$role->name}}</td>
           <td class="align-middle">
             @foreach($role->permissions as $perm)
               @if ($role->isAllowedTo("administrator"))
               <span class="badge badge-danger badge-pill">administrator</span>
               @break
               @else
-              <span class="badge badge-dark badge-pill">{{$perm->name}}</span>
+              <span class="badge badge-dark badge-pill" v-pre>{{$perm->name}}</span>
               @endif
             @endforeach
             @if (!$role->permissions->count())
@@ -42,8 +42,8 @@
             @endif
           </td>
           <td class="text-right align-middle">
-            <a href="/role/edit/{{$role->id}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-pencil"></i></a>
-            <a href="/role/delete/{{$role->id}}" class="btn btn-danger btn-sm my-1"><i class="fas fa-trash-alt"></i></a>
+            <a href="/role/edit/{{$role->id}}" class="btn btn-primary btn-sm my-1" v-pre><i class="fas fa-pencil"></i></a>
+            <a href="/role/delete/{{$role->id}}" class="btn btn-danger btn-sm my-1" v-pre><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
         @endforeach

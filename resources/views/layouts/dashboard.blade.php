@@ -16,6 +16,14 @@
                   <span class="icon"><i class="fal fa-times"></i></span>
                   <span class="label pl-2">Close</span>
               </li>
+
+              <li>
+                <a href="/dashboard/stats">
+                  <span class="icon"><i class="fal fa-chart-line"></i></span>
+                  <span class="label pl-2">Stats</span>
+                </a>
+              </li>
+
               <li>
                 <a href="/dashboard/profile">
                   <div class="user-icon">
@@ -23,7 +31,7 @@
                     <span class="label pl-2">Profile</span>
                   </div>
                   <div class="user py-2 px-2 border-top border-bottom border-light">
-                    <img src="{{!!Auth::user()->avatar ? Storage::url(Auth::user()->avatar) : 'https://api.adorable.io/avatars/200/'.Auth::user()->username }}" alt="avatar" class="rounded-circle avatar" width="50" height="50">
+                    <img src="{{ Auth::user()->avatar }}" alt="avatar" class="rounded-circle avatar" width="50" height="50">
                     <div class="info">
                       <div class="username">{{ Auth::user()->username }}</div>
                       <div>{{ Auth::user()->email }}</div>
@@ -67,7 +75,7 @@
                 </a>
               </li>
               @endcan
-              
+
               @can('manage users')
               <li>
                 <a href="/dashboard/users">
@@ -96,7 +104,7 @@
               </li>
             </ul>
           </div>
-          <main class="py-4" id="dashboard-content">
+          <main class="pb-4" id="dashboard-content">
               @include('layouts.alerts')
               @yield('content')
           </main>
@@ -104,7 +112,7 @@
     </div>
 
     <!-- Include the Quill library -->
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    @yield('footer')
     <script src="/js/app.js" charset="utf-8"></script>
     <script src="/fa/svg-with-js/js/fontawesome-all.min.js" charset="utf-8"></script>
 </body>

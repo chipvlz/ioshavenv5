@@ -3,9 +3,9 @@
 
 
 @if(!!$query)
-<div class="banner home query">
-    <div class="p-4 text-center w-100">
-      {{ $apps->total() }} Search results for <strong>{{ $query }}</strong>
+<div class="banner home query" v-pre>
+    <div class="p-4 text-center w-100" v-pre>
+      {{ $apps->total() }} Search results for <strong v-pre>{{ $query }}</strong>
     </div>
     @if($apps->count())
     <div class="container mb-4 pt-4">
@@ -25,20 +25,26 @@
     @foreach($apps as $app)
 
         <div class="col-lg-4 col-md-6 col-12">
-          <a class="app mb-2 py-1 px-2" href="/app/{{ $app->uid }}">
+          <div class="app mb-2 py-1 px-2 linkable" v-pre url="/app/{{ $app->uid }}">
             <div class="icon">
-              <img src="{{!!$app->current()->icon ? Storage::url($app->current()->icon) : '/img/icon.png'}}" alt="app-icon" width="60" height="60">
+              <img v-pre src="{{ $app->current()->icon }}" alt="app-icon" width="60" height="60">
             </div>
             <!-- <div class="w-100"> -->
               <div class="info pl-2 pr-0 w-100">
-                <div class="title">{{ $app->name }}</div>
-                <div class="short">{{ $app->short }}</div>
+                <div class="title" v-pre>{{ $app->name }}</div>
+                <div class="short" v-pre>{{ $app->short }}</div>
               </div>
               <div class="action pr-2">
-                <button class="btn btn-outline-primary btn-sm">Get</button>
+                @if($app->current()->signed)
+                  <a href="/download/app/signed/{{$app->uid}}" v-pre target="_blank" class="btn btn-outline-primary btn-sm">Get</a>
+                @elseif($app->current()->apk)
+                  <a href="/download/app/apk/{{$app->uid}}" v-pre target="_blank" class="btn btn-outline-primary btn-sm">Get</a>
+                @else
+                  <button class="btn btn-outline-primary btn-sm">View</button>
+                @endif
               </div>
             <!-- </div> -->
-          </a>
+          </div>
         </div>
 
     @endforeach
@@ -69,6 +75,7 @@
    search="{{ $search }}"
    query="{{ $query }}"
    @update="addApps"
+   v-pre
   ></load-more>
 
 </div>

@@ -16,6 +16,8 @@ class CreateAppsTable extends Migration
     {
       Version::main('apps', function (Blueprint $table) {
           $table->integer("user_id");
+          $table->bigInteger('views')->default(0);
+          $table->bigInteger('downloads')->default(0);
       });
 
       Version::versions('app', function (Blueprint $table) {
@@ -30,8 +32,6 @@ class CreateAppsTable extends Migration
         $table->string('short')->default("A short snippet");
         $table->longText('description')->nullable();
         $table->string('tags')->nullable();
-        $table->bigInteger('views')->default(0);
-        $table->bigInteger('downloads')->default(0);
         $table->bigInteger('size')->default(0);
       });
 

@@ -2,7 +2,7 @@
 
 return [
   "twitter" => [
-    "url" => "http://twitter.com/ioshaven",
+    "url" => "http://twitter.com/ioshavenco",
     "icon" => "fab fa-twitter"
   ],
   "reddit" => [

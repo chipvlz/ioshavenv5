@@ -27,6 +27,11 @@ html {
   margin: 0;
 }
 
+small, .small {
+    font-size: 80% !important;
+    font-weight: 400;
+}
+
 *:not(label) {
   word-break: break-word;
 }
@@ -95,7 +100,7 @@ blockquote::after {
 }
 
 .nav1 {
-  background: #23282d;
+  background: black;
   height: 32px;
   padding: 0rem 1rem;
   display: flex;
@@ -210,7 +215,6 @@ blockquote::after {
   &.query {
     background-image: url(/img/funky-lines.png);
     background-size: 50%;
-    margin-top: -1.5rem;
     margin-bottom: -7.5rem;
     font-size: 1.2rem;
   }
@@ -359,12 +363,6 @@ blockquote::after {
     }
 }
 
-.app-banner.mb-3.jumbotron-fluid {
-    margin-top: -1.5rem;
-}
-
-
-
 .locale-down {
   vertical-align: top;
 }
@@ -414,6 +412,7 @@ blockquote::after {
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 16px;
+    overflow: hidden;
     .label { display: none}
     a {
       color: white;
@@ -461,6 +460,9 @@ blockquote::after {
   position: relative;
   color: black !important;
   text-decoration: none !important;
+  &:hover {
+    cursor: pointer;
+  }
   img {
     border-radius: 0.5rem;
   }
@@ -667,7 +669,7 @@ iframe.video {
   }
   .posts {
     margin-top: -212px;
-    padding: 0;
+    padding: 0 0.5rem;
   }
   .container.phone {
     padding: 0;

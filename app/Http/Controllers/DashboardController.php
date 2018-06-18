@@ -29,7 +29,7 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard.index');
+        return view('dashboard.stats');
     }
 
     public function showApps(Request $r) {

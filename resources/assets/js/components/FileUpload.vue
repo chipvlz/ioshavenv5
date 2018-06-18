@@ -17,7 +17,7 @@
     <div class="text-danger status" v-show="error">
       <strong class="mr-2">Error:</strong>
       {{error}}
-      <button @click.prevent="reset" class="font-weight-bold btn btn-link">Try again</button>
+      <!-- <button type="button" @click="reset" class="font-weight-bold btn btn-link">Try again</button> -->
     </div>
     <div class="text-primary status success" v-show="success">
       <strong class="mr-2">Success:</strong> {{success}}
@@ -34,11 +34,13 @@
             success: '',
             started: false,
             path: null,
-            percent:0
+            percent:0,
+            clone: null,
           }
         },
         mounted() {
             console.log('File upload mounted.')
+            this.clone = $('#' + this.id).val('').clone(true);
         },
         methods: {
           onUploadProgress (event) {
@@ -47,11 +49,16 @@
             this.percent = percent;
           },
           reset () {
-            this.started = false,
-            this.success = '',
+            console.log('resetting fileupload');
+            // this.$forceUpdate()
+            this.started = false
+            this.success = ''
             this.error = ''
+            this.percent = 0
+            this.path = null
             $('#progress-' + this.id).removeClass('bg-danger')
             $('#progress-' + this.id).width('0%');
+            $('#' + this.id).replaceWith(this.clone);
           },
           handleFile () {
             console.log('handling file');
@@ -72,9 +79,8 @@
               this.success = 'File uploaded';
               this.error = '';
               this.$emit('success', res.data);
-              setTimeout(this.reset, 1000);
             }).catch(err => {
-              console.error(err);
+              // console.error(err);
               this.error = 'Invalid file extension or file is too big'
               $('#progress-' + this.id).addClass('bg-danger')
               this.success = ''

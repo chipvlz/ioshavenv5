@@ -9,11 +9,11 @@
 // }
 
 function formatBytes($bytes, $dm = 2) {
-  if ($bytes == 0) return '0 Bytes';
+  if ($bytes == 0) return '0B';
   $k = 1000;
-  $sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+  $sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
   $i = floor(log($bytes) / log($k));
-  return round($bytes / pow($k, $i), $dm) . " " . $sizes[$i];
+  return round($bytes / pow($k, $i), $dm) . $sizes[$i];
 }
 
 function formatNum($num, $dm = 2) {

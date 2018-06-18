@@ -6,6 +6,7 @@ Route::get('/', 'MainController@news');
 Route::post("/locale", 'MainController@locale');
 Route::get('/apps', "MainController@apps");
 Route::get('/test', 'TestController@test');
+Route::post('/test', 'TestController@upload');
 
 Route::prefix('dashboard')->group(function () {
   Route::get('/', 'DashboardController@dashboard');
@@ -15,21 +16,28 @@ Route::prefix('dashboard')->group(function () {
   Route::get('/roles', 'DashboardController@showRoles');
   Route::get('/profile', 'DashboardController@showProfile');
   Route::get('/stories', 'DashboardController@showStories');
-
 });
 
 Route::prefix('app')->group(function () {
   Route::get('/edit/{uid}/{vid?}', 'AppController@showEditPage');
+  Route::get('{uid}', 'MainController@showApp');
   Route::post('/edit', 'AppController@edit');
   Route::post('/create', 'AppController@create');
 });
 
 Route::prefix('upload')->group(function () {
   Route::post('/apk', 'UploadController@apk');
+  Route::post('/ipa', 'UploadController@ipa');
   Route::post('/icon', 'UploadController@icon');
   Route::post('/banner', 'UploadController@banner');
   Route::post('/avatar', 'UploadController@avatar');
   Route::post('/story', 'UploadController@story');
+});
+
+Route::prefix('download')->group(function () {
+  Route::get('/raw/{session}/{random}', 'DownloadController@downloadRaw');
+  Route::get('/app/{type}/{uid}/{vid?}', 'MainController@downloadApp');
+  Route::post('/app', 'DownloadController@app');
 });
 
 Route::prefix('role')->group(function () {
@@ -53,4 +61,10 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('action')->group(function () {
   Route::post('like', 'MainController@like');
+});
+
+Route::prefix('stats')->group(function () {
+  Route::get('downloads/{format?}/{limit?}', 'StatsController@getDownloads');
+  Route::get('likes/{type}/{format?}/{limit?}', 'StatsController@getLikes');
+  Route::get('views/{type}/{format?}/{limit?}', 'StatsController@getViews');
 });

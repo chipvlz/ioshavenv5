@@ -3,8 +3,8 @@
 
 @if(!!$query)
 <div class="banner home query">
-    <div class="p-4 text-center w-100">
-      {{ $logs->total() }} Search results for <strong>{{ $query }}</strong>
+    <div class="p-4 text-center w-100" v-pre>
+      {{ $logs->total() }} Search results for <strong v-pre>{{ $query }}</strong>
     </div>
     <div class="container mb-4">
       <h1 class="py-2 border-bottom">Logs</h1>
@@ -23,8 +23,8 @@
 </div>
 
 <div class="container">
-  <div class="table-responsive">
-    <table class="table table-hover table-light">
+  <div class="table-responsive-md">
+    <table class="table table-hover table-light" style="min-width: 500px">
       <thead class="bg-dark text-white">
         <tr>
           <th scope="col">#</th>
@@ -37,18 +37,18 @@
       <tbody class="">
         @foreach($logs as $log)
           @if($log->level === 'danger' || $log->level === 'warning')
-            <tr class="table-{{$log->level}}">
+            <tr class="table-{{$log->level}}" v-pre>
           @elseif($log->level === 'success')
-            <tr class="text-{{$log->level}}">
+            <tr class="text-{{$log->level}}" v-pre>
           @endif
-            <th scope="row" class="align-middle text-dark">{{$loop->iteration}}</th>
-            <td class="align-middle py-1" width="40" title="{{ $log->user->username }}" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
-              <img class="rounded-circle" width="25" height="25" id="avatar-image" src="{{!!$log->user->avatar ? Storage::url($log->user->avatar) : 'https://api.adorable.io/avatars/200/'.$log->user->username }}"  alt="avatar">
+            <th scope="row" class="align-middle text-dark" v-pre>{{$loop->iteration}}</th>
+            <td class="align-middle py-1" width="40" title="{{ $log->user->username }}" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }' v-pre>
+              <img class="rounded-circle" width="25" height="25" id="avatar-image" src="{{ $log->user->avatar }}"  alt="avatar">
             </td>
-            <td class="align-middle py-1">{{$log->message}}</td>
-            <td class="align-middle py-1 text-dark">{{$log->created_at->diffForHumans()}}</td>
+            <td class="align-middle py-1" v-pre>{{$log->message}}</td>
+            <td class="align-middle py-1 text-dark" v-pre>{{$log->created_at->diffForHumans()}}</td>
             <td class="text-right align-middle py-1">
-              <button type="button" class="btn btn-dark btn-sm my-1" data-toggle="modal" data-target="#logModal" data-message="{{$log->message}}" data-method="{{$log->method}}" data-data="{{$log->data}}" data-level="{{$log->level}}"><i class="fas fa-eye"></i></a>
+              <button type="button" class="btn btn-dark btn-sm my-1" data-toggle="modal" data-target="#logModal" data-message="{{$log->message}}" data-method="{{$log->method}}" data-data="{{$log->data}}" data-level="{{$log->level}}" v-pre><i class="fas fa-eye"></i></a>
             </td>
           </tr>
         @endforeach

@@ -76,6 +76,10 @@ trait Versionable
     return $res;
   }
 
+  public function removeVersion($vid) {
+    static::table()->where('uid', $vid)->delete();
+  }
+
   public function versions() {
     $versions = static::table()->where(static::$short . '_id', $this->id)->get();
     foreach($versions as $version) {
@@ -162,6 +166,12 @@ trait Versionable
     $version = $query->first();
     static::byuid($this->uid)->update([
       "saved_version" => $version->uid
+    ]);
+  }
+
+  public function unpublish() {
+    static::byuid($this->uid)->update([
+      "published_version" => null
     ]);
   }
 

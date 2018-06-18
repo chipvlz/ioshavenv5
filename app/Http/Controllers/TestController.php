@@ -7,22 +7,30 @@ use Illuminate\Http\Request;
 use App\Permission;
 use App\Story;
 use App\Role;
+use App\App;
 use Report;
 use Gate;
 use Auth;
+use Session;
 
 
 class TestController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:upload apps');
+        // $this->middleware('can:upload apps');
     }
 
     public function test() {
-      $story = Story::find(2);
-      Auth::user()->like($story);
+      dd(Auth::user()->isAdmin());
+      return view('test');
+    }
 
-      dd(Auth::user()->likeCount("stories"), $story->likeCount());
+    public function upload(Request $r) {
+      // dd(config('filesystems'));
+      $path = $r->file('thing')->store('avatars');
+      Session::flash('message', $path);
+      Session::flash('message-type', 'success');
+      return back();
     }
 }

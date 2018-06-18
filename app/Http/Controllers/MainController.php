@@ -37,6 +37,14 @@ class MainController extends Controller
     ]);
   }
 
+  public function showApp ($uid) {
+    $app = App::byuid($uid)->whereNotNull('published_version')->firstOrFail();
+    return view('app', [
+      "app" => $app,
+      "published" => $app->published(),
+    ]);
+  }
+
   public function apps(Request $r) {
     $a = App::mergeVersions()->whereNotNull("published_version");
     $apps = !$r->q ? $a
@@ -78,5 +86,18 @@ class MainController extends Controller
     ];
 
     return response()->json($data);
+  }
+
+  public function downloadApp ($type, $uid, $vid=null) {
+    if (!in_array($type, ['apk', 'signed', 'unsigned', 'duplicate'])) return abort(404);
+
+    $app = App::byuid($uid)->firstOrFail();
+    $version = !!$vid ? $app->version($vid) : $app->published();
+
+    return view('download', [
+      "uid" => $app->uid,
+      "vid" => $version->uid,
+      "type" => $type,
+    ]);
   }
 }

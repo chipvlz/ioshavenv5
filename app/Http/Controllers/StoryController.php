@@ -87,7 +87,28 @@ class StoryController extends Controller
           'image' => $r->image,
           'tags' => $r->tags,
         ]);
-
+        if ($r->delete) {
+          foreach($story->versions() as $s) {
+            $story->removeVersion($s->uid);
+          }
+          $story->delete();
+          Report::warning([
+            "message" => "deleted story",
+            "data" => [
+              "story" => $story
+            ]
+          ]);
+          return redirect('/dashboard/apps');
+        }
+        if ($r->unpublish) {
+          $story->unpublish();
+          Report::warning([
+            "message" => "unpublished story",
+            "data" => [
+              "story" => $story,
+            ]
+          ]);
+        }
         if ($r->save) {
           $version->setAsCurrent();
           Report::success([

@@ -2,6 +2,7 @@
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
 window.ElementQueries = require('css-element-queries/src/ElementQueries')
+window.Sniddl = require('sniddl-ajax')
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -57,3 +58,8 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+require('./chart.js')
+Sniddl.init('.linkable', {
+  addCss: true
+});

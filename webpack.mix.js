@@ -10,9 +10,16 @@ let mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.options({
-  processCssUrls: false
-});
+// mix.webpackConfig({
+//   module: {
+//     loaders: [
+//       {
+//         test: /\.js$/,
+//         loader: 'ify-loader'
+//       }
+//     ]
+//   }
+// })
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');

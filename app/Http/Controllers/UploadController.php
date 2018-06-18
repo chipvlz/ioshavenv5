@@ -46,9 +46,9 @@ class UploadController extends Controller
           $constraint->aspectRatio();
         });
         Storage::put($path, (string) $image->encode(), 'public');
-        return $path;
+        return Storage::cloud()->url($path);
       } catch (\Exception $e) {
-        return false;
+        return $e;
       }
     }
 
@@ -65,7 +65,28 @@ class UploadController extends Controller
         return Response::json([
           "error" => "wrong extension",
           "accepted" => $fileTypes
-        ], 501);
+        ], 500);
+      }
+      return response()->json([
+        "path" => $path,
+        "size" => Storage::size($path),
+      ]);
+    }
+
+    public function ipa(Request $request) {
+      $fileTypes = ['ipa'];
+      $path = $this->upload($request, 'unsigned-0', 'unsigned', $fileTypes);
+      Report::success([
+        "message" => "uploaded ipa",
+        "data" => [
+          "path" => $path,
+        ]
+      ]);
+      if (!$path) {
+        return Response::json([
+          "error" => "wrong extension",
+          "accepted" => $fileTypes
+        ], 500);
       }
       return response()->json([
         "path" => $path,
@@ -86,7 +107,7 @@ class UploadController extends Controller
         return Response::json([
           "error" => "wrong extension",
           "accepted" => $fileTypes
-        ], 501);
+        ], 500);
       }
       return response()->json([
         "path" => $path,
@@ -107,7 +128,7 @@ class UploadController extends Controller
         return Response::json([
           "error" => "wrong extension",
           "accepted" => $fileTypes
-        ], 501);
+        ], 500);
       }
       return response()->json([
         "path" => $path,
@@ -118,6 +139,9 @@ class UploadController extends Controller
     public function avatar(Request $request) {
       $fileTypes = ['png', 'jpg', 'jpeg', 'gif'];
       $path = $this->image($request, 'avatar-0', 'avatars', $fileTypes, 200, 200);
+      if ($path instanceof \Exception) {
+        return response()->json($path);
+      }
       Report::success([
         "message" => "uploaded user avatar",
         "data" => [
@@ -128,7 +152,7 @@ class UploadController extends Controller
         return Response::json([
           "error" => "wrong extension",
           "accepted" => $fileTypes
-        ], 501);
+        ], 500);
       }
       $user = User::find($request->id);
       $user->avatar = $path;
@@ -139,7 +163,7 @@ class UploadController extends Controller
 
     public function story(Request $request) {
       $fileTypes = ['png', 'jpg', 'jpeg', 'gif'];
-      $path = $this->image($request, 'image-0', 'stories', $fileTypes, 1500, 500);
+      $path = $this->image($request, 'image-0', 'stories', $fileTypes, 600, 400);
       Report::success([
         "message" => "uploaded story image",
         "data" => [
@@ -150,7 +174,7 @@ class UploadController extends Controller
         return Response::json([
           "error" => "wrong extension",
           "accepted" => $fileTypes
-        ], 501);
+        ], 500);
       }
 
       return response()->json([

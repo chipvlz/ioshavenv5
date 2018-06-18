@@ -2,7 +2,7 @@
 
 @section('content')
 @if (!!$query)
-<div class="banner home query2">
+<div class="banner home query2" v-pre>
     <div class="p-4 text-center w-100">
       {{ $stories->total() }} Search results for <strong>{{ $query }}</strong>
     </div>
@@ -15,7 +15,7 @@
   </div>
 </div>
 @endif
-<div class="posts container {{ !!$query ? 'query' : '' }}">
+<div class="posts container {{ !!$query ? 'query' : '' }}" v-pre>
   @foreach($stories as $story)
     @component('components.newspost', [
       "story" => $story

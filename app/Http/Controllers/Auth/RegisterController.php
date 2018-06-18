@@ -83,6 +83,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'avatar' => "https://api.adorable.io/avatars/100/{$data['username']}",
         ]);
     }
 }

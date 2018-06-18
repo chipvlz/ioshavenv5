@@ -3,7 +3,7 @@
 
 @if(!!$query)
 <div class="banner home query">
-    <div class="p-4 text-center w-100">
+    <div class="p-4 text-center w-100" v-pre>
       {{ $stories->total() }} Search results for <strong>{{ $query }}</strong>
     </div>
     <div class="container mb-4">
@@ -53,13 +53,13 @@
       <tbody class="">
         @foreach($stories as $story)
         <tr>
-          <th scope="row" class="align-middle">{{$loop->iteration}}</th>
-          <td class="align-middle">{{$story->current()->type}}</td>
-          <td class="align-middle">{{$story->current()->title}}</td>
+          <th scope="row" class="align-middle" v-pre>{{$loop->iteration}}</th>
+          <td class="align-middle" v-pre>{{$story->current()->type}}</td>
+          <td class="align-middle" v-pre>{{$story->current()->title}}</td>
           <td></td>
           <td></td>
           <td class="text-right align-middle">
-            <a href="/story/edit/{{$story->uid}}" class="btn btn-primary btn-sm my-1"><i class="fas fa-pencil"></i></a>
+            <a href="/story/edit/{{$story->uid}}" class="btn btn-primary btn-sm my-1" v-pre><i class="fas fa-pencil"></i></a>
           </td>
         </tr>
         @endforeach
