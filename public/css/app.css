@@ -49,7 +49,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 @-ms-viewport {
@@ -10670,38 +10670,38 @@ blockquote::after {
   background: #ccc;
 }
 
-.nav-link.red i,
-.nav-link.red svg,
-.nav-link.red:hover,
-.nav-link.red.selected {
+.red i,
+.red svg,
+.red:hover,
+.red.selected {
   color: #f44336;
 }
 
-.nav-link.blue i,
-.nav-link.blue svg,
-.nav-link.blue:hover,
-.nav-link.blue.selected {
+.blue i,
+.blue svg,
+.blue:hover,
+.blue.selected {
   color: #2196f3;
 }
 
-.nav-link.gold i,
-.nav-link.gold svg,
-.nav-link.gold:hover,
-.nav-link.gold.selected {
+.gold i,
+.gold svg,
+.gold:hover,
+.gold.selected {
   color: #ff9800;
 }
 
-.nav-link.green i,
-.nav-link.green svg,
-.nav-link.green:hover,
-.nav-link.green.selected {
+.green i,
+.green svg,
+.green:hover,
+.green.selected {
   color: #4caf50;
 }
 
-.nav-link.black i,
-.nav-link.black svg,
-.nav-link.black:hover,
-.nav-link.black.selected {
+.black i,
+.black svg,
+.black:hover,
+.black.selected {
   color: #000;
 }
 

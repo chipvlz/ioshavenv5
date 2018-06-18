@@ -69,7 +69,7 @@ class UploadController extends Controller
       }
       return response()->json([
         "path" => $path,
-        "size" => Storage::size($path),
+        "size" => $path,
       ]);
     }
 
@@ -90,7 +90,7 @@ class UploadController extends Controller
       }
       return response()->json([
         "path" => $path,
-        "size" => Storage::size($path),
+        "size" => $path,
       ]);
     }
 
@@ -111,7 +111,7 @@ class UploadController extends Controller
       }
       return response()->json([
         "path" => $path,
-        "image" => Storage::url($path),
+        "image" => $path,
       ]);
     }
 
@@ -132,7 +132,7 @@ class UploadController extends Controller
       }
       return response()->json([
         "path" => $path,
-        "image" => Storage::url($path),
+        "image" => $path,
       ]);
     }
 
@@ -157,7 +157,6 @@ class UploadController extends Controller
       $user = User::find($request->id);
       $user->avatar = $path;
       $user->save();
-      $user->avatar = Storage::url($user->avatar);
       return response()->json($user);
     }
 
@@ -179,7 +178,7 @@ class UploadController extends Controller
 
       return response()->json([
         "path" => $path,
-        "image" => Storage::url($path),
+        "image" => $path,
       ]);
     }
 }

@@ -3,7 +3,7 @@
 <link href="{{ url('/fa/web-fonts-with-css/css/fontawesome-all.min.css') }}" rel="prefetch"></link>
 
 <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<!-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> -->
 <link href="{{ url('/fa/web-fonts-with-css/css/fontawesome-all.min.css') }}" rel="stylesheet"></link>
 <link rel="stylesheet" href="{{ url('/css/app.css') }}">
 

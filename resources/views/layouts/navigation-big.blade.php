@@ -20,7 +20,7 @@
 
         <div class="dropdown-menu" aria-labelledby="moreDropdown">
           @foreach(config('navigation.more') as $name => $data)
-            <a href="{{ $data['url'] }}" class="dropdown-item" v-pre>
+            <a href="{{ $data['url'] }}" class="dropdown-item {{ $data['color'] }}" v-pre>
               <i class="mr-3 {{ $data['icon'] }}" v-pre></i>
               {{ __($name) }}
             </a>
@@ -44,9 +44,9 @@
   </div>
 </div>
 
-<div class="w-100 bg-white px-3 d-sm-none" v-show="showmoreclick" >
+<div class="w-100 bg-white px-3 d-md-none" v-show="showmoreclick" >
   <form class="form-inline py-2 my-lg-0" action="{{ $search ?? '' }}" v-pre>
-    <input class="form-control ml-2 d-sm-block" type="text" placeholder="Search..." aria-label="Search" name="q" value="{{ $query ?? '' }}" v-pre>
+    <input class="form-control ml-2 d-md-block" type="text" placeholder="Search..." aria-label="Search" name="q" value="{{ $query ?? '' }}" v-pre>
   </form>
   @foreach(config('navigation') as $section)
     @foreach($section as $name => $data)

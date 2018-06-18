@@ -153,31 +153,31 @@ blockquote::after {
   }
 }
 
-.nav-link.red {
+.red {
   i, svg, &:hover, &.selected {
     color: #f44336;
   }
 }
 
-.nav-link.blue {
+.blue {
   i, svg, &:hover, &.selected {
     color: #2196f3;
   }
 }
 
-.nav-link.gold {
+.gold {
   i, svg, &:hover, &.selected {
     color: #ff9800;
   }
 }
 
-.nav-link.green {
+.green {
   i, svg, &:hover, &.selected {
     color: #4caf50;
   }
 }
 
-.nav-link.black {
+.black {
   i, svg, &:hover, &.selected {
     color: #000;
   }

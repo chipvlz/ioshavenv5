@@ -22,7 +22,7 @@ return [
   "more" => [
     "Betas" => [
       "url" => "/betas",
-      "icon" => "fal fa-flask",
+      "icon" => "fas fa-flask",
       "color" => "green",
     ],
     "How to sideload" => [

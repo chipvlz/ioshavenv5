@@ -86,6 +86,7 @@ const app = new Vue({
         $('#unsigned-input').val(data.path);
       },
       avatarSuccess (data) {
+        console.log(data);
         $('#avatar-image').attr('src', data.avatar);
       },
       storySuccess (data) {

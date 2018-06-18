@@ -14386,6 +14386,7 @@ var app = new Vue({
       $('#unsigned-input').val(data.path);
     },
     avatarSuccess: function avatarSuccess(data) {
+      console.log(data);
       $('#avatar-image').attr('src', data.avatar);
     },
     storySuccess: function storySuccess(data) {

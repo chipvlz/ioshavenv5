@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:manage users');
+        // $this->middleware('can:manage users');
     }
 
     public function showUser($username) {
@@ -30,8 +30,10 @@ class UserController extends Controller
     }
 
     public function edit(Request $r) {
+      // dd($r->all());
       $session_messages = [];
       $user = User::withTrashed()->find($r->id);
+
       if ($r->username != $user->username) {
         $r->validate([
           'username' => 'required|string|alpha_num|min:3|max:255|unique:users',
@@ -48,14 +50,14 @@ class UserController extends Controller
       if (Gate::allows('manage users') && $r->ban){
         $user->ban_reason = $r->ban_reason;
         $user->delete();
-        Session::put('success', ['User banned successfully!']);
+        Session::flash('success', ['User banned successfully!']);
         return redirect('/dashboard/users');
       }
 
       if (Gate::allows('manage users') && $r->restore){
         $user->ban_reason = "";
         $user->restore();
-        Session::put('success', ['User restored successfully!']);
+        Session::flash('success', ['User restored successfully!']);
         return redirect('/dashboard/users');
       }
 
@@ -78,7 +80,9 @@ class UserController extends Controller
       } else if ($r->old_password) {
         Session::flash('danger', ['Wrong password']);
       }
-      Session::put('success', $session_messages);
+
+      $user->save();
+      Session::flash('success', $session_messages);
       return redirect("/user/edit/$user->username");
     }
 }
