@@ -36,6 +36,7 @@ class DashboardController extends Controller
     public function showApps(Request $r) {
       $this->authorize('upload apps');
       $a = Auth::user()->isAdmin() ? DB::table('apps')
+          ->where('type', env('APP_TYPE'))
           ->join('app_versions', 'apps.saved_version', '=', 'app_versions.uid')
           ->select('apps.*', 'app_versions.*', 'app_versions.uid as vid', 'apps.uid as uid', 'apps.id as main_id')
           : Auth::user()->apps();

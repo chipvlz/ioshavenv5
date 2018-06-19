@@ -56,7 +56,7 @@ class MainController extends Controller
   }
 
   public function apps(Request $r) {
-    $a = App::mergeVersions()->whereNotNull("published_version");
+    $a = App::mergeVersions()->whereNotNull("published_version")->where('type', env('APP_TYPE'));
     $apps = (!$r->q && !$r->t) ? $a
       : $a->where(function($query) use ($r) {
         $query->where('name', 'like', "%$r->q%")

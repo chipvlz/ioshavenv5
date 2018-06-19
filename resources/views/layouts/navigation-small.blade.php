@@ -1,7 +1,7 @@
 <div class="nav1">
   <div>
-    <a href="" class="nav-link"><i class="fab fa-apple"></i></a>
-    <a href="" class="nav-link android"><i class="fab fa-android"></i></a>
+    <a href="https://alpha.ioshaven.co" class="nav-link"><i class="fab fa-apple"></i></a>
+    <a href="https://alpha.apkhaven.co" class="nav-link android"><i class="fab fa-android"></i></a>
   </div>
   <div :class="['totop', {'show': hasScrolledOnePage}]">
     <a href="" class="nav-link"><i class="fal fa-angle-double-up"></i></a>

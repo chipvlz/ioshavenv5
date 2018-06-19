@@ -27,7 +27,7 @@
         <div class="w-100 d-flex flex-wrap align-items-center small">
           <div class="btn mr-2 mb-2 like small">
             <i class="fas fa-download"></i>
-            <span class="ml-2" id="downloads" v-pre>{{ formatNum($app->downloads) }}</span>
+            <span class="ml-2" id="downloads" v-pre>{{ formatNum($app->downloads()->get()->count()) }}</span>
           </div>
           <div class="btn mr-2 mb-2 like small">
             <i class="fas fa-eye"></i>

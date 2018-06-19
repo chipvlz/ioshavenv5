@@ -17,7 +17,7 @@ class CreateAppsTable extends Migration
       Version::main('apps', function (Blueprint $table) {
           $table->integer("user_id");
           $table->bigInteger('views')->default(0);
-          $table->bigInteger('downloads')->default(0);
+          $table->string('type')->nullable();
       });
 
       Version::versions('app', function (Blueprint $table) {

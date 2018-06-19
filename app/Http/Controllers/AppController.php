@@ -22,6 +22,7 @@ class AppController extends Controller
     public function showEditPage($uid, $vid=null) {
       $app = App::byuid($uid)->first();
       if(!Auth::user()->isAdmin() && !Auth::user()->apps()->pluck('uid')->contains($uid)) return abort(404);
+      if ($app->type !== env('APP_TYPE')) abort(404);
       $version = !!$vid ? $app->version($vid) : $app->current();
       return view('dashboard.editApp', [
         "app" => $app,
@@ -38,7 +39,8 @@ class AppController extends Controller
 
         App::make([
           "uid" => $uid,
-          "saved_version" => $vid
+          "saved_version" => $vid,
+          "type" => env('APP_TYPE')
         ], [
           "uid" => $vid,
         ]);
