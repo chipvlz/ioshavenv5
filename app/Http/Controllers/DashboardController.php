@@ -117,7 +117,7 @@ class DashboardController extends Controller
       if ($r->json) {
         foreach ($logs as $log) {
           $log->user = $log->user()->first();
-          $log->user->avatar = !!$log->user->avatar ? Storage::url($log->user->avatar) : 'https://api.adorable.io/avatars/200/'.$log->user->username;
+          // $log->user->avatar = !!$log->user->avatar ? Storage::url($log->user->avatar) : 'https://api.adorable.io/avatars/200/'.$log->user->username;
           $log->time = $log->created_at->diffForHumans();
         }
       }

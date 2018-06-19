@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
           "username" => "system",
           "email" => "system",
           "password" => bcrypt(str_random(50)),
+          "avatar" => "/img/icon.png"
         ]);
 
     }
