@@ -79,7 +79,6 @@
    search="{{ $search }}"
    query="{{ $query }}"
    @update="addApps"
-   v-pre
   ></load-more>
 
 </div>

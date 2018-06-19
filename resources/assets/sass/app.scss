@@ -623,7 +623,7 @@ iframe.video {
   }
   ul li {
     &:before {
-      content: counter(list-0, disc) '. '
+      content: counter(list-0, disc) ' '
     }
   }
 

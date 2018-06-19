@@ -41,13 +41,6 @@ class DashboardController extends Controller
 
       $apps = $apps->paginate(10);
 
-      if ($r->json) {
-        foreach ($apps as $app) {
-          $app->icon = isset($app->current()->icon) ? Storage::url($app->current()->icon) : '/img/icon.png';
-          $app->banner = isset($app->current()->banner) ? Storage::url($app->current()->banner) : '/img/banner.png';
-        }
-      }
-
       $data = [
         "apps" => $apps,
         "query" => $r->q,

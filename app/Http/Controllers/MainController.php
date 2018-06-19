@@ -7,7 +7,7 @@ use App\Story;
 use App\App;
 use Session;
 use Report;
-
+use Storage;
 
 class MainController extends Controller
 {
@@ -21,8 +21,18 @@ class MainController extends Controller
     $stories = !$r->q ? $s
       : $s->where('title', 'like', "%$r->q%");
 
+    $stories = $stories->paginate(10);
+
+    if ($r->json) {
+      foreach ($stories as $story) {
+        $story->published = $story->published();
+        $story->user = $story->user()->get();
+        $story->released_at = $story->published()->released_at->diffForHumans();
+      }
+    }
+
     $data = [
-      "stories" => $stories->paginate(10),
+      "stories" => $stories,
       "query" => $r->q,
       "search" => "/"
     ];
@@ -55,7 +65,7 @@ class MainController extends Controller
 
     if ($r->json) {
       foreach ($apps as $app) {
-        $app->icon = isset($app->current()->icon) ? Storage::url($app->current()->icon) : '/img/icon.png';
+        $app->icon = isset($app->current()->icon) ? $app->current()->icon : '/img/icon.png';
       }
     }
 

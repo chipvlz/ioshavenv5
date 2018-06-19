@@ -14364,6 +14364,7 @@ var app = new Vue({
     apps: [],
     users: [],
     logs: [],
+    stories: [],
     readyForDynamicContent: false
   },
   methods: {
@@ -14396,6 +14397,9 @@ var app = new Vue({
     addApps: function addApps(data) {
       this.apps.push.apply(this.apps, data);
     },
+    addStories: function addStories(data) {
+      this.stories.push.apply(this.stories, data);
+    },
     addUsers: function addUsers(data) {
       this.users.push.apply(this.users, data);
     },
@@ -14424,6 +14428,13 @@ var app = new Vue({
     $('#dashboard-content').on('scroll', function (e) {
       _this.scrollpos = $('#dashboard-content').scrollTop();
       _this.hasScrolledOnePage = _this.scrollpos > 32;
+    });
+  },
+  updated: function updated() {
+    this.$nextTick(function () {
+      Sniddl.init('.linkable', {
+        addCss: true
+      });
     });
   }
 });
@@ -14605,9 +14616,9 @@ if (token) {
 // });
 
 __webpack_require__(42);
-Sniddl.init('.linkable', {
-  addCss: true
-});
+// Sniddl.init('.linkable', {
+//   addCss: true
+// });
 
 /***/ }),
 /* 17 */
@@ -32596,32 +32607,33 @@ Sniddl.set = function(query, key, value, init=false) {
 
 Sniddl.init = function(query, options={}) {
   if (options.addCss) Sniddl.addCss(query);
-  document.addEventListener('DOMContentLoaded', function () {
-    var elements = document.querySelectorAll(query);
-    for (var i = 0; i < elements.length; i++) {
-      var el = elements[i];
-      Object.defineProperty(el, '$sniddl', {
-        get () {
-          return this.__sniddl__.make()
-        },
-        set (val) {
-          return this.__sniddl__ = val
-        }
-      })
-      el["$sniddl"] = new SniddlComponent(el, options);
-    }
-    var binds = document.querySelectorAll('[bind]');
-    for (var i = 0; i < binds.length; i++) {
-      var el = binds[i];
-      Sniddl.set(query, 'value', el.value, true)
-      el.addEventListener('input', function(e) {
-        var query = e.target.getAttribute('bind');
-        Sniddl.set(query, 'value', e.target.value)
-      })
+  // document.addEventListener('DOMContentLoaded', function () {
+  var elements = document.querySelectorAll(query);
+  for (var i = 0; i < elements.length; i++) {
+    var el = elements[i];
+    if (el.$sniddl) continue
+    Object.defineProperty(el, '$sniddl', {
+      get () {
+        return this.__sniddl__.make()
+      },
+      set (val) {
+        return this.__sniddl__ = val
+      }
+    })
+    el["$sniddl"] = new SniddlComponent(el, options);
+  }
+  var binds = document.querySelectorAll('[bind]');
+  for (var i = 0; i < binds.length; i++) {
+    var el = binds[i];
+    Sniddl.set(query, 'value', el.value, true)
+    el.addEventListener('input', function(e) {
+      var query = e.target.getAttribute('bind');
+      Sniddl.set(query, 'value', e.target.value)
+    })
 
-      // el["__binds__"] = new SniddlComponent(el, options);
-    }
-  })
+    // el["__binds__"] = new SniddlComponent(el, options);
+  }
+  // })
 }
 
 Sniddl.addCss = function(query) {
@@ -49288,8 +49300,8 @@ LinkBlot.tagName = 'a';
 
 // Quill.register(VideoBlot);
 // Quill.register(EmbedBlot);
-__WEBPACK_IMPORTED_MODULE_0_quill___default.a.register(ImageBlot);
-__WEBPACK_IMPORTED_MODULE_0_quill___default.a.register(LinkBlot);
+__WEBPACK_IMPORTED_MODULE_0_quill___default.a.register(ImageBlot, true);
+__WEBPACK_IMPORTED_MODULE_0_quill___default.a.register(LinkBlot, true);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {

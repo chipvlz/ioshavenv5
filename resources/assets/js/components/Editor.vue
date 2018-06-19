@@ -204,8 +204,8 @@
 
     // Quill.register(VideoBlot);
     // Quill.register(EmbedBlot);
-    Quill.register(ImageBlot);
-    Quill.register(LinkBlot);
+    Quill.register(ImageBlot, true);
+    Quill.register(LinkBlot, true);
 
     export default {
         data () {

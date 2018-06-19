@@ -64,6 +64,7 @@ const app = new Vue({
       apps: [],
       users: [],
       logs: [],
+      stories: [],
       readyForDynamicContent: false
     },
     methods: {
@@ -96,6 +97,9 @@ const app = new Vue({
       addApps(data) {
         this.apps.push.apply(this.apps, data);
       },
+      addStories(data) {
+        this.stories.push.apply(this.stories, data);
+      },
       addUsers(data) {
         this.users.push.apply(this.users, data);
       },
@@ -124,6 +128,15 @@ const app = new Vue({
         this.scrollpos = $('#dashboard-content').scrollTop();
         this.hasScrolledOnePage = this.scrollpos > 32;
       });
+    },
+
+    updated () {
+      this.$nextTick(() => {
+        Sniddl.init('.linkable', {
+          addCss: true
+        });
+      })
+
     }
 });
 

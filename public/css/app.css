@@ -11254,7 +11254,7 @@ iframe.video {
 }
 
 .story ul li:before {
-  content: counter(list-0, disc) ". ";
+  content: counter(list-0, disc) " ";
 }
 
 .story .ql-indent-1 {

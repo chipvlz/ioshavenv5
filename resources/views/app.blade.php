@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('meta')
-<link rel="preload" as="image" v-pre href="{{ !!$published->banner ? Storage::url($published->banner) : url('/img/banner.png') }}">
-<link rel="preload" as="image" v-pre href="{{ !!$published->icon ? Storage::url($published->icon) : url('/img/icon.png') }}">
+<link rel="preload" as="image" v-pre href="{{ $published->banner }}">
+<link rel="preload" as="image" v-pre href="{{ $published->icon }}">
 
 @component('components.meta', [
   "description" => $published->short,

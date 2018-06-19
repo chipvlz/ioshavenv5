@@ -60,6 +60,6 @@ if (token) {
 // });
 
 require('./chart.js')
-Sniddl.init('.linkable', {
-  addCss: true
-});
+// Sniddl.init('.linkable', {
+//   addCss: true
+// });
