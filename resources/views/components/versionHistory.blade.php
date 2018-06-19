@@ -14,7 +14,7 @@
           </span>
           @elseif (!!$thing->queued() && $v->uid == $thing->queued()->uid)
           <span title="awaiting approval" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
-            <i class="fas fa-spinner fa-spin"></i>
+            <i class="fas fa-spinner fa-spin"></i>l
           </span>
           @endif
 
