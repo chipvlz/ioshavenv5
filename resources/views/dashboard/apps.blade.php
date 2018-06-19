@@ -62,7 +62,7 @@
     @endforeach
 
     <div class="col-lg-4 col-md-6 col-12 dynamic-content d-none" v-for="app in apps">
-      <a class="app mb-2 py-1 px-2" :href="'/app/' + app.uid + '/edit'">
+      <a class="app mb-2 py-1 px-2" :href="'/app/edit' + app.uid">
         <div class="icon">
           <img :src="app.icon" alt="app-icon" width="60" height="60">
         </div>
