@@ -53,21 +53,22 @@
 
     @endforeach
 
+
     <div class="col-lg-4 col-md-6 col-12 dynamic-content d-none" v-for="app in apps">
-      <a class="app mb-2 py-1 px-2" :href="'app/' + app.uid">
+      <div class="app mb-2 py-1 px-2 linkable" :url="'/app/' + app.uid">
         <div class="icon">
           <img :src="app.icon" alt="app-icon" width="60" height="60">
         </div>
-        <!-- <div class="w-100"> -->
           <div class="info pl-2 pr-0 w-100">
             <div class="title">@{{ app.name }}</div>
             <div class="short">@{{ app.short }}</div>
           </div>
           <div class="action pr-2">
-            <button class="btn btn-outline-primary btn-sm">Get</button>
+              <a :href="'/download/app/signed/' + app.uid" v-if="app.signed" target="_blank" class="btn btn-outline-primary btn-sm">Get</a>
+              <a :href="'/download/app/apk/' + app.uid" v-else-if="app.apk" target="_blank" class="btn btn-outline-primary btn-sm">Get</a>
+              <button v-else="" class="btn btn-outline-primary btn-sm">View</button>
           </div>
-        <!-- </div> -->
-      </a>
+      </div>
     </div>
 
   </div>

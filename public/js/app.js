@@ -14429,6 +14429,9 @@ var app = new Vue({
       _this.scrollpos = $('#dashboard-content').scrollTop();
       _this.hasScrolledOnePage = _this.scrollpos > 32;
     });
+    Sniddl.init('.linkable', {
+      addCss: true
+    });
   },
   updated: function updated() {
     this.$nextTick(function () {
