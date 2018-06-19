@@ -1,27 +1,17 @@
 @extends('layouts.app')
 @section('content')
 
-
-@if($query === "game")
+@if($tags === "game")
   <div class="container mb-4 pt-4">
     <h1 class="py-2 border-bottom">Games</h1>
-  </div>
-@elseif(!!$query)
-  <div class="banner home query" v-pre>
-      <div class="p-4 text-center w-100" v-pre>
-        {{ $apps->total() }} Search results for <strong v-pre>{{ $query }}</strong>
-      </div>
-      @if($apps->count())
-      <div class="container mb-4 pt-4">
-        <h1 class="py-2 border-bottom">Apps</h1>
-      </div>
-      @endif
   </div>
 @else
   <div class="container mb-4 pt-4">
     <h1 class="py-2 border-bottom">Apps</h1>
   </div>
 @endif
+
+
 
 <div class="container">
 

@@ -38,6 +38,7 @@
         @endforeach
       </div>
       <form class="form-inline my-2 my-lg-0" action="{{ $search ?? '' }}" v-pre>
+        <input type="hidden" name="t" value="{{ $tags ?? '' }}">
         <input class="form-control ml-2 d-none d-sm-block" type="text" placeholder="Search" aria-label="Search" name="q" value="{{ $query ?? '' }}" v-pre>
       </form>
     </div>
@@ -46,6 +47,7 @@
 
 <div class="w-100 bg-white px-3 d-md-none" v-show="showmoreclick" >
   <form class="form-inline py-2 my-lg-0" action="{{ $search ?? '' }}" v-pre>
+    <input type="hidden" name="t" value="{{ $tags ?? '' }}">
     <input class="form-control ml-2 d-md-block" type="text" placeholder="Search..." aria-label="Search" name="q" value="{{ $query ?? '' }}" v-pre>
   </form>
   @foreach(config('navigation') as $section)

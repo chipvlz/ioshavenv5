@@ -13,7 +13,7 @@ return [
       "color" => "blue",
     ],
     "Games" => [
-      "url" => "/apps?q=game",
+      "url" => "/apps?t=game",
       "icon" => "fal fa-gamepad",
       "color" => "gold",
     ],

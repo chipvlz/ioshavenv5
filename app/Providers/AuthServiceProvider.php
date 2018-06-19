@@ -34,28 +34,9 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::before(function ($user, $ability) {
           if (!Schema::hasTable('permissions')) return false;
-          $permissions = Permission::get()->map(function ($carry, $item) {
-            return $carry->name;
-          });
-
-          return $user->role->permissions->contains(function($perm) use ($ability, $permissions) {
-            return $permissions->contains($ability) && ($perm->name === 'administrator' || $ability);
-          });
+          return $user->role->permissions->pluck('name')->contains($ability)
+              || $user->role->permissions->pluck('name')->contains("administrator");
         });
-
-        // if (Schema::hasTable('permissions')) {
-        //   // dump('has table');
-        //   foreach (Permission::with('roles')->get() as $perm) {
-        //     Gate::define($perm->name, function ($user) use ($perm) {
-        //       return $user->role->permissions->contains('name', 'administrator')
-        //             || $perm->roles->contains('name', $user->role->name);
-        //     });
-        //   }
-        // }
-
-        // Blade::if('can', function ($perm) {
-        //   return Auth::check() && Gate::forUser(Auth::user())->allows($perm);
-        // });
 
     }
 }

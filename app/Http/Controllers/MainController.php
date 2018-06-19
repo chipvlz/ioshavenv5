@@ -57,9 +57,12 @@ class MainController extends Controller
 
   public function apps(Request $r) {
     $a = App::mergeVersions()->whereNotNull("published_version");
-    $apps = !$r->q ? $a
-      : $a->where('name', 'like', "%$r->q%")
-          ->orWhere('tags', 'like', "%$r->q%");
+    $apps = (!$r->q && !$r->t) ? $a
+      : $a->where(function($query) use ($r) {
+        $query->where('name', 'like', "%$r->q%")
+              ->where('tags', 'like', "%$r->t%");
+        });
+
 
     $apps = $apps->paginate(10);
 
@@ -72,6 +75,7 @@ class MainController extends Controller
     $data = [
       "apps" => $apps,
       "query" => $r->q,
+      "tags" => $r->t,
       "search" => "/apps"
     ];
 

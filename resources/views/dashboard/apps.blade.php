@@ -45,12 +45,12 @@
         <div class="col-lg-4 col-md-6 col-12">
           <a class="app mb-2 py-1 px-2" href="/app/edit/{{ $app->uid }}" v-pre>
             <div class="icon">
-              <img src="{{ $app->current()->icon }}" alt="app-icon" width="60" height="60" v-pre>
+              <img src="{{ $app->icon }}" alt="app-icon" width="60" height="60" v-pre>
             </div>
             <!-- <div class="w-100"> -->
               <div class="info pl-2 pr-0 w-100">
-                <div class="title" v-pre>{{ $app->current()->name }}</div>
-                <div class="short" v-pre>{{ $app->current()->short }}</div>
+                <div class="title" v-pre>{{ $app->name }}</div>
+                <div class="short" v-pre>{{ $app->short }}</div>
               </div>
               <div class="action pr-2">
                 <button class="btn btn-outline-primary btn-sm">Edit</button>

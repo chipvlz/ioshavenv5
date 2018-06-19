@@ -11,6 +11,7 @@ use Storage;
 use Report;
 use Auth;
 use Gate;
+use DB;
 
 
 
@@ -34,7 +35,11 @@ class DashboardController extends Controller
 
     public function showApps(Request $r) {
       $this->authorize('upload apps');
-      $a = Auth::user()->apps();
+      // dd(Auth::user()->isAdmin());
+      $a = Auth::user()->isAdmin() ? DB::table('apps')
+          ->join('app_versions', 'apps.saved_version', '=', 'app_versions.uid')
+          ->select('apps.*', 'app_versions.*', 'app_versions.uid as vid', 'apps.uid as uid', 'apps.id as main_id')
+          : Auth::user()->apps();
 
       $apps = !$r->q ? $a
         : $a->where('name', 'like', "%$r->q%");
