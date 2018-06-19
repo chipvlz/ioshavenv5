@@ -65,11 +65,7 @@ class MainController extends Controller
 
     if ($r->json) {
       foreach ($apps as $app) {
-<<<<<<< Updated upstream
         $app->icon = isset($app->current()->icon) ? $app->current()->icon : '/img/icon.png';
-=======
-        $app->icon = isset($app->current()->icon) $app->current()->icon : '/img/icon.png';
->>>>>>> Stashed changes
       }
     }
 
