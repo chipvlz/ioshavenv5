@@ -12,7 +12,7 @@ class app extends Model
   use Likeable;
 
   protected $fillable = [
-    "uid", "user_id", "saved_version", "published_version", "queued_version"
+    "uid", "user_id", "saved_version", "published_version", "queued_version", "type"
   ];
 
   public function user() {
