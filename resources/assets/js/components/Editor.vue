@@ -64,10 +64,10 @@
           </button>
         </div>
 
-        <!-- <div class="btn-group mr-3" role="group" aria-label="First group">
-          <button type="button" class="btn btn-light btn-sm py-2 px-3" id="embed-button" title="embed code" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
+        <div class="btn-group mr-3" role="group" aria-label="First group">
+          <!-- <button type="button" class="btn btn-light btn-sm py-2 px-3" id="embed-button" title="embed code" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-code"></i>
-          </button>
+          </button> -->
           <button type="button" class="btn btn-light btn-sm py-2 px-3" id="image-button" title="insert image" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-image"></i>
           </button>
@@ -77,7 +77,7 @@
           <button type="button" class="btn btn-light btn-sm py-2 px-3" id="video-button" title="insert video" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 100 }'>
             <i class="fas fa-video"></i>
           </button>
-        </div> -->
+        </div>
     </div>
 
     <div id="app-description" class="bg-white"></div>
@@ -116,54 +116,54 @@
     let Block = Quill.import('blots/block');
     let Embed = Quill.import('blots/block/embed');
 
-    // class VideoBlot extends Embed {
-    //   static create(url) {
-    //     let node = super.create();
-    //     let embed = document.createElement('div');
-    //     let wrapper = document.createElement('div');
-    //     let iframe = document.createElement('iframe');
-    //     if (url.includes('youtube.com')) {
-    //       let params = paramsToJson(url);
-    //       url = 'https://www.youtube.com/embed/' + params.v
-    //     }
-    //     else if (url.includes('youtu.be')) {
-    //       let id = url.split('/').reverse()[0];
-    //       url = "https://www.youtube.com/embed/" + id
-    //     }
-    //     else if (url.includes('vimeo.com')) {
-    //       let id = url.split('/').reverse()[0];
-    //       url = "https://player.vimeo.com/video/" + id
-    //     }
-    //     else if (url.includes('twitch.tv')) {
-    //       let channel = url.split('/').reverse()[0];
-    //       url = "https://player.twitch.tv/?channel=" + channel
-    //     }
-    //     embed.setAttribute('class', 'embed-content')
-    //     wrapper.setAttribute('class', 'responsive-video')
-    //     iframe.setAttribute('class', 'video')
-    //     iframe.setAttribute('width', 560);
-    //     iframe.setAttribute('height', 315);
-    //     iframe.setAttribute('src', url);
-    //     iframe.setAttribute('frameborder', 0);
-    //     iframe.setAttribute('allow', 'autoplay;encrypted-media');
-    //     iframe.setAttribute('allowfullscreen', true);
-    //     wrapper.appendChild(iframe);
-    //     embed.appendChild(wrapper)
-    //     node.appendChild(embed);
-    //     node.setAttribute('class', 'embeded')
-    //     return node;
-    //   }
-    //
-    //   static value(node) {
-    //     return {
-    //       src: node.getAttribute('src'),
-    //       width: node.getAttribute('width'),
-    //       height: node.getAttribute('height')
-    //     }
-    //   }
-    // }
-    // VideoBlot.blotName = 'video';
-    // VideoBlot.tagName = 'div';
+    class VideoBlot extends Embed {
+      static create(url) {
+        let node = super.create();
+        let embed = document.createElement('div');
+        let wrapper = document.createElement('div');
+        let iframe = document.createElement('iframe');
+        if (url.includes('youtube.com')) {
+          let params = paramsToJson(url);
+          url = 'https://www.youtube.com/embed/' + params.v
+        }
+        else if (url.includes('youtu.be')) {
+          let id = url.split('/').reverse()[0];
+          url = "https://www.youtube.com/embed/" + id
+        }
+        else if (url.includes('vimeo.com')) {
+          let id = url.split('/').reverse()[0];
+          url = "https://player.vimeo.com/video/" + id
+        }
+        else if (url.includes('twitch.tv')) {
+          let channel = url.split('/').reverse()[0];
+          url = "https://player.twitch.tv/?channel=" + channel
+        }
+        embed.setAttribute('class', 'embed-content')
+        wrapper.setAttribute('class', 'responsive-video')
+        iframe.setAttribute('class', 'video')
+        iframe.setAttribute('width', 560);
+        iframe.setAttribute('height', 315);
+        iframe.setAttribute('src', url);
+        iframe.setAttribute('frameborder', 0);
+        iframe.setAttribute('allow', 'autoplay;encrypted-media');
+        iframe.setAttribute('allowfullscreen', true);
+        wrapper.appendChild(iframe);
+        embed.appendChild(wrapper)
+        node.appendChild(embed);
+        node.setAttribute('class', 'embeded')
+        return node;
+      }
+
+      static value(node) {
+        return {
+          src: node.getAttribute('src'),
+          width: node.getAttribute('width'),
+          height: node.getAttribute('height')
+        }
+      }
+    }
+    VideoBlot.blotName = 'video';
+    VideoBlot.tagName = 'div';
     //
     // class EmbedBlot extends Embed {
     //   static create(value) {
@@ -202,7 +202,7 @@
     LinkBlot.blotName = 'link';
     LinkBlot.tagName = 'a';
 
-    // Quill.register(VideoBlot);
+    Quill.register(VideoBlot);
     // Quill.register(EmbedBlot);
     Quill.register(ImageBlot, true);
     Quill.register(LinkBlot, true);
@@ -292,23 +292,23 @@
               let size = $(e.currentTarget).data('size');
               this.quill.format('header', parseInt(size));
             });
-            // $('#video-button').click(() => {
-            //   this.prompt('Insert a video url', {
-            //     url: {label: "Video source", value:''}
-            //   }).onSave(data => {
-            //     if (!data.url.value) return
-            //     this.embed('video', data.url.value)
-            //   });
-            // });
-            // $('#image-button').click(() => {
-            //   this.prompt('Insert a image url', {
-            //     url: {label: "Image url", value:''},
-            //     alt: {label: "Alternative text", value:''}
-            //   }).onSave(data => {
-            //     if (!data.url.value) return
-            //     this.embed('image', data)
-            //   });
-            // });
+            $('#video-button').click(() => {
+              this.prompt('Insert a video url', {
+                url: {label: "Video source", value:''}
+              }).onSave(data => {
+                if (!data.url.value) return
+                this.embed('video', data.url.value)
+              });
+            });
+            $('#image-button').click(() => {
+              this.prompt('Insert a image url', {
+                url: {label: "Image url", value:''},
+                alt: {label: "Alternative text", value:''}
+              }).onSave(data => {
+                if (!data.url.value) return
+                this.embed('image', data)
+              });
+            });
             // $('#embed-button').click(() => {
             //   this.prompt('Insert embed code', {
             //     embed: {label: "Embed code", value:''}
@@ -317,22 +317,20 @@
             //     this.embed('embed', data.embed.value)
             //   });
             // });
-            // $('#link-button').click(() => {
-            //   let s = this.getSelection()
-            //   this.prompt('Insert link', {
-            //     url: {label: "link", value:''},
-            //     text: {label: "text", value: s.value}
-            //   }).onSave(data => {
-            //     if (!data.url.value) return
-            //     data.text.value = data.text.value || data.url.value
-            //     this.quill.format('link', data)
-            //     if (s.value) {
-            //       this.quill.deleteText(s.index + data.text.value.length, s.length)
-            //       // this.quill.setSelection(s.index, data.text.value.length)
-            //     }
-            //
-            //   });
-            // });
+            $('#link-button').click(() => {
+              let s = this.getSelection()
+              this.prompt('Insert link', {
+                url: {label: "link", value:''},
+                text: {label: "text", value: s.value}
+              }).onSave(data => {
+                if (!data.url.value) return
+                data.text.value = data.text.value || data.url.value
+                this.quill.format('link', data)
+                if (s.value) {
+                  this.quill.deleteText(s.index + data.text.value.length, s.length)
+                }
+              });
+            });
 
             $('#app-description-value').val(this.quill.root.innerHTML);
 

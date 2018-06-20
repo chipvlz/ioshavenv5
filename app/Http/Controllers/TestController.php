@@ -22,7 +22,6 @@ class TestController extends Controller
     }
 
     public function test() {
-      dd(Auth::user()->isAdmin());
       return view('test');
     }
 

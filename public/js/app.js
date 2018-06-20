@@ -49185,54 +49185,66 @@ var Inline = __WEBPACK_IMPORTED_MODULE_0_quill___default.a.import('blots/inline'
 var Block = __WEBPACK_IMPORTED_MODULE_0_quill___default.a.import('blots/block');
 var Embed = __WEBPACK_IMPORTED_MODULE_0_quill___default.a.import('blots/block/embed');
 
-// class VideoBlot extends Embed {
-//   static create(url) {
-//     let node = super.create();
-//     let embed = document.createElement('div');
-//     let wrapper = document.createElement('div');
-//     let iframe = document.createElement('iframe');
-//     if (url.includes('youtube.com')) {
-//       let params = paramsToJson(url);
-//       url = 'https://www.youtube.com/embed/' + params.v
-//     }
-//     else if (url.includes('youtu.be')) {
-//       let id = url.split('/').reverse()[0];
-//       url = "https://www.youtube.com/embed/" + id
-//     }
-//     else if (url.includes('vimeo.com')) {
-//       let id = url.split('/').reverse()[0];
-//       url = "https://player.vimeo.com/video/" + id
-//     }
-//     else if (url.includes('twitch.tv')) {
-//       let channel = url.split('/').reverse()[0];
-//       url = "https://player.twitch.tv/?channel=" + channel
-//     }
-//     embed.setAttribute('class', 'embed-content')
-//     wrapper.setAttribute('class', 'responsive-video')
-//     iframe.setAttribute('class', 'video')
-//     iframe.setAttribute('width', 560);
-//     iframe.setAttribute('height', 315);
-//     iframe.setAttribute('src', url);
-//     iframe.setAttribute('frameborder', 0);
-//     iframe.setAttribute('allow', 'autoplay;encrypted-media');
-//     iframe.setAttribute('allowfullscreen', true);
-//     wrapper.appendChild(iframe);
-//     embed.appendChild(wrapper)
-//     node.appendChild(embed);
-//     node.setAttribute('class', 'embeded')
-//     return node;
-//   }
-//
-//   static value(node) {
-//     return {
-//       src: node.getAttribute('src'),
-//       width: node.getAttribute('width'),
-//       height: node.getAttribute('height')
-//     }
-//   }
-// }
-// VideoBlot.blotName = 'video';
-// VideoBlot.tagName = 'div';
+var VideoBlot = function (_Embed) {
+  _inherits(VideoBlot, _Embed);
+
+  function VideoBlot() {
+    _classCallCheck(this, VideoBlot);
+
+    return _possibleConstructorReturn(this, (VideoBlot.__proto__ || Object.getPrototypeOf(VideoBlot)).apply(this, arguments));
+  }
+
+  _createClass(VideoBlot, null, [{
+    key: 'create',
+    value: function create(url) {
+      var node = _get(VideoBlot.__proto__ || Object.getPrototypeOf(VideoBlot), 'create', this).call(this);
+      var embed = document.createElement('div');
+      var wrapper = document.createElement('div');
+      var iframe = document.createElement('iframe');
+      if (url.includes('youtube.com')) {
+        var params = paramsToJson(url);
+        url = 'https://www.youtube.com/embed/' + params.v;
+      } else if (url.includes('youtu.be')) {
+        var id = url.split('/').reverse()[0];
+        url = "https://www.youtube.com/embed/" + id;
+      } else if (url.includes('vimeo.com')) {
+        var _id = url.split('/').reverse()[0];
+        url = "https://player.vimeo.com/video/" + _id;
+      } else if (url.includes('twitch.tv')) {
+        var channel = url.split('/').reverse()[0];
+        url = "https://player.twitch.tv/?channel=" + channel;
+      }
+      embed.setAttribute('class', 'embed-content');
+      wrapper.setAttribute('class', 'responsive-video');
+      iframe.setAttribute('class', 'video');
+      iframe.setAttribute('width', 560);
+      iframe.setAttribute('height', 315);
+      iframe.setAttribute('src', url);
+      iframe.setAttribute('frameborder', 0);
+      iframe.setAttribute('allow', 'autoplay;encrypted-media');
+      iframe.setAttribute('allowfullscreen', true);
+      wrapper.appendChild(iframe);
+      embed.appendChild(wrapper);
+      node.appendChild(embed);
+      node.setAttribute('class', 'embeded');
+      return node;
+    }
+  }, {
+    key: 'value',
+    value: function value(node) {
+      return {
+        src: node.getAttribute('src'),
+        width: node.getAttribute('width'),
+        height: node.getAttribute('height')
+      };
+    }
+  }]);
+
+  return VideoBlot;
+}(Embed);
+
+VideoBlot.blotName = 'video';
+VideoBlot.tagName = 'div';
 //
 // class EmbedBlot extends Embed {
 //   static create(value) {
@@ -49247,8 +49259,8 @@ var Embed = __WEBPACK_IMPORTED_MODULE_0_quill___default.a.import('blots/block/em
 // EmbedBlot.tagName = 'div';
 //
 
-var ImageBlot = function (_Embed) {
-  _inherits(ImageBlot, _Embed);
+var ImageBlot = function (_Embed2) {
+  _inherits(ImageBlot, _Embed2);
 
   function ImageBlot() {
     _classCallCheck(this, ImageBlot);
@@ -49301,7 +49313,7 @@ var LinkBlot = function (_Inline) {
 LinkBlot.blotName = 'link';
 LinkBlot.tagName = 'a';
 
-// Quill.register(VideoBlot);
+__WEBPACK_IMPORTED_MODULE_0_quill___default.a.register(VideoBlot);
 // Quill.register(EmbedBlot);
 __WEBPACK_IMPORTED_MODULE_0_quill___default.a.register(ImageBlot, true);
 __WEBPACK_IMPORTED_MODULE_0_quill___default.a.register(LinkBlot, true);
@@ -49357,7 +49369,7 @@ __WEBPACK_IMPORTED_MODULE_0_quill___default.a.register(LinkBlot, true);
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     // Quill.register(VideoBlot);
     // Quill.register(EmbedBlot);
@@ -49373,43 +49385,43 @@ __WEBPACK_IMPORTED_MODULE_0_quill___default.a.register(LinkBlot, true);
 
     $('.button-format').click(function (e) {
       var format = $(e.currentTarget).data('format');
-      _this3.quill.format(format, true);
+      _this4.quill.format(format, true);
     });
     $('.button-list').click(function (e) {
       var format = $(e.currentTarget).data('format');
-      _this3.quill.format('list', format);
+      _this4.quill.format('list', format);
     });
     $('.button-indent').click(function (e) {
       var format = $(e.currentTarget).data('format');
       console.log(format.toString(), _typeof(format.toString()));
-      _this3.quill.format('indent', format.toString());
+      _this4.quill.format('indent', format.toString());
     });
     $('.button-size').click(function (e) {
       var size = $(e.currentTarget).data('size');
       console.log(size);
-      _this3.quill.format('size', size);
+      _this4.quill.format('size', size);
     });
     $('.button-heading').click(function (e) {
       var size = $(e.currentTarget).data('size');
-      _this3.quill.format('header', parseInt(size));
+      _this4.quill.format('header', parseInt(size));
     });
-    // $('#video-button').click(() => {
-    //   this.prompt('Insert a video url', {
-    //     url: {label: "Video source", value:''}
-    //   }).onSave(data => {
-    //     if (!data.url.value) return
-    //     this.embed('video', data.url.value)
-    //   });
-    // });
-    // $('#image-button').click(() => {
-    //   this.prompt('Insert a image url', {
-    //     url: {label: "Image url", value:''},
-    //     alt: {label: "Alternative text", value:''}
-    //   }).onSave(data => {
-    //     if (!data.url.value) return
-    //     this.embed('image', data)
-    //   });
-    // });
+    $('#video-button').click(function () {
+      _this4.prompt('Insert a video url', {
+        url: { label: "Video source", value: '' }
+      }).onSave(function (data) {
+        if (!data.url.value) return;
+        _this4.embed('video', data.url.value);
+      });
+    });
+    $('#image-button').click(function () {
+      _this4.prompt('Insert a image url', {
+        url: { label: "Image url", value: '' },
+        alt: { label: "Alternative text", value: '' }
+      }).onSave(function (data) {
+        if (!data.url.value) return;
+        _this4.embed('image', data);
+      });
+    });
     // $('#embed-button').click(() => {
     //   this.prompt('Insert embed code', {
     //     embed: {label: "Embed code", value:''}
@@ -49418,27 +49430,25 @@ __WEBPACK_IMPORTED_MODULE_0_quill___default.a.register(LinkBlot, true);
     //     this.embed('embed', data.embed.value)
     //   });
     // });
-    // $('#link-button').click(() => {
-    //   let s = this.getSelection()
-    //   this.prompt('Insert link', {
-    //     url: {label: "link", value:''},
-    //     text: {label: "text", value: s.value}
-    //   }).onSave(data => {
-    //     if (!data.url.value) return
-    //     data.text.value = data.text.value || data.url.value
-    //     this.quill.format('link', data)
-    //     if (s.value) {
-    //       this.quill.deleteText(s.index + data.text.value.length, s.length)
-    //       // this.quill.setSelection(s.index, data.text.value.length)
-    //     }
-    //
-    //   });
-    // });
+    $('#link-button').click(function () {
+      var s = _this4.getSelection();
+      _this4.prompt('Insert link', {
+        url: { label: "link", value: '' },
+        text: { label: "text", value: s.value }
+      }).onSave(function (data) {
+        if (!data.url.value) return;
+        data.text.value = data.text.value || data.url.value;
+        _this4.quill.format('link', data);
+        if (s.value) {
+          _this4.quill.deleteText(s.index + data.text.value.length, s.length);
+        }
+      });
+    });
 
     $('#app-description-value').val(this.quill.root.innerHTML);
 
     this.quill.on('text-change', function (delta, oldDelta, source) {
-      $('#app-description-value').val(_this3.quill.root.innerHTML);
+      $('#app-description-value').val(_this4.quill.root.innerHTML);
     });
   }
 });
@@ -63366,6 +63376,63 @@ var staticRenderFns = [
                 }
               },
               [_c("i", { staticClass: "fas fa-outdent" })]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "btn-group mr-3",
+            attrs: { role: "group", "aria-label": "First group" }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-light btn-sm py-2 px-3",
+                attrs: {
+                  type: "button",
+                  id: "image-button",
+                  title: "insert image",
+                  "data-toggle": "tooltip",
+                  "data-placement": "bottom",
+                  "data-delay": '{ "show": 1000, "hide": 100 }'
+                }
+              },
+              [_c("i", { staticClass: "fas fa-image" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-light btn-sm py-2 px-3",
+                attrs: {
+                  type: "button",
+                  id: "link-button",
+                  title: "insert link",
+                  "data-toggle": "tooltip",
+                  "data-placement": "bottom",
+                  "data-delay": '{ "show": 1000, "hide": 100 }'
+                }
+              },
+              [_c("i", { staticClass: "fas fa-link" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-light btn-sm py-2 px-3",
+                attrs: {
+                  type: "button",
+                  id: "video-button",
+                  title: "insert video",
+                  "data-toggle": "tooltip",
+                  "data-placement": "bottom",
+                  "data-delay": '{ "show": 1000, "hide": 100 }'
+                }
+              },
+              [_c("i", { staticClass: "fas fa-video" })]
             )
           ]
         )
