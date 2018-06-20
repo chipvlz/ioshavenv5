@@ -6,7 +6,7 @@
 @component('components.meta', [
   "description" => $published->short,
   "author" => $app->user->username,
-  "image" => !!$published->banner ? Storage::url($published->banner) : url('/img/banner.png'),
+  "image" => $published->banner,
   "title" => $published->name,
   "url" => url("/app/$app->uid"),
   "released_at" => $app->released_at,
