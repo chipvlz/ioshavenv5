@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('meta')
-<link rel="preload" as="image" href="{{ !!$published->image ? Storage::url($published->image) : url('/img/banner.png') }}" v-pre>
+<link rel="preload" as="image" href="{{ $published->image }}" v-pre>
 @component('components.meta', [
   "description" => $published->mini,
   "author" => $story->user->username,
-  "image" => !!$published->image ? Storage::url($published->image) : url('/img/banner.png'),
+  "image" => $published->image,
   "title" => $published->title,
   "type" => $published->type,
   "url" => url("/story/$story->uid"),
