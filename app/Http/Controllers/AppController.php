@@ -68,6 +68,7 @@ class AppController extends Controller
 
     public function edit(Request $r) {
         $app = App::byuid($r->uid)->first();
+        if(!Auth::user()->isAdmin() && !Auth::user()->apps()->pluck('uid')->contains($r->uid)) return abort(404);
         if ($r->delete) {
           foreach($app->versions() as $v) {
             $app->removeVersion($v->uid);
