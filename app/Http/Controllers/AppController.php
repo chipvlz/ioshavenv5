@@ -97,7 +97,6 @@ class AppController extends Controller
             'unsigned' => 'required_without_all:apk,signed,duplicate',
             'signed' => 'required_without_all:unsigned,apk,duplicate',
             'duplicate' => 'required_without_all:unsigned,signed,apk',
-            'size' => 'required',
           ];
         } else {
           $rules = [
@@ -111,7 +110,7 @@ class AppController extends Controller
           'version' => 'required',
           'short' => 'required|min:10',
           'icon' => 'required',
-          'banner' => 'required',
+          'size' => 'required',
         ] + $rules);
       try {
         $version = $app->summary($r->commit)->commit([
@@ -140,7 +139,11 @@ class AppController extends Controller
         }
         elseif ($r->publish) {
           $version->setAsCurrent();
-          $version->publish();
+          if ($version->queued_version) {
+            $version->accept();
+          } else {
+            $version->publish();
+          }
           Report::success([
             "message" => "published app",
             "data" => [

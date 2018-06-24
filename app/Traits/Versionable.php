@@ -179,7 +179,9 @@ trait Versionable
     $query = static::table()->where($this->lastAttributes);
     $version = $query->first();
     if (!$version->released_at) {
-      $query->update(["released_at" => Carbon::now()]);
+      $query->update([
+        "released_at" => Carbon::now(),
+      ]);
     }
     static::byuid($this->uid)->update([
       "published_version" => $version->uid

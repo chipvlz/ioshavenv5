@@ -14379,11 +14379,12 @@ var app = new Vue({
     },
     apkSuccess: function apkSuccess(data) {
       $('#size').html(formatBytes(data.size));
+      $('#app-size').val(data.size);
       $('#apk-input').val(data.path);
     },
     unsignedSuccess: function unsignedSuccess(data) {
       $('#size').html(formatBytes(data.size));
-      $('#unsigned-size').val(data.size);
+      $('#app-size').val(data.size);
       $('#unsigned-input').val(data.path);
     },
     avatarSuccess: function avatarSuccess(data) {
@@ -14545,7 +14546,10 @@ if ($('#download-page').length > 0) {
         window.location.href = res.data.link;
       } else if (res.data.download) {
         $('#time-remaining').html('downloading...');
-        window.location.href = res.data.download;
+        var link = document.createElement("a");
+        link.href = res.data.download;
+        link.click();
+        // window.location.href = res.data.download
       } else {
         $('#time-remaining').html('error');
       }

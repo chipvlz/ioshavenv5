@@ -34,11 +34,12 @@
       <input autocomplete="dashboard-app-{{$app->uid}}" value="{{old('short') ?? $version->short}}" type="text" class="form-control py-3 px-3" id="short" name="short" placeholder="Short description..." v-pre>
     </div>
 
-    @if(env("APP_TYPE") === 'ios')
     <div class="form-group">
       <label for="size" class="h6">File size (in bytes)</label>
-      <input autocomplete="dashboard-app-{{$app->uid}}" id="unsigned-size" value="{{old('size') ?? $version->size}}" type="text" class="form-control py-3 px-3" id="size" name="size" placeholder="File size..." v-pre>
+      <input autocomplete="dashboard-app-{{$app->uid}}" id="app-size" value="{{old('size') ?? $version->size}}" type="text" class="form-control py-3 px-3" id="size" name="size" placeholder="File size..." v-pre>
     </div>
+
+    @if(env("APP_TYPE") === 'ios')
     <div class="form-group">
       <label for="unsigned" class="h6">IPA file</label>
       <file-upload id="unsigned" name="unsigned" @success="unsignedSuccess" class="mb-3" action="/upload/ipa" :data="[{

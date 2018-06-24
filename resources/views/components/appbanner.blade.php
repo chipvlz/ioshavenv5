@@ -4,10 +4,10 @@
 
 <div class="container">
     <div class="d-flex align-items-start justify-content-start">
-      <img class="mr-3" id="icon-image" v-pre src="{{ $version->icon }}" alt="icon" width="100">
+      <img class="mr-3 linkable" id="icon-image" v-pre src="{{ $version->icon }}" url="/app/{{ $app->uid }}" alt="icon" width="100">
       <div class="d-flex align-items-center flex-wrap">
         <div class="mb-2">
-          <h4 v-pre>{{ $version->name }}</h4>
+          <h4 v-pre class="linkable" url="/app/{{ $app->uid }}">{{ $version->name }}</h4>
           @if($version->apk)
           <a v-pre href="/download/app/apk/{{$app->uid}}/{{$version->uid}}" target="_blank" class="btn btn-sm btn-light mb-1 border border-dark"><i class="fas fa-file-archive mr-2"></i>Get .apk</a>
           @endif

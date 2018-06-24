@@ -19,7 +19,7 @@
 @section('content')
 
 <div class="mb-3 jumbotron-fluid">
-  <img id="banner-image" v-pre src="{{ $published->banner }}" class="w-100" alt="banner">
+  <img id="banner-image" v-pre src="{{ $published->banner ?? '/img/'.env('APP_TYPE').'-banner.png' }}" class="w-100" alt="banner">
 </div>
 
 <div class="container story">
