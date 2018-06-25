@@ -22,6 +22,8 @@ class TestController extends Controller
     }
 
     public function test() {
+      $app = App::find(24);
+      // dd($app->views());
       return view('test');
     }
 

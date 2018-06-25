@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Versionable;
 use App\Traits\Likeable;
+use App\View;
 
 class app extends Model
 {
@@ -21,5 +22,9 @@ class app extends Model
 
   public function downloads() {
     return $this->hasMany('App\Download');
+  }
+
+  public function getViews() {
+    return View::where('table_id', $this->id)->where('table', $this->getTable())->count();
   }
 }

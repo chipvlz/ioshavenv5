@@ -8,6 +8,7 @@ use App\App;
 use Session;
 use Report;
 use Storage;
+use App\View;
 
 class MainController extends Controller
 {
@@ -41,6 +42,7 @@ class MainController extends Controller
 
   public function showStory ($uid) {
     $story = Story::byuid($uid)->whereNotNull('published_version')->firstOrFail();
+    View::visit($story);
     return view('story', [
       "story" => $story,
       "published" => $story->published(),
@@ -49,6 +51,7 @@ class MainController extends Controller
 
   public function showApp ($uid) {
     $app = App::byuid($uid)->whereNotNull('published_version')->firstOrFail();
+    View::visit($app);
     return view('app', [
       "app" => $app,
       "published" => $app->published(),

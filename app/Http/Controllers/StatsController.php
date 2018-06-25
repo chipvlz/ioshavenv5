@@ -9,6 +9,8 @@ use App\Like;
 use App\View;
 use Carbon\Carbon;
 use DB;
+use App\App;
+use App\Story;
 
 class StatsController extends Controller
 {
@@ -24,7 +26,7 @@ class StatsController extends Controller
     public function getDownloads($format='Y-_m-_d', $limit=7) {
       $format = str_replace('_', "%", $format);
       // dd(Auth::user()->apps()->get());
-      $app_ids = Auth::user()->apps()->pluck('main_id')->toArray();
+      $app_ids = Auth::user()->isAdmin() ? App::all()->pluck('id')->toArray() : Auth::user()->apps()->pluck('main_id')->toArray();
       $raw = Download::whereIn('app_id', $app_ids)
            ->select(DB::raw("DATE_FORMAT(created_at, '%$format') as date"), DB::raw('count(*) as count'))
            ->limit($limit)
@@ -45,9 +47,9 @@ class StatsController extends Controller
     public function getLikes($type, $format='Y-_m-_d', $limit=7) {
       $format = str_replace('_', "%", $format);
       if ($type === 'apps') {
-        $ids = Auth::user()->apps()->pluck('main_id')->toArray();
+        $ids = Auth::user()->isAdmin() ? App::all()->pluck('id')->toArray() : Auth::user()->apps()->pluck('main_id')->toArray();
       } elseif ($type === 'stories') {
-        $ids = Auth::user()->stories()->pluck('main_id')->toArray();
+        $ids = Auth::user()->isAdmin() ? Story::all()->pluck('id')->toArray() : Auth::user()->stories()->pluck('main_id')->toArray();
       } else {
         abort(404);
       }
@@ -74,9 +76,9 @@ class StatsController extends Controller
       $format = str_replace('_', "%", $format);
       // dd($format);
       if ($type === 'apps') {
-        $ids = Auth::user()->apps()->pluck('main_id')->toArray();
+        $ids = Auth::user()->isAdmin() ? App::all()->pluck('id')->toArray() : Auth::user()->apps()->pluck('main_id')->toArray();
       } elseif ($type === 'stories') {
-        $ids = Auth::user()->stories()->pluck('main_id')->toArray();
+        $ids = Auth::user()->isAdmin() ? Story::all()->pluck('id')->toArray() : Auth::user()->stories()->pluck('main_id')->toArray();
       } else {
         abort(404);
       }
