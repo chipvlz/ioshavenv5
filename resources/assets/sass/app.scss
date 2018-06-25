@@ -399,7 +399,7 @@ blockquote::after {
   }
   main {
     flex-grow: 1;
-    min-width: 270px;
+    width: 270px;
     padding-top: 0;
     overflow: auto;
   }
@@ -421,6 +421,7 @@ blockquote::after {
     background: #24282e;
     color: white;
     width: 50px;
+    min-width: 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
