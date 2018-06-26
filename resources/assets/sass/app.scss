@@ -276,7 +276,8 @@ blockquote::after {
 .posts {
     margin-top: -135px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     &.query {
       margin-top: -190px;
@@ -284,6 +285,8 @@ blockquote::after {
 }
 
 .news-post {
+    margin: 0.25rem 0.5rem;
+    max-width: 400px;
     background: white;
     border-radius: 0.3rem;
     @include shadow-big();
@@ -584,7 +587,7 @@ iframe.video {
 }
 
 .story {
-  h1,h2,h3,h4,h5,h6 { text-align: center }
+  h1,h2,h3,h4,h5,h6 { text-align: left }
   p, .embeded {
     margin-bottom: 3rem;
   }
