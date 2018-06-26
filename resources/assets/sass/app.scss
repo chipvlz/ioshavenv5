@@ -589,12 +589,11 @@ iframe.video {
 .story {
   h1,h2,h3,h4,h5,h6 { text-align: left }
   p, .embeded {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
   }
   p{
     margin-top: 0;
-    font-size: 1rem;
-    line-height: 1.5rem;
+    font-size: 1.1rem;
     word-break: break-all;
     hyphens: auto;
   }
@@ -619,15 +618,20 @@ iframe.video {
       counter-reset: list(0);
       counter-increment: list-0;
       list-style-type: none;
+      text-indent: -15px;
+      &:before {
+        width: 15px;
+        display: inline-block;
+      }
   }
   ol li {
     &:before {
-      content: counter(list-0, decimal) '. '
+      content: counter(list-0, decimal) '. ';
     }
   }
   ul li {
     &:before {
-      content: counter(list-0, disc) ' '
+      content: counter(list-0, disc) ' ';
     }
   }
 

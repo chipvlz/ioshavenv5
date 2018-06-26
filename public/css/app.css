@@ -11222,13 +11222,12 @@ iframe.video {
 
 .story p,
 .story .embeded {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .story p {
   margin-top: 0;
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: 1.1rem;
   word-break: break-all;
   -webkit-hyphens: auto;
       -ms-hyphens: auto;
@@ -11251,6 +11250,12 @@ iframe.video {
   counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
   counter-increment: list-0;
   list-style-type: none;
+  text-indent: -15px;
+}
+
+.story li:before {
+  width: 15px;
+  display: inline-block;
 }
 
 .story ol li:before {
